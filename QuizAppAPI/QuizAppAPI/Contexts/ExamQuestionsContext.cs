@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Models;
 using MongoDB.Driver;
-using QuizAppAPI.Models;
 
 namespace QuizAppAPI.Contexts
 {
