@@ -1,4 +1,9 @@
 
+
+
+using Models;
+using QuizAppAPI.Contexts;
+
 namespace QuizAppAPI
 {
     public class Program
@@ -12,6 +17,7 @@ namespace QuizAppAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            ConfigureServices(builder);
 
             var app = builder.Build();
 
@@ -31,5 +37,20 @@ namespace QuizAppAPI
 
             app.Run();
         }
+
+        private static void ConfigureServices(WebApplicationBuilder builder)
+        {
+            IServiceCollection services = builder.Services;
+            ConfigureMongoModel(builder, services);
+            services.AddScoped<ExamQuestionsContext>();
+        }
+
+        private static void ConfigureMongoModel(WebApplicationBuilder builder, IServiceCollection services)
+        {
+            var modelSection = builder.Configuration.GetSection("ConnectionStrings:QuizExamDatabase");
+            services.Configure<MongoDbConnectionModel>(modelSection);
+        }
+
     }
+
 }
