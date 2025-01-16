@@ -1,7 +1,6 @@
-﻿using Models;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace QuizAppAPI.Models
+namespace Models
 {
     public class Exam
     {

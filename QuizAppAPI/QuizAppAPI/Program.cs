@@ -3,6 +3,7 @@
 
 using Models;
 using QuizAppAPI.Contexts;
+using QuizAppAPI.Services.ExamQuestions;
 
 namespace QuizAppAPI
 {
@@ -42,7 +43,13 @@ namespace QuizAppAPI
         {
             IServiceCollection services = builder.Services;
             ConfigureMongoModel(builder, services);
+            ConfigureExamQuestionsDb(services);
+        }
+
+        private static void ConfigureExamQuestionsDb(IServiceCollection services)
+        {
             services.AddScoped<ExamQuestionsContext>();
+            services.AddScoped<IExamQuestionsRepository, DbExamQuestionsRepository>();
         }
 
         private static void ConfigureMongoModel(WebApplicationBuilder builder, IServiceCollection services)

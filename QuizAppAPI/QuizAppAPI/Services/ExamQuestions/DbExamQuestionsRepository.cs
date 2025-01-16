@@ -1,7 +1,6 @@
 ﻿using Models;
 using MongoDB.Driver;
 using QuizAppAPI.Contexts;
-using QuizAppAPI.Models;
 
 namespace QuizAppAPI.Services.ExamQuestions
 {
@@ -17,16 +16,19 @@ namespace QuizAppAPI.Services.ExamQuestions
             return (await _exams.FindAsync<Exam>(e => e.Name == examName)).Single();
         }
 
-        public async Task<IEnumerable<Exam>> GetExams()
+        public async Task<Exam> GetExamById(string id)
         {
-            return (await _exams.FindAsync(_ => true)).ToEnumerable<Exam>();
-
+            return (await _exams.FindAsync(e => e.id == id)).Single();
         }
 
-        public async Task<IEnumerable<Question>> GetQuestions(string examName)
+        public async Task<IEnumerable<Exam>> GetExams()
         {
-            var exam = await GetExam(examName);
-            return exam.Questions;
+            return (await _exams.FindAsync(_ => true)).ToList();
+        }
+
+        public async Task<IEnumerable<Question>> GetQuestions(string examId)
+        {
+            return (await GetExamById(examId)).Questions;
         }
     }
 }
