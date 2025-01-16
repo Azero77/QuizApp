@@ -1,0 +1,100 @@
+# Ignore build output
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.sln.ide.*
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore Visual Studio cache, temp, and workspace
+.vs/
+.ipch/
+*.pdb
+*.cache/
+*.ilk
+*.log
+
+# Ignore application logs
+*.log
+
+# Ignore Resharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Ignore build results
+*.exe
+*.dll
+*.app
+*.msi
+*.nupkg
+*.map
+
+# Ignore package management folders
+packages/
+node_modules/
+
+# Ignore published files
+.publish/
+out/
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.~*
+~$*
+
+# Ignore database-related files
+*.db
+*.mdf
+*.ldf
+*.sqlite
+*.sqlite3
+
+# Ignore IDE and design-time markers
+*.vspscc
+*.vssscc
+*.scc
+*.csproj.user
+*.csproj.bak
+*.vbproj.user
+*.vbproj.bak
+
+# Ignore test result files
+TestResults/
+*.trx
+*.coverage
+
+# Ignore Azure Pipelines
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Ignore configuration files
+appsettings*.json
+app*.json
+*.config
+
+# Ignore auto-generated files
+GeneratedFiles/
+*.g.*
+*.g.i.*
+
+# Ignore unnecessary designer files
+*.Designer.cs
+*.Designer.vb
+
+# Ignore WPF-specific files
+*.suo
+*.xap
+*.xaml.cache
+*.xaml.g.*
+
+# Ignore tools and backup folders
+Tools/
+Backup/
