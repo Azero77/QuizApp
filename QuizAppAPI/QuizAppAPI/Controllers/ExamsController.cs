@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Models;
+using QuizApp.Models;
 using QuizAppAPI.Services.ExamQuestions;
 
 namespace QuizAppAPI.Controllers

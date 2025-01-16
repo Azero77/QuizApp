@@ -1,4 +1,4 @@
-﻿using Models;
+﻿using QuizApp.Models;
 
 namespace QuizAppAPI.Services.ExamQuestions
 {

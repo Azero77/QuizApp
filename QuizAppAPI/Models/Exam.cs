@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Models
+namespace QuizApp.Models
 {
     public class Exam
     {
