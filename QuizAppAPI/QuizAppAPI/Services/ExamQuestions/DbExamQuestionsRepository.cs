@@ -1,5 +1,5 @@
-﻿using Models;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
+using QuizApp.Models;
 using QuizAppAPI.Contexts;
 
 namespace QuizAppAPI.Services.ExamQuestions

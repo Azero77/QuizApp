@@ -1,7 +1,4 @@
-
-
-
-using Models;
+using QuizApp.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
 
