@@ -15,12 +15,16 @@ namespace QuizAppAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpsRedirection(opts => 
+            {
+                opts.HttpsPort = 5001;
+            });
             builder.Services.AddCors(opts => 
             {
                 opts.AddPolicy(name : "BlazorWebAssemblyPolicy",
                     p => 
                     {
-                        p.WithOrigins("http://localhost:5001")
+                        p.WithOrigins("https://localhost:5002")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
