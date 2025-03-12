@@ -5,3 +5,32 @@
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+@if(Exams is null)
+{
+    <p>Loading</p>
+}
+else
+{
+    @foreach (var item in Exams)
+    {
+        <p>@item.id</p>
+    }
+}
+
+@code{
+
+    [Inject]
+    public ExamsClient? _client { get; set; }
+
+    public List<Exam>? Exams { get; set; } = null;
+
+    protected override async Task OnInitializedAsync() 
+    {
+        Exams = new();
+        await foreach (Exam? Exam in _client?.GetExamsAsync()!)
+        {
+            if(Exam is not null)
+                Exams.Add(Exam);
+        }
+    }
+}
