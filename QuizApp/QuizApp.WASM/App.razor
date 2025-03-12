@@ -10,3 +10,17 @@
         </LayoutView>
     </NotFound>
 </Router>
+
+@code{
+
+    [Inject]
+    private NavigationManager? NavigationManager { get; set; }
+    protected override void OnInitialized()
+    {
+        if (NavigationManager!.Uri.StartsWith("http://"))
+        {
+            NavigationManager.NavigateTo("https://" + NavigationManager.Uri.Substring(7));
+            return;
+        }
+    }
+}
