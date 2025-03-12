@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using QuizApp.BlazorWASM.Services;
 
-namespace QuizAppWasm
+namespace QuizApp.BlazorWASM
 {
     public class Program
     {
@@ -10,10 +11,18 @@ namespace QuizAppWasm
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
+            AddClientServices(builder);
+            var app = builder.Build();
+            
+            await app.RunAsync();
+        }
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            await builder.Build().RunAsync();
+        private static void AddClientServices(WebAssemblyHostBuilder builder)
+        {
+            builder.Services.AddHttpClient<ExamsClient>(client => 
+                {
+                    client.BaseAddress = new Uri("http://localhost:5000/api/");
+                });
         }
     }
 }
