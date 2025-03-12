@@ -23,8 +23,9 @@ namespace QuizAppAPI.Services.ExamQuestions
 
         public async Task<IEnumerable<Exam>> GetExams()
         {
-            return (await _exams.FindAsync(_ => true)).ToList();
+            return await (await _exams.FindAsync(_ => true)).ToListAsync();
         }
+
 
         public async Task<IEnumerable<Question>> GetQuestions(string examId)
         {
