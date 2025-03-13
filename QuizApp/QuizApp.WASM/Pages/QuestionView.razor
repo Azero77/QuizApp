@@ -1,0 +1,60 @@
+﻿
+<MudPaper Class="p-4 mx-auto" Style="max-width: 600px;"
+          dir="@(IsArabic(Question.QuestionText) ? "rtl" : "ltr")">
+    <!-- Flex layout for question number + text -->
+    <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
+        <MudText Typo="Typo.overline" Color="Color.Primary" Class="me-2">
+            @QuestionNumber.
+        </MudText>
+        <MudText Typo="Typo.h5"
+                 >
+            @Question.QuestionText
+        </MudText>
+    </MudStack>
+
+    <!-- Choices as selectable list items -->
+    <MudList
+        @bind-SelectedValue="SelectedChoice"
+        SelectionMode="SelectionMode.SingleSelection"
+        T = "string"
+        Color="@Color.Info"
+        Dense="true" Hover="true">
+        @foreach (var choice in Question.Choices)
+        {
+            <MudListItem Class="d-flex align-items-center"
+                        Value="choice"
+                         Style="cursor: pointer;"
+                        >
+
+                <!-- Circle icon or bullet -->
+                <MudStack Row="true">
+                    <MudText Typo="Typo.body1"
+                    >@choice</MudText>
+                </MudStack>
+
+            </MudListItem>
+        }
+    </MudList>
+</MudPaper>
+
+
+@code {
+    [Parameter]
+    public Question Question { get; set; } = null!;
+
+    [Parameter]
+    public long QuestionNumber { get; set; }
+
+    public string SelectedChoice { get; set; } = string.Empty;
+
+    private bool IsArabic(string? text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return false;
+
+        // Arabic Unicode block ranges from 0600 to 06FF (basic)
+        return text.Any(c => c >= 0x0600 && c <= 0x06FF);
+    }
+
+
+}

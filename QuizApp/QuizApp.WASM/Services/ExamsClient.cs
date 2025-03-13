@@ -13,5 +13,7 @@ namespace QuizApp.BlazorWASM.Services
         }
 
         public IAsyncEnumerable<Exam?> GetExamsAsync() => _client.GetFromJsonAsAsyncEnumerable<Exam>("Exams") ?? throw new InvalidDataException();
+
+        public Task<Exam?> GetExamAsync(string id) => _client.GetFromJsonAsync<Exam>($"Exams/{id}");
     }
 }

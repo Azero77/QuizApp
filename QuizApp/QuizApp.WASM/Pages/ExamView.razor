@@ -1,15 +1,40 @@
-﻿@page "/Exams/{Id:string}"
+﻿@page "/Exams/{Id}"
+@inject NavigationManager Navigation
+<div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+    @if (Exam is not null)
+    {
+        long i = 0;
+        foreach (Question question in Exam.Questions)
+        {
+            i++;
+            <!-- Add w-100 and text-center to the child container -->
+            <div class="mb-4 w-100 text-center">
+                <QuestionView Question="question" QuestionNumber="i" />
+            </div>
+        }
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Info" Size="Size.Large" />
+    }
+</div>
 
-<h3>ExamView</h3>
 
 @code {
     [Parameter]
     public string Id { get; set; } = string.Empty;
 
+    [Inject]
+    public ExamsClient? _client { get; set; }
+
+    public Exam? Exam { get; set; }
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
-            return;
+            Navigation.NavigateTo("/NotFound");
+        Exam = await InitializeExam(Id);
         await base.OnInitializedAsync();
     }
+
+    private Task<Exam?> InitializeExam(string id) => _client?.GetExamAsync(id) ?? throw new InvalidDataException();
 }
