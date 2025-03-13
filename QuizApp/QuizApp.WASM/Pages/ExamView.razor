@@ -1,6 +1,17 @@
 ﻿@page "/Exams/{Id}"
-@inject NavigationManager Navigation
 <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '\\(', right: '\\)', display: false }
+                ]
+            });
+        });
+    </script>
     @if (Exam is not null)
     {
         long i = 0;
@@ -8,7 +19,7 @@
         {
             i++;
             <!-- Add w-100 and text-center to the child container -->
-            <div class="mb-4 w-100 text-center">
+            <div class="mb-4 w-100 text-center data-latex">
                 <QuestionView Question="question" QuestionNumber="i" />
             </div>
         }
@@ -20,6 +31,7 @@
 </div>
 
 
+
 @code {
     [Parameter]
     public string Id { get; set; } = string.Empty;
@@ -27,13 +39,41 @@
     [Inject]
     public ExamsClient? _client { get; set; }
 
+    [Inject]
+    public NavigationManager? Navigation{ get; set; }
+
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; } = null!;
+
     public Exam? Exam { get; set; }
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
-            Navigation.NavigateTo("/NotFound");
+            Navigation?.NavigateTo("/NotFound");
         Exam = await InitializeExam(Id);
+        
         await base.OnInitializedAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Initialize MathJax
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                MathJax = {
+                    tex: {
+                        inlineMath: [['\\(', '\\)']],
+                        displayMath: [['$$', '$$']]
+                    }
+                };
+            ");
+
+            // Load MathJax script
+            await JSRuntime.InvokeVoidAsync("loadMathJax", "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js");
+        }
+
+        // Render equations after content is rendered
+        await JSRuntime.InvokeVoidAsync("renderMathInElement");
     }
 
     private Task<Exam?> InitializeExam(string id) => _client?.GetExamAsync(id) ?? throw new InvalidDataException();

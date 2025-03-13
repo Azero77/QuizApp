@@ -18,4 +18,8 @@
     <ProjectReference Include="..\QuizApp.Models\QuizApp.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\ExamView.js" />
+  </ItemGroup>
+
 </Project>
