@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.API", "QuizApp.API\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.Models", "QuizApp.Models\QuizApp.Models.csproj", "{8BBA40AF-D337-4FA7-B51D-D20C7299DDF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizApp.BlazorWASM", "QuizApp.WASM\QuizApp.BlazorWASM.csproj", "{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.BlazorWASM", "QuizApp.WASM\QuizApp.BlazorWASM.csproj", "{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
