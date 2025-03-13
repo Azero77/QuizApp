@@ -1,0 +1,24 @@
+﻿
+<span>
+    @foreach (var segment in _directionService.SplitTextIntoSegments(Text))
+    {
+        <span dir="@segment.Direction" style="white-space: pre-wrap;">
+            @if (segment.IsMath)
+            {
+                <span class="mathjax-equation">@segment.Text</span>
+            }
+            else
+            {
+                @segment.Text
+            }
+        </span>
+    }
+</span>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = string.Empty;
+
+    [Inject]
+    public ITextDirectionService _directionService { get; set; } = null!;
+}

@@ -14,6 +14,7 @@ namespace QuizApp.BlazorWASM
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             AddClientServices(builder);
+            builder.Services.AddSingleton<ITextDirectionService, TextDirectionService>();
             var app = builder.Build();
             
             await app.RunAsync();

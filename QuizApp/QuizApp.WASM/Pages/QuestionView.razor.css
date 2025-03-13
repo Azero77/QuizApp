@@ -1,0 +1,13 @@
+﻿.question-text
+{
+    font-size : 1.5rem;
+}
+.question-choice
+{
+    font-size : 1.2rem;
+}
+
+.auto-dir {
+    unicode-bidi: plaintext;
+    text-align:start;
+}

@@ -1,17 +1,7 @@
 ﻿@page "/Exams/{Id}"
-<div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+<div class="exam-container d-flex flex-column justify-content-center align-items-center">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    { left: '$$', right: '$$', display: true },
-                    { left: '\\(', right: '\\)', display: false }
-                ]
-            });
-        });
-    </script>
     @if (Exam is not null)
     {
         long i = 0;
@@ -19,14 +9,17 @@
         {
             i++;
             <!-- Add w-100 and text-center to the child container -->
-            <div class="mb-4 w-100 text-center data-latex">
+            <div class="m-4 w-100 text-center data-latex">
                 <QuestionView Question="question" QuestionNumber="i" />
             </div>
         }
     }
     else
     {
-        <MudProgressCircular Color="Color.Info" Size="Size.Large" />
+            <MudProgressCircular Color="Color.Info"
+                                 Indeterminate="true"
+                                 Size="Size.Large"
+                                 Style="height:30vh;width:30vh;align-self:center;margin-top:15%"/>
     }
 </div>
 
@@ -45,7 +38,7 @@
     [Inject]
     public IJSRuntime JSRuntime { get; set; } = null!;
 
-    public Exam? Exam { get; set; }
+    public Exam? Exam { get; set; } = null;
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
@@ -58,18 +51,28 @@
     {
         if (firstRender)
         {
-            // Initialize MathJax
+            // Initialize MathJax with CommonHTML output for copyable equations
             await JSRuntime.InvokeVoidAsync("eval", @"
-                MathJax = {
-                    tex: {
-                        inlineMath: [['\\(', '\\)']],
-                        displayMath: [['$$', '$$']]
+            MathJax = {
+                tex: {
+                    inlineMath: [['\\(', '\\)']],
+                    displayMath: [['$$', '$$']]
+                },
+                options: {
+                    enableCopy: true, // Enable copying of equations
+                    renderActions: {
+                        addMenu: [0, '', ''] // Disable the right-click menu
                     }
-                };
-            ");
+                },
+                chtml: {
+                    scale: 1.2, // Adjust scale if needed
+                    mtextInheritFont: true // Inherit font for better integration
+                }
+            };
+        ");
 
-            // Load MathJax script
-            await JSRuntime.InvokeVoidAsync("loadMathJax", "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js");
+            // Load MathJax script with CommonHTML output
+            await JSRuntime.InvokeVoidAsync("loadMathJax", "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js");
         }
 
         // Render equations after content is rendered

@@ -1,0 +1,14 @@
+﻿@typeparam T
+
+@code {
+    //enable text with mixed language and images to be splitted into mul
+    //multiple span with corresponding rtl and ltr directions
+
+    [Parameter]
+    public T? item { get; set; } = default(T);
+
+    [Parameter]
+    public RenderFragment<T> Content { get; set; } = null!;
+
+
+}
