@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 using QuizApp.BlazorWASM.Services;
 
 namespace QuizApp.BlazorWASM
@@ -9,6 +10,7 @@ namespace QuizApp.BlazorWASM
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.Services.AddMudServices();
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             AddClientServices(builder);

@@ -1,0 +1,15 @@
+﻿@page "/Exams/{Id:string}"
+
+<h3>ExamView</h3>
+
+@code {
+    [Parameter]
+    public string Id { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(Id))
+            return;
+        await base.OnInitializedAsync();
+    }
+}
