@@ -7,7 +7,7 @@ db = client["ExamQuestionsDatabase"]
 collection = db["Exams"]
 
 # Load the JSON file
-with open(r"E:\QuizApp\test.json",encoding = "utf-8") as file:
+with open(r"E:\QuizAppProject\test.json",encoding = "utf-8") as file:
     json_content = json.load(file)
 
 # Insert the JSON file content as a value to a specific key
