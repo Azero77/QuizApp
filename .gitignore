@@ -98,3 +98,8 @@ GeneratedFiles/
 # Ignore tools and backup folders
 Tools/
 Backup/
+
+
+#ignore all the static libraries
+**/lib/
+lib/
