@@ -6,6 +6,7 @@ namespace QuizApp.Models
     {
         public List<List<QuestionSentence>> QuestionChoices { get; set; } = null!; //every choice is a list of Question segment
         public List<QuestionSentence> QuestionText { get; set; } = null!;
+        
         public string Answer { get; set; } = string.Empty;
     }
 
