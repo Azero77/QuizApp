@@ -1,329 +1,2056 @@
 [
   {
-    "Choices": [
-      "تثبت تراكيز المواد المتفاعلة",
-      "تتساوي سرعة التفاعل المباشر و العكسي",
-      "تتساوي تراكيز المواد المتفاعلة و المواد الناتجة",
-      "يثبت لون المحلول"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "تثبت تراكيز المواد المتفاعلة",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "تتساوي سرعة التفاعل المباشر و العكسي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "تتساوي تراكيز المواد المتفاعلة و المواد الناتجة",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "يثبت لون المحلول",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "كل مما يلي يحدث عند التوازن ما عدا",
+    "QuestionText": [
+      {
+        "Text": "كل مما يلي يحدث عند التوازن ما عدا",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "C"
   },
   {
-    "Choices": [
-      "حركي",
-      "ساكن",
-      "غير ثابت",
-      "ليس أيا مما سبق"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "حركي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ساكن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "غير ثابت",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ليس أيا مما سبق",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "التوازن الكيميائي",
+    "QuestionText": [
+      {
+        "Text": "التوازن الكيميائي",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(K_{c}=\\frac{\\left[HI\\right]^{2}}{\\left[H_{2}\\right].\\left[I_{2}\\right]}\\)",
-      "\\(K_{c}=\\frac{\\left[H_{2}\\right].\\left[I_{2}\\right]}{\\left[HI\\right]^{2}}\\)",
-      "\\(K_{c}=\\frac{\\left[H_{2}\\right].\\left[I_{2}\\right]}{[HI]}\\)",
-      "\\(K_{c}=\\frac{\\left[HI\\right]}{\\left[H_{2}\\right].\\left[I_{2}\\right]}\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[HI\\right]^{2}}{\\left[H_{2}\\right].\\left[I_{2}\\right]}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[H_{2}\\right].\\left[I_{2}\\right]}{\\left[HI\\right]^{2}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[H_{2}\\right].\\left[I_{2}\\right]}{[HI]}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[HI\\right]}{\\left[H_{2}\\right].\\left[I_{2}\\right]}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "اكتب علاقة ثابت التوازن الكيميائي بدلالة التراكيز للتفاعل الآتي:\\(H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)",
+    "QuestionText": [
+      {
+        "Text": "اكتب علاقة ثابت التوازن الكيميائي بدلالة التراكيز للتفاعل الآتي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(K_{c}=\\frac{\\left[CaCO_{3}\\right]}{\\left[CaO\\right].\\left[CO_{2}\\right]}\\)",
-      "\\(K_{c}=[CO_{2}]\\)",
-      "\\(Kc=[CaCO_{3}]\\)",
-      "\\(K_{c}=\\left[CO_{2}\\right].[CaCO_{3}\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[CaCO_{3}\\right]}{\\left[CaO\\right].\\left[CO_{2}\\right]}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=[CO_{2}]\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(Kc=[CaCO_{3}]\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\left[CO_{2}\\right].[CaCO_{3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "اكتب علاقة ثابت التوازن الكيميائي بدلالة التراكيز للتفاعل الآتي:\\(CaCO_{_{3}\\left(s\\right)}⇌CaO_{\\left(s\\right)}+CO_{_{2}\\left(g\\right)}\\)",
+    "QuestionText": [
+      {
+        "Text": "اكتب علاقة ثابت التوازن الكيميائي بدلالة التراكيز للتفاعل الآتي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(CaCO_{_{3}\\left(s\\right)}⇌CaO_{\\left(s\\right)}+CO_{_{2}\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "\\(K_{p}=K_{c}\\)",
-      "\\(K_{p}=K_{c}\\left(RT\\right)\\)",
-      "\\(K_{p}=\\frac{K_{c}}{RT}\\)",
-      "\\(K_{c}=K_{p}\\left(RT\\right)\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{p}=K_{c}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{p}=K_{c}\\left(RT\\right)\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{p}=\\frac{K_{c}}{RT}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=K_{p}\\left(RT\\right)\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "علاقة Kp للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "علاقة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "Kp",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "\\(K_{c}=1\\)",
-      "\\(K_{c}=\\left[H_{2}\\right]^{-3}\\)",
-      "\\(Kc=\\left[H_{2}\\right]^{3}\\)",
-      "\\(K_{c}=\\frac{\\left[W\\right]}{\\left[WO_{3}\\right].\\left[H2\\right]^{3}}\\)",
-      ""
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=1\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\left[H_{2}\\right]^{-3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(Kc=\\left[H_{2}\\right]^{3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{\\left[W\\right]}{\\left[WO_{3}\\right].\\left[H2\\right]^{3}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      []
     ],
-    "QuestionText": "ليكن التفاعل:\\(WO_{_{3}\\left(s\\right)}+3H_{2_{\\left(g\\right)}}⇌W_{\\left(s\\right)}+3H2O_{\\left(l\\right)}\\)فإن علاقة ثابت التوازن بدلالة التراكيز هي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(WO_{_{3}\\left(s\\right)}+3H_{2_{\\left(g\\right)}}⇌W_{\\left(s\\right)}+3H2O_{\\left(l\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإن علاقة ثابت التوازن بدلالة التراكيز هي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "\\(K_{c}=K_{p}\\left(RT\\right)^{3}\\)",
-      "\\(K_{p}=K_{c}\\left(RT\\right)^{3}\\)",
-      "\\(K_{p}=K_{c}\\)",
-      "\\(K_{p}=K_{c}\\left(RT\\right)^{2}\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=K_{p}\\left(RT\\right)^{3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{p}=K_{c}\\left(RT\\right)^{3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{p}=K_{c}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{p}=K_{c}\\left(RT\\right)^{2}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "\\(K_{p},\\ K_{c}\\ \\)العلاقة بين  للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "العلاقة بين ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{p},\\ K_{c}\\ \\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(K_{c}=K_{p}\\)",
-      "\\(K_{c}=K_{p}\\left(RT\\right)\\)",
-      "\\(K_{c}=\\frac{K_{p}}{RT}\\)",
-      "\\(K_{c}=2\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=K_{p}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=K_{p}\\left(RT\\right)\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{K_{p}}{RT}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=2\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل\\(2NO_{2}⇌N_{2}O_{4}\\)فإن علاقة بين ثابت التوازن بدلالة التراكيز و بدلالة الضغوط الجزئية هو:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(2NO_{2}⇌N_{2}O_{4}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإن علاقة بين ثابت التوازن بدلالة التراكيز و بدلالة الضغوط الجزئية هو:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "250K",
-      "250 C",
-      "150K",
-      "150 C"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "250K",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "250 C",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "150K",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "150 C",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل \\(A_{\\left(g\\right)}+B_{\\left(g\\right)}⇌3C_{\\left(g\\right)}\\)\\(K_{p}=82,\\ K_{c}=4\\)بعد اختبارات تبين أن  فإن درجة الحرارة للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A_{\\left(g\\right)}+B_{\\left(g\\right)}⇌3C_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "بعد اختبارات تبين أن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{p}=82,\\ K_{c}=4\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " فإن درجة الحرارة للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "8.2",
-      "4.1",
-      "2.05",
-      "16.4"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "8.2",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "4.1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "2.05",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "16.4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)\\(K_{p}=0.5\\ ,\\ T=\\ -73\\ C^{ً}\\)\\(K_{c}\\)فإذا علمت أن  فإن :",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا علمت أن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{p}=0.5\\ ,\\ T=\\ -73\\ C^{ً}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "فإن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{c}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": ":",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": ""
   },
   {
-    "Choices": [
-      "8",
-      "3.2",
-      "4",
-      "10"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "8",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "3.2",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "0",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)\\(K_{c}=4\\ \\)إذا علمت أن  و كان التفاعل يرجح بالاتجاه المباشر فأي من القيم للQ حاصل التفاعل ممكنة:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "إذا علمت أن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{c}=4\\ \\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " و كان التفاعل يرجح بالاتجاه المباشر فأي من القيم لل",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "Q",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " حاصل التفاعل ممكنة:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "التفاعل يرجح بالاتجاه المباشر",
-      "التفاعل يرجح بالاتجاه العكسي",
-      "متوازن",
-      "ليس أيا مما سبق"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "التفاعل يرجح بالاتجاه المباشر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "التفاعل يرجح بالاتجاه العكسي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "متوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ليس أيا مما سبق",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(I_{_{2}\\left(g\\right)}+H_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)\\(K_{c}=50.5\\)فإذا علمت أن  في درجة حرارة 400K و تم حساب حاصل التفاعل في لحظة و كانQ = 8  ، أي مما يلي صحيح:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(I_{_{2}\\left(g\\right)}+H_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا علمت أن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{c}=50.5\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " في درجة حرارة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "400K",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " و تم حساب حاصل التفاعل في لحظة و كان",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "Q = 8 ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " ، أي مما يلي صحيح:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "درجة الحرارة",
-      "تغير التراكيز",
-      "الضغط",
-      "حفاز"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "درجة الحرارة",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "تغير التراكيز",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "الضغط",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "حفاز",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "كل مما يلي من العوامل المؤثرة في حالة التوازن ما عدا:",
+    "QuestionText": [
+      {
+        "Text": "كل مما يلي من العوامل المؤثرة في حالة التوازن ما عدا:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "D"
   },
   {
-    "Choices": [
-      "\\(PCl_{5}\\)زيادة كمية ",
-      "زيادة الضغط",
-      "\\(Cl_{2}\\)زيادة كمية ",
-      "زيادة درجة الحرارة"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "زيادة كمية ",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "\\(PCl_{5}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "زيادة الضغط",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "زيادة كمية ",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "\\(Cl_{2}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "زيادة درجة الحرارة",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(PCl_{5}⇌PCl_{3}+Cl_{2}\\ \\ \\ \\ H<0\\)\\(\\ \\)إذا علمت أن التفاعل قد اختلّ توازنه و أصبح راجحاً بالاتجاه المباشر، أي من التغيرات ممكنة:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(PCl_{5}⇌PCl_{3}+Cl_{2}\\ \\ \\ \\ H<0\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "إذا علمت أن التفاعل قد اختلّ توازنه و أصبح راجحاً بالاتجاه المباشر، أي من التغيرات ممكنة:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\ \\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "رجحان التفاعل المباشر",
-      "رجحان التفاعل العكسي",
-      "ليس أيّا مما سبق"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "رجحان التفاعل المباشر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "رجحان التفاعل العكسي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ليس أيّا مما سبق",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "\\(Cl_{2}\\)نقصان كمية  للتفاعل تؤدي:",
+    "QuestionText": [
+      {
+        "Text": "نقصان كمية ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(Cl_{2}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل تؤدي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(N_{2}O_{_{4}\\left(g\\right)}\\)زيادة تركيز ",
-      "\\(2NO_{_{2}\\left(g\\right)}\\)زيادة تركيز ",
-      "لا تؤثر",
-      "رجحان التفاعل بالاتجاه المباشر"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "زيادة تركيز ",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "\\(N_{2}O_{_{4}\\left(g\\right)}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "زيادة تركيز ",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "\\(2NO_{_{2}\\left(g\\right)}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "لا تؤثر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "رجحان التفاعل بالاتجاه المباشر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل المتوازن :\\(N_{2}O_{_{4}\\left(g\\right)}⇌2NO_{_{2}\\left(g\\right)}\\)زيادة ضغط هذا التفاعل تؤدي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل المتوازن :",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(N_{2}O_{_{4}\\left(g\\right)}⇌2NO_{_{2}\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "زيادة ضغط هذا التفاعل تؤدي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "رجحان التفاعل المباشر",
-      "رجحان التفاعل العكسي",
-      "لا تؤثر"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "رجحان التفاعل المباشر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "رجحان التفاعل العكسي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "لا تؤثر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل المتوازن:\\(H_{2}+I_{2}⇌2HI\\) زيادة ضغط تؤدي إلى:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل المتوازن:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(H_{2}+I_{2}⇌2HI\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "زيادة ضغط تؤدي إلى:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "C"
   },
   {
-    "Choices": [
-      "رجحان التفاعل العكوس",
-      "رجحان التفاعل المباشر",
-      "لا يؤثر على حالة التوازن",
-      "تزداد Kp"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "رجحان التفاعل العكوس",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "رجحان التفاعل المباشر",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "لا يؤثر على حالة التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "تزداد ",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "Kp",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل \\(CaCO_{_{3}\\left(s\\right)}⇌CaO_{\\left(g\\right)}+CO_{_{2}\\left(g\\right)}\\)تم إنقاص حجم الوعاء للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(CaCO_{_{3}\\left(s\\right)}⇌CaO_{\\left(g\\right)}+CO_{_{2}\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "تم إنقاص حجم الوعاء للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(H<0\\)",
-      "\\(H>0\\)",
-      "\\(H=0\\)",
-      "لا يمكن تحديد ذلك"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(H<0\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(H>0\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(H=0\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "لا يمكن تحديد ذلك",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(2SO_{_{2}\\left(g\\right)}+O_{_{2}\\left(g\\right)}⇌2SO_{_{3}\\left(g\\right)}\\)\\(SO_{_{3}\\left(g\\right)}\\)إذا علمت أن زيادة درجة الحرارة تقلل من مردود ال فإن:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(2SO_{_{2}\\left(g\\right)}+O_{_{2}\\left(g\\right)}⇌2SO_{_{3}\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "إذا علمت أن زيادة درجة الحرارة تقلل من مردود ال",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(SO_{_{3}\\left(g\\right)}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " فإن:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "زيادة اللون البنفسجي",
-      "نقصان اللون البنفسجي",
-      "زيادة اللون الشفاف",
-      "A+C"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "زيادة اللون البنفسجي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "نقصان اللون البنفسجي",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "زيادة اللون الشفاف",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "A+C",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(2HI_{\\left(g\\right)}⇌H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}\\ \\ \\ \\\\ H>0\\)فإن زيادة درجة الحرارة تؤدي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(2HI_{\\left(g\\right)}⇌H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}\\ \\ \\ \\\\ H>0\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإن زيادة درجة الحرارة تؤدي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(K_{_{c}1}\\ K_{c2}\\)",
-      "\\(\\frac{K_{_{c}1}}{K_{c2}}\\)",
-      "\\(\\frac{K_{c2}}{K_{c1}}\\)",
-      "ليس أيّا مما سبق"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{_{c}1}\\ K_{c2}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{K_{_{c}1}}{K_{c2}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{K_{c2}}{K_{c1}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ليس أيّا مما سبق",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "\\(K_{c}\\)فإن  للتفاعل الآتي :\\(CO_{2}+H_{2}⇌CO+H_{2}O\\)",
+    "QuestionText": [
+      {
+        "Text": "فإن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{c}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل الآتي :",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(CO_{2}+H_{2}⇌CO+H_{2}O\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "معدل تغير التركيز بدلالة الزمن",
-      "معدل تغير السرعة بدلالة الزمن",
-      "ثبات التراكيز للمواد بعد الوصول لحالة التوازن",
-      "A+C"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "معدل تغير التركيز بدلالة الزمن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "معدل تغير السرعة بدلالة الزمن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "ثبات التراكيز للمواد بعد الوصول لحالة التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "A+C",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "-14408153556000يمثل الشكل المجاور ما يلي:",
+    "QuestionText": [
+      {
+        "Text": "",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "يمثل الشكل المجاور ما يلي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "D"
   },
   {
-    "Choices": [
-      "\\(3.6\\%\\)",
-      "0.33 %",
-      "33.3 %",
-      "3 %"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(3.6\\%\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.33 %",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "33.3 %",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "3 %",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "مزج 2mol  من ثنائي أكسيد الكبريت مع 2mol  من ثنائي أكسيد النتروجين في وعاء حجمه 4L فحدث التفاعل:\\(SO_{_{2}\\left(g\\right)}+NO_{_{2}\\left(g\\right)}⇌SO_{_{3}\\left(g\\right)}+NO_{\\left(g\\right)}\\)\\(\\ K_{c}=0.25\\)فإذا علمت أن  فما هي النسبة المئوية المتفاعلة من ثنائي أكسيد النتروجين:",
+    "QuestionText": [
+      {
+        "Text": "مزج ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "2mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " من ثنائي أكسيد الكبريت مع ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "2mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " من ثنائي أكسيد النتروجين في وعاء حجمه ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "4L",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " فحدث التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(SO_{_{2}\\left(g\\right)}+NO_{_{2}\\left(g\\right)}⇌SO_{_{3}\\left(g\\right)}+NO_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا علمت أن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\ K_{c}=0.25\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " فما هي النسبة المئوية المتفاعلة من ثنائي أكسيد النتروجين:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "C"
   },
   {
-    "Choices": [
-      "يرجح التفاعل المباشر  و تزداد كمية المواد الناتجة و تزداد قيمة ثابت التوازن",
-      "يرجح التفاعل العكسي و تزداد كمية المواد المتفاعلة و تنقص قيمة ثابت التوازن",
-      "يرجح التفاعل العكسي تزداد كمية المواد المتفاعلة و تزداد قيمة ثابت التوازن",
-      "يرجح التفاعل المباشر و تزداد كمية المواد الناتجة و تنقص قيمة ثابت التوازن"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "يرجح التفاعل المباشر  و تزداد كمية المواد الناتجة و تزداد قيمة ثابت التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "يرجح التفاعل العكسي و تزداد كمية المواد المتفاعلة و تنقص قيمة ثابت التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "يرجح التفاعل العكسي تزداد كمية المواد المتفاعلة و تزداد قيمة ثابت التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "يرجح التفاعل المباشر و تزداد كمية المواد الناتجة و تنقص قيمة ثابت التوازن",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌3C_{\\left(g\\right)}\\ \\ \\ \\ H< 0\\)عند زيادة درجة الحرارة للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A_{\\left(g\\right)}+2B_{\\left(g\\right)}⇌3C_{\\left(g\\right)}\\ \\ \\ \\ H< 0\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "عند زيادة درجة الحرارة للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "4",
-      "2",
-      "1"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "2",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "\\(k_{1}=8.8\\ \\ 10^{-2}\\)\\(k_{2}=2.210^{-2}\\)ليكن تفاعلاً عكوساً، ثابت سرعة التفاعل المباشر ، و سرعة التفاعل العكسي  فتكون قيمة ثابت التوازن بدلالة التراكيز هي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن تفاعلاً عكوساً، ثابت سرعة التفاعل المباشر ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(k_{1}=8.8\\ \\ 10^{-2}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "، و سرعة التفاعل العكسي ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(k_{2}=2.210^{-2}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " فتكون قيمة ثابت التوازن بدلالة التراكيز هي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "4"
   },
   {
-    "Choices": [
-      "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)}{K_{c3}}\\)",
-      "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)^{2}}{K_{c3}}\\)",
-      "\\(K_{c}=\\frac{K_{c1}\\left(K_{c3}\\right)}{K_{c2}}\\)",
-      "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)^{3}}{K_{c3}}\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)}{K_{c3}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)^{2}}{K_{c3}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{K_{c1}\\left(K_{c3}\\right)}{K_{c2}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(K_{c}=\\frac{K_{c1}\\left(K_{c2}\\right)^{3}}{K_{c3}}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "تصنيع الميثانول يتطلب مجموعة من التفاعلات الآتية:فتكون قيمة Kc  للتفاعل الآتي \\(CO_{\\left(g\\right)}+2H_{_{2}\\left(g\\right)}\\ ⇌CH_{3}OH_{\\left(l\\right)}\\)",
+    "QuestionText": [
+      {
+        "Text": "تصنيع الميثانول يتطلب مجموعة من التفاعلات الآتية:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "فتكون قيمة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "Kc ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل الآتي ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(CO_{\\left(g\\right)}+2H_{_{2}\\left(g\\right)}\\ ⇌CH_{3}OH_{\\left(l\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "2.25",
-      "3.5",
-      "3",
-      "4"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "2.25",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "3.5",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "3",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل:\\(2A+B ⇌3C\\)و جميع المواد غازات، مزج 2mol من A مع 3mol  من B ليتشكل 3mol  من C ، عندها نقول أن ثابت التوازن بدلالة التراكيز يساوي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(2A+B ⇌3C\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "و جميع المواد غازات، مزج ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "2mol",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " من ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "A",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " مع ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "3mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " من ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "B",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " ليتشكل ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "3mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " من ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "C",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " ، عندها نقول أن ثابت التوازن بدلالة التراكيز يساوي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(\\frac{1}{108}\\)",
-      "\\(\\frac{4}{9}\\)",
-      "\\(\\frac{1}{36}^{\\prime}\\)",
-      "1"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(\\frac{1}{108}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{4}{9}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{1}{36}^{\\prime}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل :\\(3A+2B ⇌2C+ D\\)\\(\\left[A\\right]_{0}=2 mol.L^{-1},\\ \\left[B\\right]_{0}=4 mol.L^{-1}\\)فإذا كانت التراكيز الابتدائية كالآتي:\\(\\left[D\\right]_{eq}=0.5\\ mol.L^{-1}\\)فإذا كان تركيز عند التوازن فإن ثابت التوازن بدلالة التراكيز يساوي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل :",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(3A+2B ⇌2C+ D\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا كانت التراكيز الابتدائية كالآتي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\left[A\\right]_{0}=2 mol.L^{-1},\\ \\left[B\\right]_{0}=4 mol.L^{-1}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا كان تركيز عند التوازن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\left[D\\right]_{eq}=0.5\\ mol.L^{-1}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "فإن ثابت التوازن بدلالة التراكيز يساوي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "1.5",
-      "1",
-      "0.5",
-      "3"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "1.5",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.5",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "3",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ليكن التفاعل :\\(A+2B ⇌3C+ D\\)\\(\\left[A\\right]_{0}=2 mol.L^{-1},\\ \\left[B\\right]_{0}=4 mol.L^{-1}\\)فإذا كانت التراكيز الابتدائية كالآتي:\\(\\left[A\\right]_{eq}=1.5 mol.L^{-1},\\ \\left[B\\right]_{eq}=3 mol.L^{-1}\\)فإذا كان تركيز عند التوازن \\(mol.L^{-1}\\)فإن تركيز المادة C عند التوازن مقدراً  يساوي:",
+    "QuestionText": [
+      {
+        "Text": "ليكن التفاعل :",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A+2B ⇌3C+ D\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا كانت التراكيز الابتدائية كالآتي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\left[A\\right]_{0}=2 mol.L^{-1},\\ \\left[B\\right]_{0}=4 mol.L^{-1}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا كان تركيز عند التوازن ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(\\left[A\\right]_{eq}=1.5 mol.L^{-1},\\ \\left[B\\right]_{eq}=3 mol.L^{-1}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "فإن تركيز المادة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "C",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " عند التوازن مقدراً ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(mol.L^{-1}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " يساوي:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "\\(\\frac{225}{18}\\)",
-      "\\(\\frac{225}{3}\\)",
-      "\\(\\frac{250}{18}\\)",
-      "\\(\\frac{1}{8}\\)"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "\\(\\frac{225}{18}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{225}{3}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{250}{18}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "\\(\\frac{1}{8}\\)",
+          "QuestionSentenceType": 2,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "ثابت التوازن للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "ثابت التوازن للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "D"
   },
   {
-    "Choices": [
-      "4",
-      "2",
-      "1",
-      "8"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "2",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "8",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "مزج 3mol من مادة A مع 3mol من مادة B  في وعاء سعته 10L فيحدث التفاعل المتوازن وفق المعادلة:\\(A_{\\left(g\\right)}+B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)\\(k_{1}=4.4\\ \\ 10^{-2}\\)\\(k_{2}=1.1\\ \\ 10^{-2}\\)\\(K_{c}\\)فإذا علمت أن قيمة ثابت سرعة التفاعل الكيميائي المباشر  و قيمة ثابت سرعة التفاعل العكسي  , قيمة    للتفاعل السابق:",
+    "QuestionText": [
+      {
+        "Text": "مزج ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "3",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "من مادة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "A",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " مع ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "3",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "من مادة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "B ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " في وعاء سعته ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "10L",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " فيحدث التفاعل المتوازن وفق المعادلة:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(A_{\\left(g\\right)}+B_{\\left(g\\right)}⇌2C_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "فإذا علمت أن قيمة ثابت سرعة التفاعل الكيميائي المباشر ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(k_{1}=4.4\\ \\ 10^{-2}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " و قيمة ثابت سرعة التفاعل العكسي",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(k_{2}=1.1\\ \\ 10^{-2}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": " ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": ",",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " قيمة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(K_{c}\\)",
+        "QuestionSentenceType": 2,
+        "AltText": null
+      },
+      {
+        "Text": "  ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " للتفاعل السابق:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "A"
   },
   {
-    "Choices": [
-      "0.1",
-      "0.2",
-      "0.4",
-      "0.05"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "0.1",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.2",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.4",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.05",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "تركيز المادة C عند التوازن هو:",
+    "QuestionText": [
+      {
+        "Text": "تركيز المادة ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "C ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "عند التوازن هو:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   },
   {
-    "Choices": [
-      "0.02",
-      "0.74",
-      "0.7",
-      "0.07"
+    "QuestionChoices": [
+      [
+        {
+          "Text": "0.02",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        },
+        {
+          "Text": "74",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.7",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ],
+      [
+        {
+          "Text": "0.07",
+          "QuestionSentenceType": 0,
+          "AltText": null
+        }
+      ]
     ],
-    "QuestionText": "يحدث التفاعل الممثل بالمعادلة: \\(H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)في وعاء حجمه 10L عند بلوغ حالة التوازن كان عدد مولات الهيدروجين 7.2 mol و عدد مولات اليود 2.4 mol  و عدد مولات يود  الهيدروجين 0.4 mol .التركيز الابتدائي للهيدروجين هو:",
+    "QuestionText": [
+      {
+        "Text": "يحدث التفاعل الممثل بالمعادلة: ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "\\(H_{_{2}\\left(g\\right)}+I_{_{2}\\left(g\\right)}⇌2HI_{\\left(g\\right)}\\)",
+        "QuestionSentenceType": 1,
+        "AltText": null
+      },
+      {
+        "Text": "في وعاء حجمه ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "10L",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " عند بلوغ حالة التوازن كان عدد مولات الهيدروجين ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "7.2 mol",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": " و عدد مولات اليود ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "2.4 mol",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "  و عدد مولات يود  الهيدروجين ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "0.4 mol ",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": ".",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      },
+      {
+        "Text": "التركيز الابتدائي للهيدروجين هو:",
+        "QuestionSentenceType": 0,
+        "AltText": null
+      }
+    ],
     "Answer": "B"
   }]
