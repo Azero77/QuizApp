@@ -14,7 +14,7 @@ else
     @foreach (var item in Exams)
     {
         <MudNavLink
-            Href="@($"Exams/{item.id}")"
+            Href="@($"submissions/{item.id}")"
             >
             @item.id
         </MudNavLink>

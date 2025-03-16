@@ -1,0 +1,11 @@
+﻿<h3>SubmissionResult</h3>
+@foreach (var item in Choices)
+{
+    <p>item</p>
+}
+
+@code {
+    [Parameter]
+    public List<string?> Choices { get; set; } = null!;
+
+}

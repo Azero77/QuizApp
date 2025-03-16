@@ -9,6 +9,19 @@ namespace QuizApp.Models
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string? id { get; set; }
         public string? Name { get; set; }
-        public IEnumerable<Question> Questions { get; set; } = new List<Question>();
+        public List<Question> Questions { get; set; } = new List<Question>();
+
+        public int CorrectExam(Submission sub)
+        {
+            int result = 0;
+            if (sub.Choices.Count() != Questions.Count())
+                return 0;
+           for (int i = 0; i < sub.Choices.Count(); i++)
+            {
+                if (sub.Choices[i].ToLower() == Questions[i].Answer.ToLower())
+                    result++;
+            }
+            return result;
+        }
     }
 }

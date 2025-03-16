@@ -1,5 +1,5 @@
 ﻿@page "/Exams/{Id}"
-@if (!string.IsNullOrEmpty(submission.SubmissionPersonName))
+@if (!string.IsNullOrEmpty(submission?.SubmissionPersonName))
 {
     <div class=" data-latex exam-container d-flex flex-column justify-content-center align-items-center">
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -13,7 +13,7 @@
                 <!-- Add w-100 and text-center to the child container -->
                 <div class="m-4 w-100 ">
                     <QuestionView 
-                        choices="choices"
+                        Choices="choices"
                         Question="question" QuestionNumber="i" />
                 </div>
             }
@@ -27,22 +27,16 @@
             Style="height:30vh;width:30vh;align-self:center;margin-top:15%"/>
         }
 
+    <div>
+        <MudButton OnClick="CorrectExam">Correct Exam</MudButton>
     </div>
-}
-else
-{
-    <div class="vh-100 w-100 d-flex justify-content-center align-items-center">
-        <div class="input-group" style="max-width:50%">
-
-            <MudTextField Class="input"
-                                    Required
-                           ErrorText="Name is required"
-                           T="string" @bind-Value="submissionName" Label="Please Write your Name" />
-             <MudButton Class="btn btn-primary ma-2"
-                        Disabled="string.IsNullOrEmpty(submissionName)"
-                        OnClick="() => submission.SubmissionPersonName = submissionName">Submit</MudButton>
-         </div>
-     </div>
+    @if(result is not null)
+        {
+            <div class="bg-info p-3 m-3 text-center">
+                Your result is @result
+            </div>
+        }
+    </div>
 }
 
 
@@ -55,10 +49,13 @@ else
 
     [Inject]
     public NavigationManager? Navigation{ get; set; }
+    private int? result = null;
 
-    private string submissionName = string.Empty;
-    private  List<string> choices  = new();
-    private Submission submission = new();
+    [SupplyParameterFromQuery]
+    [Parameter]
+    public string submissionName { get; set; } = string.Empty;
+    private  List<string?> choices;
+    private Submission submission = null!;
 
     [Inject]
     public IJSRuntime JSRuntime { get; set; } = null!;
@@ -69,7 +66,8 @@ else
         if (string.IsNullOrEmpty(Id))
             Navigation?.NavigateTo("/NotFound");
         Exam = await InitializeExam(Id);
-        
+        choices = new List<string?>(Exam!.Questions.Count());
+        submission = new() { SubmissionPersonName = submissionName};
         await base.OnInitializedAsync();
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -105,4 +103,10 @@ else
     }
 
     private Task<Exam?> InitializeExam(string id) => _client?.GetExamAsync(id) ?? throw new InvalidDataException();
+
+    private void CorrectExam()
+    {
+        submission.Choices = choices;
+        result = Exam!.CorrectExam(submission);
+    }
 }
