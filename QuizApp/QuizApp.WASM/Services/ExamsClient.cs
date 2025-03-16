@@ -20,5 +20,10 @@ namespace QuizApp.BlazorWASM.Services
         {
             return _client.PostAsJsonAsync<Submission>($"Submissions/add",submission);
         }
+
+        public Task<Submission?> GetSubmission(string subId)
+        {
+            return _client.GetFromJsonAsync<Submission>($"Submissions/id/{subId}");
+        }
     }
 }

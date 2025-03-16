@@ -1,11 +1,44 @@
-﻿<h3>SubmissionResult</h3>
-@foreach (var item in Choices)
+﻿@page "/submissionResult"
+@inject NavigationManager NavigationManager
+@if (submission is not null)
 {
-    <p>item</p>
+    <ExamView Id="@examId"
+        submissionName="@submission.SubmissionPersonName"
+              Corrected="true"/>
+    <p>Working...</p>
 }
-
+else
+{
+    <MudProgressCircular Color="Color.Info"
+                         Indeterminate="true"
+                         Size="Size.Large"
+                         Style="height:30vh;width:30vh;align-self:center;margin-top:15%" />
+}
 @code {
     [Parameter]
-    public List<string?> Choices { get; set; } = null!;
+    [SupplyParameterFromQuery]
+    public string submissionId { get; set; } = null!;
 
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string examId { get; set; } = null!;
+
+    private Submission? submission = null;
+
+    [Inject]
+    public ExamsClient _client { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("Nulllllll....");
+        Console.WriteLine(submissionId);
+        Console.WriteLine(examId);
+        Console.WriteLine(NavigationManager.Uri);
+        submission = await InitializeSubmission();
+    }
+
+    private Task<Submission?> InitializeSubmission()
+    {
+        return _client.GetSubmission(submissionId);
+    }
 }

@@ -27,6 +27,7 @@
 
             <MudListItem Class="d-flex align-items-center question-choice"
                          Value="i"
+                         Disabled = "Corrected"
                          Style="cursor: pointer;">
                 <!-- Render the prefix and the choice -->
                 <div class="question-choice">
@@ -54,6 +55,9 @@
     [Parameter]
     public int QuestionNumber { get; set; }
 
+    [CascadingParameter]
+    public bool Corrected { get; set; }
+
 
     private int _selectedIndex = -1; // Backing field for SelectedIndex
     public int SelectedIndex
@@ -70,8 +74,6 @@
     }
     private void OnChoiceSelected(int selectedIndex)
     {
-        Console.WriteLine("Choice Selected");
-        Console.WriteLine($"Selected Index: {selectedIndex}");
         // Convert the selected index to A, B, C format
         var selectedChoiceLetter = GetChoicePrefix(selectedIndex);
         QuestionSelected(QuestionNumber,selectedChoiceLetter);

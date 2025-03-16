@@ -6,17 +6,20 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         @if (Exam is not null)
         {
-            int i = 0;
-            foreach (Question question in Exam.Questions)
-            {
-                i++;
-                <!-- Add w-100 and text-center to the child container -->
-                <div class="m-4 w-100 ">
-                    <QuestionView 
-                        QuestionSelected="SelectChoices"
-                        Question="question" QuestionNumber="i" />
-                </div>
-            }
+            <CascadingValue Value="Corrected">
+                @{
+                    int i = 0;
+                    foreach (Question question in Exam.Questions)
+                    {
+                        i++;
+                        <!-- Add w-100 and text-center to the child container -->
+                        <div class="m-4 w-100 ">
+                            <QuestionView QuestionSelected="SelectChoices"
+                                            Question="question" QuestionNumber="i" />
+                        </div>
+                    }
+                }
+            </CascadingValue>
         }
         else
         {
@@ -61,6 +64,9 @@
     public IJSRuntime JSRuntime { get; set; } = null!;
 
     public Exam? Exam { get; set; } = null;
+
+    [Parameter]
+    public bool Corrected { get; set; } = false;
     protected override async Task OnInitializedAsync()
     {
         if (string.IsNullOrEmpty(Id))
@@ -110,11 +116,25 @@
         {
             submission.Choices = new List<string?>(_choices);
             var result = await _client!.SubmitExam(submission);
+            if (result.IsSuccessStatusCode)
+            {
+                string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;
+                submission.id = id ?? throw new HttpRequestException();
+                submission.DateSubmitted = DateTime.Now;
+                IDictionary<string, string> queryParams = new Dictionary<string, string>
+                {
+                    {"submissionId",submission.id},
+                    {"examId",Exam!.id!}
+                };
+                string url = QueryHelpers.AddQueryString("/submissionResult",queryParams);
+
+                Navigation!.NavigateTo(url);
+            }
         }
     }
 
     private void SelectChoices(int questionIndex, string answer)
     {
-        _choices[questionIndex] = answer;
+        _choices[questionIndex - 1] = answer;
     }
 }

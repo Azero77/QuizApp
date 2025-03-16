@@ -25,9 +25,18 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet("name/{name}")]
-        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissions(string name)
+        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByName(string name)
         {
             IAsyncEnumerable<Submission> submissions = _repo.GetSubmissions(name);
+            if (submissions is null)
+                return NotFound();
+            return Ok(submissions);
+        }
+
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetSubmissionsById(string id)
+        {
+            Submission submissions = await _repo.GetSubmission(id);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
