@@ -1,3 +1,4 @@
+using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
@@ -61,6 +62,7 @@ namespace QuizAppAPI
         {
             services.AddScoped<ExamQuestionsContext>();
             services.AddScoped<IExamQuestionsRepository, DbExamQuestionsRepository>();
+            services.AddScoped<ISubmissionRepository, DbSubmissionRepository>();
         }
 
         private static void ConfigureMongoModel(WebApplicationBuilder builder, IServiceCollection services)

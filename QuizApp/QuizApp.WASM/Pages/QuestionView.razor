@@ -1,40 +1,45 @@
-﻿<MudPaper Class="ma-3 mx-auto" Style="max-width: 100vh;"
-          dir="@(IsArabic(Question.QuestionText) ? "rtl" : "ltr")">
-    <!-- Flex layout for question number + text -->
-    <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
-        <MudText Typo="Typo.inherit" Color="Color.Primary" Class="me-2">
-            @QuestionNumber.
-        </MudText>
-        <MudText Typo="Typo.h4">
-            @foreach (var segment in Question.QuestionText)
-            {
-                @RenderQuestionSegment(segment)
-            }
-        </MudText>
-    </MudStack>
+﻿
+    <MudPaper Class="ma-3 mx-auto" Style="max-width: 100vh;"
+              dir="rtl">
+        <!-- Flex layout for question number + text -->
+        <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
+            <MudText Typo="Typo.inherit" Color="Color.Primary" Class="me-2">
+                @QuestionNumber.
+            </MudText>
+            <MudText Typo="Typo.h4">
+                @foreach (var segment in Question.QuestionText)
+                {
+                    @RenderQuestionSegment(segment)
+                }
+            </MudText>
+        </MudStack>
 
-    <!-- Choices as selectable list items -->
-    <MudList @bind-SelectedValue="SelectedChoice"
-             SelectionMode="SelectionMode.SingleSelection"
-             T="string"
-             Color="@Color.Info"
-             Dense="true" Hover="true">
-        @foreach (var choice in Question.QuestionChoices)
-        {
-            <MudListItem Class="d-flex align-items-center question-choice"
-                         Value="GetChoiceText(choice)"
-                         Style="cursor: pointer;">
-                <!-- Render each choice as a collection of segments -->
-                <MudStack Row="true">
-                    @foreach (var segment in choice)
-                    {
-                        @RenderQuestionSegment(segment)
-                    }
-                </MudStack>
-            </MudListItem>
-        }
-    </MudList>
-</MudPaper>
+        <!-- Choices as selectable list items -->
+        <MudList SelectionMode="SelectionMode.SingleSelection"
+                 T="string"
+                 Color="@Color.Info"
+                 Dense="true" Hover="true">
+            @foreach (var choice in Question.QuestionChoices)
+            {
+                    <MudListItem Class="d-flex align-items-center question-choice"
+                                 Value="GetChoiceText(choice)"
+                                 Style="cursor: pointer;">
+                        <!-- Render each choice as a collection of segments -->
+                        <div class="question-choice">
+                            <MudStack Row="true">
+                                @foreach (var segment in choice)
+                                {
+                                    @RenderQuestionSegment(segment)
+                                }
+                            </MudStack>
+                        </div>
+                    </MudListItem>
+            }
+        </MudList>
+
+
+    </MudPaper>
+
 
 @code {
     [Parameter]
@@ -44,6 +49,10 @@
     public long QuestionNumber { get; set; }
 
     public string SelectedChoice { get; set; } = string.Empty;
+
+    [Parameter]
+    [EditorRequired]
+    public List<string> choices { get; set; }
 
     private bool IsArabic(List<QuestionSentence> questionText)
     {
@@ -71,37 +80,38 @@
 
             case QuestionSentenceType.ParagraphEquation:
                 builder.OpenElement(1, "div");
-                builder.AddContent(2, RenderEquation(segment.Text));
+                builder.AddAttribute(2, "class", "text-center"); // Add text-center class
+                builder.AddContent(3, RenderEquation(segment.Text));
                 builder.CloseElement();
                 break;
 
             case QuestionSentenceType.InlineEquation:
-                builder.OpenElement(3, "span");
-                builder.AddContent(4, RenderEquation(segment.Text));
+                builder.OpenElement(4, "span");
+                builder.AddContent(5, RenderEquation(segment.Text));
                 builder.CloseElement();
                 break;
 
             case QuestionSentenceType.ImageUrl:
-                builder.OpenElement(5, "img");
-                builder.AddAttribute(6, "src", segment.Text);
-                builder.AddAttribute(7, "alt", segment.AltText ?? "Image");
+                builder.OpenElement(6, "img");
+                builder.AddAttribute(7, "src", segment.Text);
+                builder.AddAttribute(8, "alt", segment.AltText ?? "Image");
                 builder.CloseElement();
                 break;
 
             case QuestionSentenceType.CodeBlock:
-                builder.OpenElement(8, "pre");
-                builder.AddContent(9, segment.Text);
+                builder.OpenElement(9, "pre");
+                builder.AddContent(10, segment.Text);
                 builder.CloseElement();
                 break;
 
             case QuestionSentenceType.Table:
-                builder.OpenElement(10, "table");
-                builder.AddMarkupContent(11, segment.Text); // Assuming Text contains HTML table markup
+                builder.OpenElement(11, "table");
+                builder.AddMarkupContent(12, segment.Text); // Assuming Text contains HTML table markup
                 builder.CloseElement();
                 break;
 
             default:
-                builder.AddContent(12, segment.Text);
+                builder.AddContent(13, segment.Text);
                 break;
         }
     };

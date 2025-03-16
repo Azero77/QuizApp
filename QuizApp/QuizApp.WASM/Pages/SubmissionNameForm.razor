@@ -1,0 +1,21 @@
+﻿
+
+<div class="vh-100 w-100 d-flex justify-content-center align-items-center">
+    <div class="input-group" style="max-width:50%">
+
+        <MudTextField Class="input" 
+            Required
+            ErrorText="Name is required"
+            T="string" @bind-Value="Name" Label="Please Write your Name" />
+        <MudButton Class="btn btn-primary ma-2"
+            Disabled = "string.IsNullOrEmpty(Name)">Submit</MudButton>
+    </div>
+</div>
+
+ @code {
+    [Parameter]
+    public string Name { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> NameChanged { get; set; }
+}

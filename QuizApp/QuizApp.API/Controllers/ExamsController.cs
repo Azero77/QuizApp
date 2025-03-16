@@ -20,14 +20,16 @@ namespace QuizAppAPI.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Exam>),200)]
+        [ProducesResponseType(typeof(IAsyncEnumerable<Exam>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetExams()
         {
-            var result = await _repo.GetExams();
+            var result = _repo.GetExamsAsync(); // Use the async method
+
             if (result is null)
                 return NotFound();
-            return Ok(result);
+
+            return Ok(result); // Return the IAsyncEnumerable directly
         }
 
         [HttpGet("{id}")]
@@ -36,20 +38,24 @@ namespace QuizAppAPI.Controllers
         public async Task<IActionResult> GetExam(string id)
         {
             var result = await _repo.GetExamById(id);
+
             if (result is null)
                 return NotFound();
+
             return Ok(result);
         }
 
         [HttpGet("{id}/Questions")]
-        [ProducesResponseType(typeof(IEnumerable<Question>), 200)]
+        [ProducesResponseType(typeof(IAsyncEnumerable<Question>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetExamQuestions(string id)
         {
-            var result = await _repo.GetQuestions(id);
+            var result = _repo.GetQuestionsAsync(id); // Use the async method
+
             if (result is null)
                 return NotFound();
-            return Ok(result);
+
+            return Ok(result); // Return the IAsyncEnumerable directly
         }
     }
 }

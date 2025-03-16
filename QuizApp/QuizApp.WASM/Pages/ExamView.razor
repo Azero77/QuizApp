@@ -1,28 +1,49 @@
 ﻿@page "/Exams/{Id}"
-<div class="exam-container d-flex flex-column justify-content-center align-items-center">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    @if (Exam is not null)
-    {
-        long i = 0;
-        foreach (Question question in Exam.Questions)
+@if (!string.IsNullOrEmpty(submission.SubmissionPersonName))
+{
+    <div class=" data-latex exam-container d-flex flex-column justify-content-center align-items-center">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        @if (Exam is not null)
         {
-            i++;
-            <!-- Add w-100 and text-center to the child container -->
-            <div class="m-4 w-100 text-center data-latex">
-                <QuestionView Question="question" QuestionNumber="i" />
-            </div>
+            long i = 0;
+            foreach (Question question in Exam.Questions)
+            {
+                i++;
+                <!-- Add w-100 and text-center to the child container -->
+                <div class="m-4 w-100 ">
+                    <QuestionView 
+                        choices="choices"
+                        Question="question" QuestionNumber="i" />
+                </div>
+            }
         }
-    }
-    else
-    {
-            <MudProgressCircular Color="Color.Info"
-                                 Indeterminate="true"
-                                 Size="Size.Large"
-                                 Style="height:30vh;width:30vh;align-self:center;margin-top:15%"/>
-    }
-</div>
+        else
+        {
+            <MudProgressCircular Color
+            ="Color.Info"
+            Indeterminate="true"
+            Size="Size.Large"
+            Style="height:30vh;width:30vh;align-self:center;margin-top:15%"/>
+        }
 
+    </div>
+}
+else
+{
+    <div class="vh-100 w-100 d-flex justify-content-center align-items-center">
+        <div class="input-group" style="max-width:50%">
+
+            <MudTextField Class="input"
+                                    Required
+                           ErrorText="Name is required"
+                           T="string" @bind-Value="submissionName" Label="Please Write your Name" />
+             <MudButton Class="btn btn-primary ma-2"
+                        Disabled="string.IsNullOrEmpty(submissionName)"
+                        OnClick="() => submission.SubmissionPersonName = submissionName">Submit</MudButton>
+         </div>
+     </div>
+}
 
 
 @code {
@@ -34,6 +55,10 @@
 
     [Inject]
     public NavigationManager? Navigation{ get; set; }
+
+    private string submissionName = string.Empty;
+    private  List<string> choices  = new();
+    private Submission submission = new();
 
     [Inject]
     public IJSRuntime JSRuntime { get; set; } = null!;

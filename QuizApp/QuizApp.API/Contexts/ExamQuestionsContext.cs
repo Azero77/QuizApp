@@ -11,11 +11,13 @@ namespace QuizAppAPI.Contexts
     public class ExamQuestionsContext
     {
         public IMongoCollection<Exam>? Exams { get; set; }
+        public IMongoCollection<Submission> Submissions { get; set; }
         public ExamQuestionsContext(IOptions<MongoDbConnectionModel> options)
         {
             var client = new MongoClient(options.Value.ConnectionString);
             var database = client.GetDatabase(options.Value.Database);
-            Exams = database.GetCollection<Exam>(options.Value.Collection);
+            Exams = database.GetCollection<Exam>("Exams");
+            Submissions = database.GetCollection<Submission>("Submissions");
         }
     }
 }
