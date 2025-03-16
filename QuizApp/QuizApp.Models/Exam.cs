@@ -18,7 +18,10 @@ namespace QuizApp.Models
                 return 0;
            for (int i = 0; i < sub.Choices.Count(); i++)
             {
-                if (sub.Choices[i].ToLower() == Questions[i].Answer.ToLower())
+                string? choice = sub.Choices[i]?.ToLower();
+                if (choice is null)
+                    continue;
+                if (choice == Questions[i].Answer.ToLower())
                     result++;
             }
             return result;

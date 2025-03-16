@@ -25,6 +25,7 @@ namespace QuizApp.BlazorWASM
                 {
                     client.BaseAddress = new Uri("https://localhost:5001/api/");
                 });
+
         }
     }
 }

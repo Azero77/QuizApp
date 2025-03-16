@@ -6,14 +6,14 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         @if (Exam is not null)
         {
-            long i = 0;
+            int i = 0;
             foreach (Question question in Exam.Questions)
             {
                 i++;
                 <!-- Add w-100 and text-center to the child container -->
                 <div class="m-4 w-100 ">
                     <QuestionView 
-                        Choices="choices"
+                        QuestionSelected="SelectChoices"
                         Question="question" QuestionNumber="i" />
                 </div>
             }
@@ -28,7 +28,7 @@
         }
 
     <div>
-        <MudButton OnClick="CorrectExam">Correct Exam</MudButton>
+        <MudButton OnClick="SubmitExam">Correct Exam</MudButton>
     </div>
     @if(result is not null)
         {
@@ -45,7 +45,7 @@
     public string Id { get; set; } = string.Empty;
 
     [Inject]
-    public ExamsClient? _client { get; set; }
+    public ExamsClient _client { get; set; } = null!;
 
     [Inject]
     public NavigationManager? Navigation{ get; set; }
@@ -54,7 +54,7 @@
     [SupplyParameterFromQuery]
     [Parameter]
     public string submissionName { get; set; } = string.Empty;
-    private  List<string?> choices;
+    private string?[] _choices = null!;
     private Submission submission = null!;
 
     [Inject]
@@ -66,8 +66,8 @@
         if (string.IsNullOrEmpty(Id))
             Navigation?.NavigateTo("/NotFound");
         Exam = await InitializeExam(Id);
-        choices = new List<string?>(Exam!.Questions.Count());
-        submission = new() { SubmissionPersonName = submissionName};
+        _choices = new string[Exam!.Questions.Count()];
+        submission = new() { ExamId = Exam!.id!,SubmissionPersonName = submissionName};
         await base.OnInitializedAsync();
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -104,9 +104,17 @@
 
     private Task<Exam?> InitializeExam(string id) => _client?.GetExamAsync(id) ?? throw new InvalidDataException();
 
-    private void CorrectExam()
+    private async Task SubmitExam()
     {
-        submission.Choices = choices;
-        result = Exam!.CorrectExam(submission);
+        if (_choices is not null)
+        {
+            submission.Choices = new List<string?>(_choices);
+            var result = await _client!.SubmitExam(submission);
+        }
+    }
+
+    private void SelectChoices(int questionIndex, string answer)
+    {
+        _choices[questionIndex] = answer;
     }
 }

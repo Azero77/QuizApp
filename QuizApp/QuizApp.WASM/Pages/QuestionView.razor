@@ -45,7 +45,6 @@
             </MudListItem>
         }
     </MudList>
-    <p class="bg-danger text-center text-white">@SelectedIndex</p>
 </MudPaper>
 
 @code {
@@ -53,11 +52,8 @@
     public Question Question { get; set; } = null!;
 
     [Parameter]
-    public long QuestionNumber { get; set; }
+    public int QuestionNumber { get; set; }
 
-    [Parameter]
-    [EditorRequired]
-    public List<string?> Choices { get; set; } = null!;
 
     private int _selectedIndex = -1; // Backing field for SelectedIndex
     public int SelectedIndex
@@ -76,16 +72,9 @@
     {
         Console.WriteLine("Choice Selected");
         Console.WriteLine($"Selected Index: {selectedIndex}");
-        Console.WriteLine($"Choices List: {string.Join(", ", Choices)}");
-        Console.WriteLine(Choices);
         // Convert the selected index to A, B, C format
         var selectedChoiceLetter = GetChoicePrefix(selectedIndex);
-
-        // Update the Choices list at the index corresponding to the current question
-        if (QuestionNumber >= 0 && QuestionNumber < Choices.Count)
-        {
-            Choices[(int)QuestionNumber] = selectedChoiceLetter;
-        }
+        QuestionSelected(QuestionNumber,selectedChoiceLetter);
     }
 
     private string GetChoicePrefix(int index)
@@ -155,6 +144,10 @@
                 break;
         }
     };
+
+    [Parameter]
+    [EditorRequired]
+    public Action<int, string> QuestionSelected { get; set; } = null!;
 
     private RenderFragment RenderEquation(string equation) => builder =>
     {
