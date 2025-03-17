@@ -11,3 +11,17 @@
     unicode-bidi: plaintext;
     text-align:start;
 }
+body{
+    background:red;
+}
+::deep .answer{
+    color : white !important;
+}
+
+::deep .right-answer{
+    background : green !important;
+}
+
+::deep .wrong-answer{
+    background : red !important;
+}

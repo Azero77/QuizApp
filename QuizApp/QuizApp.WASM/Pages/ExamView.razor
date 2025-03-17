@@ -6,19 +6,22 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         @if (Exam is not null)
         {
-            <CascadingValue Value="Corrected">
-                @{
-                    int i = 0;
-                    foreach (Question question in Exam.Questions)
-                    {
-                        i++;
-                        <!-- Add w-100 and text-center to the child container -->
-                        <div class="m-4 w-100 ">
-                            <QuestionView QuestionSelected="SelectChoices"
-                                            Question="question" QuestionNumber="i" />
-                        </div>
+            <CascadingValue Value="submission">
+                <CascadingValue Value="Corrected">
+                    @{
+                        int i = 0;
+                        foreach (Question question in Exam.Questions)
+                        {
+                            i++;
+                            <!-- Add w-100 and text-center to the child container -->
+                                <div class="m-4 w-100 ">
+                                    <QuestionView QuestionSelected="SelectChoices"
+                                                    SelectedChoice="@Choices[i-1]"
+                                                  Question="question" QuestionNumber="i" />
+                                </div>
+                        }
                     }
-                }
+                </CascadingValue>
             </CascadingValue>
         }
         else
@@ -57,8 +60,11 @@
     [SupplyParameterFromQuery]
     [Parameter]
     public string submissionName { get; set; } = string.Empty;
-    private string?[] _choices = null!;
-    private Submission submission = null!;
+
+    [Parameter]
+    public string?[] Choices { get; set; } = null!;
+
+    public Submission submission { get; set; } = null!;
 
     [Inject]
     public IJSRuntime JSRuntime { get; set; } = null!;
@@ -72,8 +78,9 @@
         if (string.IsNullOrEmpty(Id))
             Navigation?.NavigateTo("/NotFound");
         Exam = await InitializeExam(Id);
-        _choices = new string[Exam!.Questions.Count()];
-        submission = new() { ExamId = Exam!.id!,SubmissionPersonName = submissionName};
+        if(!Corrected)
+            Choices = new string[Exam!.Questions.Count()];
+        submission = new() { ExamId = Exam!.id!, SubmissionPersonName = submissionName };
         await base.OnInitializedAsync();
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -112,14 +119,17 @@
 
     private async Task SubmitExam()
     {
-        if (_choices is not null)
+        if (Choices is not null)
         {
-            submission.Choices = new List<string?>(_choices);
+            submission.Choices = new List<string?>(Choices);
             submission.DateSubmitted = DateTime.Now;
-            var result = await _client!.SubmitExam(submission);
-            if (result.IsSuccessStatusCode)
+            int result = Exam!.CorrectExam(submission);
+            submission.Result = result;
+            Console.WriteLine("result is : "  + result);
+            HttpResponseMessage HttpResponseresult = await _client!.SubmitExam(submission);
+            if (HttpResponseresult.IsSuccessStatusCode)
             {
-                string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;
+                string? id = (await HttpResponseresult.Content.ReadFromJsonAsync<Submission?>())?.id;
                 submission.id = id ?? throw new HttpRequestException();
                 IDictionary<string, string> queryParams = new Dictionary<string, string>
                 {
@@ -135,6 +145,6 @@
 
     private void SelectChoices(int questionIndex, string answer)
     {
-        _choices[questionIndex - 1] = answer;
+        Choices[questionIndex - 1] = answer;
     }
 }

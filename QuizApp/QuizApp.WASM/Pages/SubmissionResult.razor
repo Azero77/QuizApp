@@ -1,18 +1,22 @@
 ﻿@page "/submissionResult"
 @inject NavigationManager NavigationManager
-@if (submission is not null)
-{
-    <ExamView Id="@examId"
-        submissionName="@submission.SubmissionPersonName"
-              Corrected="true"/>
-}
-else
-{
-    <MudProgressCircular Color="Color.Info"
-                         Indeterminate="true"
-                         Size="Size.Large"
-                         Style="height:30vh;width:30vh;align-self:center;margin-top:15%" />
-}
+<div>
+    @if (submission is not null)
+    {
+        <div class="bg-info text-white text-center fs-4 m-2 rounded">Your Score is @submission.Result / @submission.Choices.Count()</div>
+        <ExamView Id="@examId"
+                  submissionName="@submission.SubmissionPersonName"
+                  Choices="@submission.Choices.ToArray()"
+                  Corrected="true" />
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Info"
+                             Indeterminate="true"
+                             Size="Size.Large"
+                             Style="height:30vh;width:30vh;align-self:center;margin-top:15%" />
+    }
+</div>
 @code {
     [Parameter]
     [SupplyParameterFromQuery]
@@ -24,6 +28,7 @@ else
 
     private Submission? submission = null;
 
+    private int result = 0;
     [Inject]
     public ExamsClient _client { get; set; } = null!;
 

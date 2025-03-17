@@ -14,9 +14,10 @@ else
     @foreach (var item in Exams)
     {
         <MudNavLink
+            Class="rounded ma-3"
             Href="@($"submissions/{item.id}")"
             >
-            @item.id
+            @item.Name
         </MudNavLink>
     }
 }

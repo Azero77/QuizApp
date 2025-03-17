@@ -1,4 +1,5 @@
-﻿<MudPaper Class="ma-3 mx-auto" Style="max-width: 100vh;"
+﻿
+<MudPaper Class="ma-3 mx-auto pa-3" Style="max-width: 100vh;"
           dir="rtl">
     <!-- Flex layout for question number + text -->
     <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
@@ -26,13 +27,14 @@
             var choice = Question.QuestionChoices[i];
             var prefix = GetChoicePrefix(i); // Get the prefix (A, B, C, ...)
 
-            <MudListItem Class="d-flex align-items-center question-choice"
+            <MudListItem Class="@($"d-flex align-items-center question-choice mt-3 pa-3 fs-3 rounded")"
                          Value="i"
-                         Style="cursor: pointer;">
+                         Style="@($"cursor:pointer; {GetChoiceClass(prefix)}")">
                 <!-- Render the prefix and the choice -->
                 <div class="question-choice">
                     <MudStack Row="true" Gap="Gap.Small">
-                        <MudText Typo="Typo.body1" Color="Color.Primary">
+                        <MudText Typo="Typo.body1"
+                                >
                             @prefix.
                         </MudText>
                         <MudStack Row="true">
@@ -55,11 +57,15 @@
     [Parameter]
     public int QuestionNumber { get; set; }
 
+    //if the question is readonly (Corrected = true) then it will be a selectedChoice
+    [Parameter]
+    public string SelectedChoice { get; set; } = string.Empty;
+
     [CascadingParameter]
     public bool Corrected { get; set; }
 
-
     private int _selectedIndex = -1; // Backing field for SelectedIndex
+
     public int SelectedIndex
     {
         get => _selectedIndex;
@@ -72,6 +78,7 @@
             }
         }
     }
+
     private void OnChoiceSelected(int selectedIndex)
     {
         // Convert the selected index to A, B, C format
@@ -147,10 +154,6 @@
         }
     };
 
-    [Parameter]
-    [EditorRequired]
-    public Action<int, string> QuestionSelected { get; set; } = null!;
-
     private RenderFragment RenderEquation(string equation) => builder =>
     {
         // Render equation using a library like MathJax or KaTeX
@@ -159,4 +162,21 @@
         builder.AddContent(15, equation);
         builder.CloseElement();
     };
+
+
+    [Parameter]
+    [EditorRequired]
+    public Action<int, string> QuestionSelected { get; set; } = null!;
+
+    private string GetChoiceClass(string prefix)
+    {
+        if(Corrected)
+        {
+            if (prefix == Question.Answer)
+                return "background : #66FF00; Color : white !important";
+            else if (prefix == SelectedChoice)
+                return "background : #FF3800 ; Color : white !important";
+        }
+        return string.Empty;
+    }
 }

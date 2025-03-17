@@ -17,5 +17,6 @@ namespace QuizApp.Models
         public List<string?> Choices { get; set; } = null!;
 
         public DateTime DateSubmitted { get; set; }
+        public int Result { get; set; }
     }
 }
