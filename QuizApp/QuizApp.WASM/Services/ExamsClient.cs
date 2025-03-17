@@ -23,6 +23,8 @@ namespace QuizApp.BlazorWASM.Services
 
         public Task<Submission?> GetSubmission(string subId)
         {
+            if (subId is null)
+                throw new InvalidDataException("Submission Id must be given");
             return _client.GetFromJsonAsync<Submission>($"Submissions/id/{subId}");
         }
     }

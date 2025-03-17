@@ -17,6 +17,7 @@
     <MudList @bind-SelectedValue="SelectedIndex"
              SelectionMode="SelectionMode.SingleSelection"
              T="int"
+             Disabled="Corrected"
              Color="@Color.Info"
              Dense="true" Hover="true"
              >
@@ -27,7 +28,6 @@
 
             <MudListItem Class="d-flex align-items-center question-choice"
                          Value="i"
-                         Disabled = "Corrected"
                          Style="cursor: pointer;">
                 <!-- Render the prefix and the choice -->
                 <div class="question-choice">

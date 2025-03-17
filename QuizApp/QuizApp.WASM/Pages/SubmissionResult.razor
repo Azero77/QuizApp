@@ -5,7 +5,6 @@
     <ExamView Id="@examId"
         submissionName="@submission.SubmissionPersonName"
               Corrected="true"/>
-    <p>Working...</p>
 }
 else
 {
@@ -28,17 +27,17 @@ else
     [Inject]
     public ExamsClient _client { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine("Nulllllll....");
-        Console.WriteLine(submissionId);
-        Console.WriteLine(examId);
-        Console.WriteLine(NavigationManager.Uri);
         submission = await InitializeSubmission();
     }
 
     private Task<Submission?> InitializeSubmission()
     {
-        return _client.GetSubmission(submissionId);
+        if (submissionId is not null)
+            return _client.GetSubmission(submissionId);
+        else
+            //return Task with null
+            return Task.FromResult<Submission?>(null);
     }
 }

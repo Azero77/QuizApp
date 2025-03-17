@@ -115,12 +115,12 @@
         if (_choices is not null)
         {
             submission.Choices = new List<string?>(_choices);
+            submission.DateSubmitted = DateTime.Now;
             var result = await _client!.SubmitExam(submission);
             if (result.IsSuccessStatusCode)
             {
                 string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;
                 submission.id = id ?? throw new HttpRequestException();
-                submission.DateSubmitted = DateTime.Now;
                 IDictionary<string, string> queryParams = new Dictionary<string, string>
                 {
                     {"submissionId",submission.id},
