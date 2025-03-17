@@ -14,7 +14,7 @@ namespace QuizApp.Models
         public string? id { get; set; }
         public string SubmissionPersonName { get; set; } = string.Empty;
         public string ExamId { get; set; } = null!;
-        public List<string?> Choices { get; set; } = null!;
+        public List<byte?> Choices { get; set; } = null!;
 
         public DateTime DateSubmitted { get; set; }
         public int Result { get; set; }

@@ -3,7 +3,7 @@
 <div>
     @if (submission is not null)
     {
-        <div class="bg-info text-white text-center fs-4 m-2 rounded">Your Score is @submission.Result / @submission.Choices.Count()</div>
+        <div class="bg-info w-50 m-auto mt-3 text-white text-center fs-4 m-2 rounded">Your Score is @submission.Result / @submission.Choices.Count()</div>
         <ExamView Id="@examId"
                   submissionName="@submission.SubmissionPersonName"
                   Choices="@submission.Choices.ToArray()"

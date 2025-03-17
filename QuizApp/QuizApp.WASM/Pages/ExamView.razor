@@ -14,7 +14,7 @@
                         {
                             i++;
                             <!-- Add w-100 and text-center to the child container -->
-                                <div class="m-4 w-100 ">
+                                <div class=" m-3 container-fluid">
                                     <QuestionView QuestionSelected="SelectChoices"
                                                     SelectedChoice="@Choices[i-1]"
                                                   Question="question" QuestionNumber="i" />
@@ -62,7 +62,7 @@
     public string submissionName { get; set; } = string.Empty;
 
     [Parameter]
-    public string?[] Choices { get; set; } = null!;
+    public byte?[] Choices { get; set; } = null!;
 
     public Submission submission { get; set; } = null!;
 
@@ -79,7 +79,7 @@
             Navigation?.NavigateTo("/NotFound");
         Exam = await InitializeExam(Id);
         if(!Corrected)
-            Choices = new string[Exam!.Questions.Count()];
+            Choices = new byte?[Exam!.Questions.Count()];
         submission = new() { ExamId = Exam!.id!, SubmissionPersonName = submissionName };
         await base.OnInitializedAsync();
     }
@@ -121,7 +121,7 @@
     {
         if (Choices is not null)
         {
-            submission.Choices = new List<string?>(Choices);
+            submission.Choices = new List<byte?>(Choices);
             submission.DateSubmitted = DateTime.Now;
             int result = Exam!.CorrectExam(submission);
             submission.Result = result;
@@ -143,7 +143,7 @@
         }
     }
 
-    private void SelectChoices(int questionIndex, string answer)
+    private void SelectChoices(int questionIndex, byte? answer)
     {
         Choices[questionIndex - 1] = answer;
     }

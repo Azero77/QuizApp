@@ -1,6 +1,5 @@
 ﻿
-<MudPaper Class="ma-3 mx-auto pa-3" Style="max-width: 100vh;"
-          dir="rtl">
+<MudPaper Class="pa-3 container" dir="rtl">
     <!-- Flex layout for question number + text -->
     <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
         <MudText Typo="Typo.inherit" Color="Color.Primary" Class="me-2">
@@ -13,32 +12,27 @@
             }
         </MudText>
     </MudStack>
-
     <!-- Choices as selectable list items -->
-    <MudList @bind-SelectedValue="SelectedIndex"
+    <MudList
+            SelectedValueChanged="SelectChoice"
              SelectionMode="SelectionMode.SingleSelection"
-             T="int"
+             T="byte?"
              Disabled="Corrected"
              Color="@Color.Info"
-             Dense="true" Hover="true"
-             >
-        @for (int i = 0; i < Question.QuestionChoices.Count; i++)
+             Dense="true" Hover="true">
+        @for (byte i = 0; i < Question.QuestionChoices.Count; i++)
         {
             var choice = Question.QuestionChoices[i];
-            var prefix = GetChoicePrefix(i); // Get the prefix (A, B, C, ...)
+            var prefix = GetChoicePrefix(i);
 
             <MudListItem Class="@($"d-flex align-items-center question-choice mt-3 pa-3 fs-3 rounded")"
-                         Value="i"
-                         Style="@($"cursor:pointer; {GetChoiceClass(prefix)}")">
-                <!-- Render the prefix and the choice -->
+                         Value="@((byte?)i)"
+                         Style="@($"cursor:pointer; {GetChoiceClass(i)}")">
                 <div class="question-choice">
                     <MudStack Row="true" Gap="Gap.Small">
-                        <MudText Typo="Typo.body1"
-                                >
-                            @prefix.
-                        </MudText>
-                        <MudStack Row="true">
-                            @foreach (var segment in choice)
+                        <MudText Typo="Typo.body1">@prefix.</MudText>
+                            <MudStack Row="true">
+                                @foreach (var segment in choice)
                             {
                                 @RenderQuestionSegment(segment)
                             }
@@ -59,32 +53,18 @@
 
     //if the question is readonly (Corrected = true) then it will be a selectedChoice
     [Parameter]
-    public string SelectedChoice { get; set; } = string.Empty;
+    public byte? SelectedChoice { get; set; } = 0;
 
     [CascadingParameter]
     public bool Corrected { get; set; }
 
-    private int _selectedIndex = -1; // Backing field for SelectedIndex
+    [Parameter]
+    public EventCallback<byte?> SelectedChoiceChanged { get; set; } // Add this
 
-    public int SelectedIndex
-    {
-        get => _selectedIndex;
-        set
-        {
-            if (_selectedIndex != value)
-            {
-                _selectedIndex = value;
-                OnChoiceSelected(value); // Call the method when the value changes
-            }
-        }
-    }
+    [Parameter]
+    [EditorRequired]
+    public Action<int, byte?> QuestionSelected { get; set; } = null!;
 
-    private void OnChoiceSelected(int selectedIndex)
-    {
-        // Convert the selected index to A, B, C format
-        var selectedChoiceLetter = GetChoicePrefix(selectedIndex);
-        QuestionSelected(QuestionNumber,selectedChoiceLetter);
-    }
 
     private string GetChoicePrefix(int index)
     {
@@ -164,19 +144,25 @@
     };
 
 
-    [Parameter]
-    [EditorRequired]
-    public Action<int, string> QuestionSelected { get; set; } = null!;
-
-    private string GetChoiceClass(string prefix)
+   
+    private string GetChoiceClass(byte choice)
     {
         if(Corrected)
         {
-            if (prefix == Question.Answer)
+            if (choice == Question.Answer)
                 return "background : #66FF00; Color : white !important";
-            else if (prefix == SelectedChoice)
+            else if (choice == SelectedChoice)
                 return "background : #FF3800 ; Color : white !important";
         }
         return string.Empty;
+    }
+
+    private void SelectChoice(byte? choice)
+    {
+        if(choice is not null)
+        {
+            SelectedChoice = choice;
+            QuestionSelected(QuestionNumber,choice);
+        }
     }
 }

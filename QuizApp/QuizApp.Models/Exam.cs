@@ -18,10 +18,10 @@ namespace QuizApp.Models
                 return 0;
            for (int i = 0; i < sub.Choices.Count(); i++)
             {
-                string? choice = sub.Choices[i]?.ToLower();
+                byte? choice = sub.Choices[i];
                 if (choice is null)
                     continue;
-                if (choice == Questions[i].Answer.ToLower())
+                if (choice == Questions[i].Answer)
                     result++;
             }
             return result;
