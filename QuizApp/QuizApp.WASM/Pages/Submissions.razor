@@ -1,45 +1,44 @@
 ﻿@page "/Submissions"
 
-<MudList T="Exam">
-    <MudListSubheader>Exams:</MudListSubheader>
-    @if(_exams.Count() > 0)
-    {
-        @foreach (Exam exam in _exams)
+<HttpClientErrorHandler>
+    <MudList T="Exam">
+        <MudListSubheader>Exams:</MudListSubheader>
+        @if (_exams.Count() > 0)
         {
-            <MudListItem Text="@exam.Name"
-                         ExpandedChanged="async () => await LoadSubmission(exam.id!)"
-                        >
-                <NestedList>
-                    @if (exam.id is not null && _submissions.ContainsKey(exam.id!))
-                    {
-                        @foreach(Submission sub in _submissions[exam.id])
+            @foreach (Exam exam in _exams)
+            {
+                <MudListItem Text="@exam.Name"
+                             ExpandedChanged="async () => await LoadSubmission(exam.id!)">
+                    <NestedList>
+                        @if (exam.id is not null && _submissions.ContainsKey(exam.id!))
+                        {
+                            @foreach (Submission sub in _submissions[exam.id])
+                            {
+                                <MudListItem>
+                                    <MudNavLink Href="@UrlHelpers.GetSubmissionLink(exam.id,sub.id!)">@sub.SubmissionPersonName</MudNavLink>
+                                    </MudListItem>
+                            }
+                        }
+                        else
                         {
                             <MudListItem>
-                                <MudNavLink
-                                    Href="@UrlHelpers.GetSubmissionLink(exam.id,sub.id!)"    
-                                >@sub.SubmissionPersonName</MudNavLink>
+                                <div class="text-center">
+                                    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                                </div>
                             </MudListItem>
                         }
-                    }
-                    else
-                    {
-                        <MudListItem>
-                            <div class="text-center">
-                                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-                            </div>
-                        </MudListItem>
-                    }
-                </NestedList>
-            </MudListItem>
+                    </NestedList>
+                </MudListItem>
+            }
         }
-    }
-    else
-    {
-        <div class="text-center">
-            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-        </div>
-    }
-</MudList>
+        else
+        {
+            <div class="text-center">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            </div>
+        }
+    </MudList>
+</HttpClientErrorHandler>
 
 @code {
     //Submissions Grouped by exam id

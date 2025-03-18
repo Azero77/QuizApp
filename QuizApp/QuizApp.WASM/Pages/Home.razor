@@ -1,28 +1,27 @@
 ﻿@page "/"
-@inherits HttpClientErrorHandler
 
-<PageTitle>Home</PageTitle>
+<HttpClientErrorHandler>
+    <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h4">
-    Select Exam:
-</MudText>
-@if(Exams is null)
-{
-    <p>Loading</p>
-}
-else
-{
-    @foreach (var item in Exams)
+    <MudText Typo="Typo.h4">
+        Select Exam:
+    </MudText>
+    @if (Exams is null)
     {
-        <MudNavLink
-            Class="rounded ma-3"
-            Href="@($"submissions/{item.id}")"
-            >
-            @item.Name
-        </MudNavLink>
+        <p>Loading</p>
     }
-}
+    else
+    {
+        @foreach (var item in Exams)
+        {
+            <MudNavLink Class="rounded ma-3"
+                        Href="@($"submissions/{item.id}")">
+                @item.Name
+            </MudNavLink>
+        }
+    }
 
+</HttpClientErrorHandler>
 @code{
 
     [Inject]

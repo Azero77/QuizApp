@@ -1,24 +1,26 @@
 ﻿@page "/submissionResult"
 @inject NavigationManager NavigationManager
-<div>
-    @if (submission is not null)
-    {
-        <ScoreView result="@submission.Result"
-                    fullMark="@submission.Choices.Count()"/>
-        <div class="bg-info w-50 m-auto mt-3 m-2 rounded"></div>
-        <ExamView Id="@examId"
-                  submissionName="@submission.SubmissionPersonName"
-                  Choices="@submission.Choices.ToArray()"
-                  Corrected="true" />
-    }
-    else
-    {
-        <MudProgressCircular Color="Color.Info"
-                             Indeterminate="true"
-                             Size="Size.Large"
-                             Style="height:30vh;width:30vh;align-self:center;margin-top:15%" />
-    }
-</div>
+<HttpClientErrorHandler>
+    <div>
+        @if (submission is not null)
+        {
+            <ScoreView result="@submission.Result"
+                       fullMark="@submission.Choices.Count()" />
+            <div class="bg-info w-50 m-auto mt-3 m-2 rounded"></div>
+            <ExamView Id="@examId"
+                      submissionName="@submission.SubmissionPersonName"
+                      Choices="@submission.Choices.ToArray()"
+                      Corrected="true" />
+        }
+        else
+        {
+            <MudProgressCircular Color="Color.Info"
+                                 Indeterminate="true"
+                                 Size="Size.Large"
+                                 Style="height:30vh;width:30vh;align-self:center;margin-top:15%" />
+        }
+    </div>
+</HttpClientErrorHandler>
 @code {
     [Parameter]
     [SupplyParameterFromQuery]

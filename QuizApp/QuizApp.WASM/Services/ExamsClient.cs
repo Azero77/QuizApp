@@ -10,6 +10,7 @@ namespace QuizApp.BlazorWASM.Services
     public class ExamsClient
     {
         private readonly HttpClient _client;
+        private readonly JsonSerializerOptions _opts = new() { PropertyNameCaseInsensitive = true };
 
         public ExamsClient(HttpClient client)
         {
@@ -23,7 +24,8 @@ namespace QuizApp.BlazorWASM.Services
             {
                 //read the response
                 Stream contentStream = await response.Content.ReadAsStreamAsync();
-                await foreach (Exam? exam in JsonSerializer.DeserializeAsyncEnumerable<Exam>(contentStream))
+
+                await foreach (Exam? exam in JsonSerializer.DeserializeAsyncEnumerable<Exam>(contentStream,_opts))
                 {
                     yield return exam;
                 }
@@ -67,7 +69,7 @@ namespace QuizApp.BlazorWASM.Services
             {
                 //read the response
                 Stream contentStream = await response.Content.ReadAsStreamAsync();
-                await foreach (Submission? sub in JsonSerializer.DeserializeAsyncEnumerable<Submission>(contentStream))
+                await foreach (Submission? sub in JsonSerializer.DeserializeAsyncEnumerable<Submission>(contentStream,_opts))
                 {
                     yield return sub;
                 }

@@ -1,18 +1,17 @@
-﻿@inherits LayoutComponentBase
-@using System.Collections.ObjectModel
+﻿@using System.Collections.ObjectModel
 @using System.Collections.Specialized
 
-<div class="container">
+<div>
     @if (_errors.Count() == 0) //no errors
     {
-        @Body
+        @ChildContent
     }
     else
     {
-        <ul>
+        <ul class="errors">
             @foreach (string error in _errors)
             {
-                <li>@error</li>
+                <li key="@error" class="error">@error</li>
             }
         </ul>
     }
@@ -22,23 +21,21 @@
     [Inject]
     private HttpClientErrorDelegationHandler _handler { get; set; } = null!;
 
-    private ObservableCollection<string> _errors { get; set; } = new();
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+
+    private List<string> _errors { get; set; } = new();
 
 
     protected override void OnInitialized()
     {
         _handler.ErrorsChanged += OnErrorsChanged;
-        _errors.CollectionChanged += OnCollectionChanged;
         base.OnInitialized();
     }
 
     private void OnErrorsChanged(string errorMessage)
     {
         _errors.Add(errorMessage);
-    }
-    private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        StateHasChanged();
     }
 
 
