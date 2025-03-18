@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.RateLimiting;
+using QuizApp.API.Middlewares;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 using QuizAppAPI.Contexts;
@@ -16,6 +18,15 @@ namespace QuizAppAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddRateLimiter(opts => {
+                opts.AddFixedWindowLimiter("fixedWindowSlider",
+                    opts =>
+                    {
+                        opts.PermitLimit = 10;
+                        opts.QueueLimit = 5;
+                        opts.Window = TimeSpan.FromSeconds(2);
+                    });
+            });
             builder.Services.AddHttpsRedirection(opts => 
             {
                 opts.HttpsPort = 5001;
@@ -44,7 +55,7 @@ namespace QuizAppAPI
             app.UseHttpsRedirection();
             app.UseCors("BlazorWebAssemblyPolicy");
             app.UseAuthorization();
-            
+            app.UseMiddleware<RequestTimeoutMiddleware>();
 
             app.MapControllers();
 

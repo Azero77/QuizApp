@@ -17,8 +17,8 @@ namespace QuizApp.API.Services.Submissions
 
         public async IAsyncEnumerable<Submission> GetSubmissions([EnumeratorCancellation]CancellationToken token = default)
         {
-            var cursor = await Submissions.FindAsync<Submission>(_ => true);
-            while (await cursor.MoveNextAsync())
+            var cursor = await Submissions.FindAsync<Submission>(_ => true,cancellationToken : token);
+            while (await cursor.MoveNextAsync(token))
             {
                 foreach (Submission item in cursor.Current)
                 {

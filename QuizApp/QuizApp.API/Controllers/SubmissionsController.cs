@@ -16,9 +16,9 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissions()
+        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissions(CancellationToken token)
         {
-            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissions();
+            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissions(token);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
