@@ -24,8 +24,9 @@ namespace QuizApp.BlazorWASM
             builder.Services.AddHttpClient<ExamsClient>(client => 
                 {
                     client.BaseAddress = new Uri("https://localhost:5001/api/");
-                });
+                }).AddHttpMessageHandler<HttpClientErrorDelegationHandler>();
 
+            builder.Services.AddSingleton<HttpClientErrorDelegationHandler>();
         }
     }
 }
