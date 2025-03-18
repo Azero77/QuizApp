@@ -30,9 +30,20 @@ namespace QuizApp.API.Services.Submissions
         {
             return await (await Submissions.FindAsync<Submission>(s => s.id == id)).SingleAsync();
         }
-        public async IAsyncEnumerable<Submission> GetSubmissions(string submissionPersonName)
+        public async IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName)
         {
             var cursor = await Submissions.FindAsync<Submission>(s => s.SubmissionPersonName == submissionPersonName);
+            while (await cursor.MoveNextAsync())
+            {
+                foreach (Submission item in cursor.Current)
+                {
+                    yield return item;
+                }
+            }
+        }
+        public async IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId)
+        {
+            var cursor = await Submissions.FindAsync<Submission>(s => s.ExamId == examId);
             while (await cursor.MoveNextAsync())
             {
                 foreach (Submission item in cursor.Current)

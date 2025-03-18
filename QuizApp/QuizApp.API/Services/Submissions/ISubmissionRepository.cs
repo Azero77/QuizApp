@@ -7,6 +7,7 @@ namespace QuizApp.API.Services.Submissions
         Task AddSubmission(Submission submission);
         Task<Submission> GetSubmission(string id);
         IAsyncEnumerable<Submission> GetSubmissions();
-        IAsyncEnumerable<Submission> GetSubmissions(string submissionPersonName);
+        IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName);
+        IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId);
     }
 }

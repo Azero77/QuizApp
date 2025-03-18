@@ -1,0 +1,92 @@
+﻿@page "/Submissions"
+
+<MudList T="Exam">
+    <MudListSubheader>Exams:</MudListSubheader>
+    @if(_exams.Count() > 0)
+    {
+        @foreach (Exam exam in _exams)
+        {
+            <MudListItem Text="@exam.Name"
+                         ExpandedChanged="async () => await LoadSubmission(exam.id!)"
+                        >
+                <NestedList>
+                    @if (exam.id is not null && _submissions.ContainsKey(exam.id!))
+                    {
+                        @foreach(Submission sub in _submissions[exam.id])
+                        {
+                            <MudListItem>
+                                <MudNavLink
+                                    Href="@UrlHelpers.GetSubmissionLink(exam.id,sub.id!)"    
+                                >@sub.SubmissionPersonName</MudNavLink>
+                            </MudListItem>
+                        }
+                    }
+                    else
+                    {
+                        <MudListItem>
+                            <div class="text-center">
+                                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                            </div>
+                        </MudListItem>
+                    }
+                </NestedList>
+            </MudListItem>
+        }
+    }
+    else
+    {
+        <div class="text-center">
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        </div>
+    }
+</MudList>
+
+@code {
+    //Submissions Grouped by exam id
+    private Dictionary<string, List<Submission>> _submissions = new();
+
+    //exams to group submssions
+    private List<Exam> _exams = new();
+
+    [Inject]
+    public ExamsClient _client { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await InitializeExams();
+    }
+
+    private async Task InitializeExams()
+    {
+        await Task.Delay(1000);
+        var exams_task = _client.GetExamsAsync();
+        await foreach (Exam? exam in exams_task)
+        {
+            if(exam is not null)
+                _exams.Add(exam);
+        }
+    }
+
+    private async Task LoadSubmission(string exam_id)
+    {
+        Console.WriteLine("Triggers");
+        if(!_submissions.ContainsKey(exam_id))
+        {
+            await Task.Delay(1000);
+            IAsyncEnumerable<Submission?> submissions = _client.GetSubmissionsByExamId(exam_id);
+
+            List<Submission> result = new();
+            await foreach (Submission? submission in submissions)
+            {
+                if (submission is not null)
+                    result.Add(submission);
+                else
+                    throw new InvalidDataException("Submission Can't be null");
+            }
+            _submissions.Add(exam_id, result);
+            StateHasChanged();
+        }
+    }
+
+
+}

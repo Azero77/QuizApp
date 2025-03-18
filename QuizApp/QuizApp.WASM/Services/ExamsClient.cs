@@ -1,4 +1,5 @@
-﻿using QuizApp.Models;
+﻿using QuizApp.BlazorWASM.Pages;
+using QuizApp.Models;
 using System.Net.Http.Json;
 
 namespace QuizApp.BlazorWASM.Services
@@ -26,6 +27,13 @@ namespace QuizApp.BlazorWASM.Services
             if (subId is null)
                 throw new InvalidDataException("Submission Id must be given");
             return _client.GetFromJsonAsync<Submission>($"Submissions/id/{subId}");
+        }
+
+        public IAsyncEnumerable<Submission?> GetSubmissionsByExamId(string examId)
+        {
+            if(examId is null)
+                throw new InvalidDataException("Exam Id must be given");
+            return _client.GetFromJsonAsAsyncEnumerable<Submission?>($"Submissions/exams/{examId}");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace QuizApp.API.Controllers
         [HttpGet("name/{name}")]
         public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByName(string name)
         {
-            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissions(name);
+            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByName(name);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
@@ -37,6 +37,15 @@ namespace QuizApp.API.Controllers
         public async Task<IActionResult> GetSubmissionsById(string id)
         {
             Submission submissions = await _repo.GetSubmission(id);
+            if (submissions is null)
+                return NotFound();
+            return Ok(submissions);
+        }
+
+        [HttpGet("exams/{exam_id}")]
+        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByExamName(string exam_id)
+        {
+            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByExamId(exam_id);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);

@@ -14,7 +14,7 @@
                         {
                             i++;
                             <!-- Add w-100 and text-center to the child container -->
-                                <div class=" m-3 container-fluid">
+                                <div class=" m-3 container">
                                     <QuestionView QuestionSelected="SelectChoices"
                                                     SelectedChoice="@Choices[i-1]"
                                                   Question="question" QuestionNumber="i" />
@@ -131,13 +131,7 @@
             {
                 string? id = (await HttpResponseresult.Content.ReadFromJsonAsync<Submission?>())?.id;
                 submission.id = id ?? throw new HttpRequestException();
-                IDictionary<string, string> queryParams = new Dictionary<string, string>
-                {
-                    {"submissionId",submission.id},
-                    {"examId",Exam!.id!}
-                };
-                string url = QueryHelpers.AddQueryString("/submissionResult",queryParams);
-
+                string url = UrlHelpers.GetSubmissionLink(Exam.id!, submission.id);
                 Navigation!.NavigateTo(url);
             }
         }
