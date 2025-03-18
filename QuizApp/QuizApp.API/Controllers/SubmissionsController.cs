@@ -25,36 +25,36 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet("name/{name}")]
-        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByName(string name)
+        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByName(string name,CancellationToken token)
         {
-            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByName(name);
+            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByName(name,token);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
         }
 
         [HttpGet("id/{id}")]
-        public async Task<IActionResult> GetSubmissionsById(string id)
+        public async Task<IActionResult> GetSubmissionsById(string id, CancellationToken token)
         {
-            Submission submissions = await _repo.GetSubmission(id);
+            Submission submissions = await _repo.GetSubmission(id,token);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
         }
 
         [HttpGet("exams/{exam_id}")]
-        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByExamName(string exam_id)
+        public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByExamName(string exam_id, CancellationToken token)
         {
-            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByExamId(exam_id);
+            IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByExamId(exam_id,token);
             if (submissions is null)
                 return NotFound();
             return Ok(submissions);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddSubmissionAsync([FromBody] Submission submission)
+        public async Task<IActionResult> AddSubmissionAsync([FromBody] Submission submission, CancellationToken token)
         {
-            await _repo.AddSubmission(submission);
+            await _repo.AddSubmission(submission,token);
             return Ok(submission);
         }
     }

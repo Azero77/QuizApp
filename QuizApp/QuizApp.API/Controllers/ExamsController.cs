@@ -22,9 +22,9 @@ namespace QuizAppAPI.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IAsyncEnumerable<Exam>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetExams()
+        public async Task<IActionResult> GetExams(CancellationToken token)
         {
-            var result = _repo.GetExamsAsync(); // Use the async method
+            var result = _repo.GetExamsAsync(token); // Use the async method
 
             if (result is null)
                 return NotFound();
@@ -35,9 +35,9 @@ namespace QuizAppAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Exam), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetExam(string id)
+        public async Task<IActionResult> GetExam(string id,CancellationToken token)
         {
-            var result = await _repo.GetExamById(id);
+            var result = await _repo.GetExamById(id,token);
 
             if (result is null)
                 return NotFound();
@@ -48,9 +48,9 @@ namespace QuizAppAPI.Controllers
         [HttpGet("{id}/Questions")]
         [ProducesResponseType(typeof(IAsyncEnumerable<Question>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetExamQuestions(string id)
+        public async Task<IActionResult> GetExamQuestions(string id, CancellationToken token)
         {
-            var result = _repo.GetQuestionsAsync(id); // Use the async method
+            var result = _repo.GetQuestionsAsync(id,token); // Use the async method
 
             if (result is null)
                 return NotFound();

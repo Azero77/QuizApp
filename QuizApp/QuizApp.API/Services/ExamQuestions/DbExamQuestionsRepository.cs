@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using QuizApp.Models;
 using QuizAppAPI.Contexts;
+using System.Runtime.CompilerServices;
 
 namespace QuizAppAPI.Services.ExamQuestions
 {
@@ -13,22 +14,22 @@ namespace QuizAppAPI.Services.ExamQuestions
             _exams = context.Exams!;
         }
 
-        public async Task<Exam> GetExam(string examName)
+        public async Task<Exam> GetExam(string examName, CancellationToken token = default)
         {
-            return (await _exams.FindAsync(e => e.Name == examName)).Single();
+            return (await _exams.FindAsync(e => e.Name == examName,cancellationToken : token)).Single();
         }
 
-        public async Task<Exam> GetExamById(string id)
+        public async Task<Exam> GetExamById(string id,CancellationToken token = default)
         {
-            return (await _exams.FindAsync(e => e.id == id)).Single();
+            return (await _exams.FindAsync(e => e.id == id,cancellationToken : token)).Single();
         }
 
-        public async IAsyncEnumerable<Exam> GetExamsAsync()
+        public async IAsyncEnumerable<Exam> GetExamsAsync([EnumeratorCancellation] CancellationToken token = default)
         {
-            var cursor = await _exams.FindAsync(_ => true);
+            var cursor = await _exams.FindAsync(_ => true,cancellationToken : token);
 
             // Iterate over the cursor asynchronously
-            while (await cursor.MoveNextAsync())
+            while (await cursor.MoveNextAsync(token))
             {
                 foreach (var exam in cursor.Current)
                 {
@@ -38,9 +39,9 @@ namespace QuizAppAPI.Services.ExamQuestions
             }
         }
 
-        public async IAsyncEnumerable<Question> GetQuestionsAsync(string examId)
+        public async IAsyncEnumerable<Question> GetQuestionsAsync(string examId, [EnumeratorCancellation] CancellationToken token = default)
         {
-            var exam = await GetExamById(examId);
+            var exam = await GetExamById(examId,token);
 
             // Iterate over the questions synchronously (since they are in memory)
             foreach (var question in exam.Questions)

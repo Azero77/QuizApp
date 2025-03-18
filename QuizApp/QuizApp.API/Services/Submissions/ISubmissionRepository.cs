@@ -4,10 +4,10 @@ namespace QuizApp.API.Services.Submissions
 {
     public interface ISubmissionRepository
     {
-        Task AddSubmission(Submission submission);
-        Task<Submission> GetSubmission(string id);
-        IAsyncEnumerable<Submission> GetSubmissions();
-        IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName);
-        IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId);
+        Task AddSubmission(Submission submission, CancellationToken token = default);
+        Task<Submission> GetSubmission(string id, CancellationToken token = default);
+        IAsyncEnumerable<Submission> GetSubmissions(CancellationToken token = default);
+        IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, CancellationToken token = default);
+        IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId, CancellationToken token = default);
     }
 }

@@ -2,6 +2,7 @@
 using QuizApp.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
+using System.Runtime.CompilerServices;
 
 namespace QuizApp.API.Services.Submissions
 {
@@ -14,7 +15,7 @@ namespace QuizApp.API.Services.Submissions
             Submissions = context.Submissions;
         }
 
-        public async IAsyncEnumerable<Submission> GetSubmissions()
+        public async IAsyncEnumerable<Submission> GetSubmissions([EnumeratorCancellation]CancellationToken token = default)
         {
             var cursor = await Submissions.FindAsync<Submission>(_ => true);
             while (await cursor.MoveNextAsync())
@@ -26,11 +27,11 @@ namespace QuizApp.API.Services.Submissions
             }
         }
 
-        public async Task<Submission> GetSubmission(string id)
+        public async Task<Submission> GetSubmission(string id, CancellationToken token = default)
         {
             return await (await Submissions.FindAsync<Submission>(s => s.id == id)).SingleAsync();
         }
-        public async IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName)
+        public async IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, [EnumeratorCancellation] CancellationToken token = default)
         {
             var cursor = await Submissions.FindAsync<Submission>(s => s.SubmissionPersonName == submissionPersonName);
             while (await cursor.MoveNextAsync())
@@ -41,7 +42,7 @@ namespace QuizApp.API.Services.Submissions
                 }
             }
         }
-        public async IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId)
+        public async IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId, [EnumeratorCancellation] CancellationToken token = default)
         {
             var cursor = await Submissions.FindAsync<Submission>(s => s.ExamId == examId);
             while (await cursor.MoveNextAsync())
@@ -52,7 +53,7 @@ namespace QuizApp.API.Services.Submissions
                 }
             }
         }
-        public Task AddSubmission(Submission submission)
+        public Task AddSubmission(Submission submission, CancellationToken token = default)
         {
             return Submissions.InsertOneAsync(submission);
         }
