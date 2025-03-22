@@ -25,7 +25,6 @@ namespace QuizApp.BlazorWASM
                 {
                     client.BaseAddress = new Uri("https://vast-lynnett-azero-3cc4ce3c.koyeb.app/api/");
                 }).AddHttpMessageHandler<HttpClientErrorDelegationHandler>();
-
             builder.Services.AddSingleton<HttpClientErrorDelegationHandler>();
         }
     }
