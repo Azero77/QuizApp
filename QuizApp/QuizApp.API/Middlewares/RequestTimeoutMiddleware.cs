@@ -23,8 +23,11 @@
             }
             catch (OperationCanceledException) when (cts.IsCancellationRequested || context.RequestAborted.IsCancellationRequested)
             {
-                await context.Response.WriteAsync("Request Timed out");
-                context.Response.StatusCode = StatusCodes.Status408RequestTimeout;
+                if (!context.Response.HasStarted)
+                {
+                    context.Response.StatusCode = StatusCodes.Status408RequestTimeout;
+                    await context.Response.WriteAsync("Request Timed out");
+                }
             }
         }
     }

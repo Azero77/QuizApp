@@ -14,6 +14,15 @@ namespace QuizAppAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.ListenAnyIP(80); // HTTP
+                serverOptions.ListenAnyIP(443, listenOptions =>
+                {
+                    listenOptions.UseHttps(builder.Configuration["Kestrel:Certificates:Default:Path"] ?? string.Empty,
+                                         builder.Configuration["Kestrel:Certificates:Default:Password"]);
+                });
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -29,14 +38,17 @@ namespace QuizAppAPI
             });
             builder.Services.AddHttpsRedirection(opts => 
             {
-                opts.HttpsPort = 5001;
+                opts.HttpsPort = 443;
             });
             builder.Services.AddCors(opts => 
             {
                 opts.AddPolicy(name : "BlazorWebAssemblyPolicy",
                     p => 
                     {
-                        p.WithOrigins("https://localhost:5002")
+                        /*p.WithOrigins("https://localhost:5002")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();*/
+                        p.AllowAnyOrigin()
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
@@ -52,7 +64,7 @@ namespace QuizAppAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseCors("BlazorWebAssemblyPolicy");
             app.UseAuthorization();
             app.UseMiddleware<RequestTimeoutMiddleware>();
