@@ -14,20 +14,13 @@ namespace QuizAppAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ListenAnyIP(80); // HTTP
-                serverOptions.ListenAnyIP(443, listenOptions =>
-                {
-                    listenOptions.UseHttps(builder.Configuration["Kestrel:Certificates:Default:Path"] ?? string.Empty,
-                                         builder.Configuration["Kestrel:Certificates:Default:Password"]);
-                });
-            });
+            ConfigureLaunchSchema(builder);
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddRateLimiter(opts => {
+            builder.Services.AddRateLimiter(opts =>
+            {
                 opts.AddFixedWindowLimiter("fixedWindowSlider",
                     opts =>
                     {
@@ -36,19 +29,17 @@ namespace QuizAppAPI
                         opts.Window = TimeSpan.FromSeconds(2);
                     });
             });
-            builder.Services.AddHttpsRedirection(opts => 
+            builder.Services.AddHttpsRedirection(opts =>
             {
-                opts.HttpsPort = 443;
+                opts.HttpsPort = builder.Environment.IsDevelopment() ? 5001 : 443;
             });
-            builder.Services.AddCors(opts => 
+            builder.Services.AddCors(opts =>
             {
-                opts.AddPolicy(name : "BlazorWebAssemblyPolicy",
-                    p => 
+                opts.AddPolicy(name: "ClientRequests",
+                    p =>
                     {
-                        /*p.WithOrigins("https://localhost:5002")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();*/
-                        p.AllowAnyOrigin()
+                        string uri = builder.Configuration?["ClientUrl"] ?? string.Empty;
+                        p.WithOrigins(uri)
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                     });
@@ -58,20 +49,41 @@ namespace QuizAppAPI
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            UseSwagger(app);
 
             //app.UseHttpsRedirection();
-            app.UseCors("BlazorWebAssemblyPolicy");
+            app.UseCors("ClientRequests");
             app.UseAuthorization();
             app.UseMiddleware<RequestTimeoutMiddleware>();
 
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static void UseSwagger(WebApplication app)
+        {
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+        }
+
+        private static void ConfigureLaunchSchema(WebApplicationBuilder builder)
+        {
+            if (!builder.Environment.IsDevelopment())
+            {
+                builder.WebHost.ConfigureKestrel(serverOptions =>
+                {
+                    serverOptions.ListenAnyIP(80); // HTTP
+                    serverOptions.ListenAnyIP(443, listenOptions =>
+                    {
+                        listenOptions.UseHttps(builder.Configuration["Kestrel:Certificates:Default:Path"] ?? string.Empty,
+                                             builder.Configuration["Kestrel:Certificates:Default:Password"]);
+                    });
+                });
+            }
         }
 
         private static void ConfigureServices(WebApplicationBuilder builder)

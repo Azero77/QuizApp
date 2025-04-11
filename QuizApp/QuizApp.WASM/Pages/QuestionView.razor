@@ -6,10 +6,7 @@
             @QuestionNumber.
         </MudText>
         <MudText Typo="Typo.h4">
-            @foreach (var segment in Question.QuestionText)
-            {
-                @RenderQuestionSegment(segment)
-            }
+            @Question.QuestionText
         </MudText>
     </MudStack>
     <!-- Choices as selectable list items -->
@@ -20,7 +17,7 @@
              Disabled="Corrected"
              Color="@Color.Info"
              Dense="true" Hover="true">
-        @for (byte i = 0; i < Question.QuestionChoices.Count; i++)
+        @for (byte i = 0; i < Question.QuestionChoices.Count(); i++)
         {
             var choice = Question.QuestionChoices[i];
             var prefix = GetChoicePrefix(i);
@@ -32,10 +29,7 @@
                     <MudStack Row="true" Gap="Gap.Small">
                         <MudText Typo="Typo.body1">@prefix.</MudText>
                             <MudStack Row="true">
-                                @foreach (var segment in choice)
-                            {
-                                @RenderQuestionSegment(segment)
-                            }
+                             @choice
                         </MudStack>
                     </MudStack>
                 </div>
@@ -88,6 +82,7 @@
         return string.Join(" ", choice.Select(segment => segment.Text));
     }
 
+    [Obsolete]
     private RenderFragment RenderQuestionSegment(QuestionSentence segment) => builder =>
     {
         switch (segment.QuestionSentenceType)

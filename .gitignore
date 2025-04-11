@@ -12,6 +12,13 @@ obj/
 # Ignore VS Code settings
 .vscode/
 
+#Ignore Docker
+**/Dockerfile*
+Dockerfile*
+
+#ignore certificate
+*.pfx
+
 # Ignore Visual Studio cache, temp, and workspace
 .vs/
 .ipch/

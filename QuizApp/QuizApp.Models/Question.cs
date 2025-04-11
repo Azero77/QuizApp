@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace QuizApp.Models
 {
     public class Question
     {
-        public List<List<QuestionSentence>> QuestionChoices { get; set; } = null!; //every choice is a list of Question segment
-        public List<QuestionSentence> QuestionText { get; set; } = null!;
-        
+        public IList<string> QuestionChoices { get; set; } = null!;
+        public string QuestionText { get; set; } = string.Empty;
         public byte? Answer { get; set; }
     }
 

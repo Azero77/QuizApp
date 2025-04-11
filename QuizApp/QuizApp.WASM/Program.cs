@@ -23,7 +23,7 @@ namespace QuizApp.BlazorWASM
         {
             builder.Services.AddHttpClient<ExamsClient>(client => 
                 {
-                    client.BaseAddress = new Uri("https://vast-lynnett-azero-3cc4ce3c.koyeb.app/api/");
+                    client.BaseAddress = new Uri("https://localhost:5001/api/");
                 }).AddHttpMessageHandler<HttpClientErrorDelegationHandler>();
             builder.Services.AddSingleton<HttpClientErrorDelegationHandler>();
         }
