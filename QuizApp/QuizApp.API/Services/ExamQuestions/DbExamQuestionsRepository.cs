@@ -26,8 +26,10 @@ namespace QuizAppAPI.Services.ExamQuestions
 
         public async IAsyncEnumerable<Exam> GetExamsAsync([EnumeratorCancellation] CancellationToken token = default)
         {
-            var cursor = await _exams.FindAsync(_ => true,cancellationToken : token);
-
+            var projection = Builders<Exam>.Projection.Include("Id").Include("Name");
+            var cursor = await _exams.FindAsync(
+                filter: Builders<Exam>.Filter.Empty,
+                options: new FindOptions<Exam>() { Projection = projection });
             // Iterate over the cursor asynchronously
             while (await cursor.MoveNextAsync(token))
             {
@@ -38,7 +40,7 @@ namespace QuizAppAPI.Services.ExamQuestions
                 }
             }
         }
-
+       
         public async IAsyncEnumerable<Question> GetQuestionsAsync(string examId, [EnumeratorCancellation] CancellationToken token = default)
         {
             var exam = await GetExamById(examId,token);
