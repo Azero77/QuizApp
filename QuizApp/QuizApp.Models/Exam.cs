@@ -21,7 +21,7 @@ namespace QuizApp.Models
                 byte? choice = sub.Choices[i];
                 if (choice is null)
                     continue;
-                if (choice == Questions[i].Answer)
+                if (choice == Questions[i].QuestionAnswer)
                     result++;
             }
             return result;
