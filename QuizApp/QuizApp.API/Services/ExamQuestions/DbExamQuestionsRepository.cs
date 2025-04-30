@@ -24,11 +24,11 @@ namespace QuizAppAPI.Services.ExamQuestions
             return RepositoryResult<Exam>.Success(exam);
         }
 
-        public async Task<RepositoryResult<Exam>> DeleteExam(Exam exam, CancellationToken token = default)
+        public async Task<RepositoryResult<Exam>> DeleteExam(string id, CancellationToken token = default)
         {
             try
             {
-                var filter = Builders<Exam>.Filter.Eq(e => e.id, exam.id);
+                var filter = Builders<Exam>.Filter.Eq(e => e.id, id);
 
                 Exam? deletedExam = await _exams.FindOneAndDeleteAsync(filter, cancellationToken: token);
                 if (deletedExam is null)

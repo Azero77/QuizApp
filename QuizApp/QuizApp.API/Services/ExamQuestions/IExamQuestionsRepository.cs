@@ -12,6 +12,6 @@ namespace QuizAppAPI.Services.ExamQuestions
 
         Task<RepositoryResult<Exam>> AddExam(Exam exam, CancellationToken token = default);
         Task<RepositoryResult<Exam>> UpdateExam(Exam exam, CancellationToken token = default);
-        Task<RepositoryResult<Exam>> DeleteExam(Exam exam, CancellationToken token = default);
+        Task<RepositoryResult<Exam>> DeleteExam(string id, CancellationToken token = default);
     }
 }

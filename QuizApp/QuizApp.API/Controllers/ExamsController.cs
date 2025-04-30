@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using MongoDB.Driver;
+using QuizApp.API.Services;
 using QuizApp.Models;
 using QuizAppAPI.Services.ExamQuestions;
 
@@ -56,6 +59,40 @@ namespace QuizAppAPI.Controllers
                 return NotFound();
 
             return Ok(result); // Return the IAsyncEnumerable directly
+        }
+
+
+        [HttpPost("add")]
+        public async Task<IActionResult> AddExamQuestion([FromBody] Exam newExam,CancellationToken token)
+        {
+            var repositoryResult = await _repo.AddExam(newExam,token);
+            if (repositoryResult.IsSuccess)
+            {
+                return Ok(repositoryResult.Result);
+            }
+            return NotFound();
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateExamQuestion([FromBody] Exam exam,CancellationToken token)
+        {
+            var repositoryResult = await _repo.UpdateExam(exam, token);
+            if (repositoryResult.IsSuccess)
+            {
+                return Ok(repositoryResult.Result);
+            }
+            return NotFound();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteExam(string id,CancellationToken token)
+        {
+            RepositoryResult<Exam> repoResult = await _repo.DeleteExam(id,token);
+            if (repoResult.IsSuccess)
+            {
+                return Ok(repoResult.Result);
+            }
+            return NotFound();
         }
     }
 }
