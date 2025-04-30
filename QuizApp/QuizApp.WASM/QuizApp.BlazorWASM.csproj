@@ -22,4 +22,8 @@
     <None Include="wwwroot\js\ExamView.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="npm\" />
+  </ItemGroup>
+
 </Project>
