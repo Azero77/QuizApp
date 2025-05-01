@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.ML.CpuMath" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
   </ItemGroup>
 
   <ItemGroup>

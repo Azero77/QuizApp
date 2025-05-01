@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using QuizApp.API.Middlewares;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
+using QuizApp.Parser;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
 
@@ -19,6 +20,7 @@ namespace QuizAppAPI
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddWordParser();
             builder.Services.AddRateLimiter(opts =>
             {
                 opts.AddFixedWindowLimiter("fixedWindowSlider",

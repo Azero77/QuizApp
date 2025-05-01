@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WordDocumentTableParserProject.Models;
 using WordDocumentTableParserProject.QuestionParsers;
 using WordDocumentTableParserProject.Formatter;
+using QuizApp.Models;
+using QuizApp.Parser;
 
 namespace WordDocumentTableParserProject.Selector
 {

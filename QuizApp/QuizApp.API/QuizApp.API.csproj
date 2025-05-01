@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuizApp.Models\QuizApp.Models.csproj" />
+    <ProjectReference Include="..\QuizApp.Parser\QuizApp.Parser.csproj" />
   </ItemGroup>
 
 </Project>

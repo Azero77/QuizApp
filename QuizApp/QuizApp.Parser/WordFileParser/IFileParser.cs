@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuizApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace WordDocumentTableParserProject.WordFileParser
 {
     public interface IFileParser
     {
-        Task ParseAsync();
+        Task ParseAsync(string documentPath);
+        IAsyncEnumerable<Question> ParseQuestionAsync(string documentPath);
         IQuestionSelector Selector { get; }
         IWriter Writer { get; }
     }
