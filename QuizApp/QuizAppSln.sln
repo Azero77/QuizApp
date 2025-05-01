@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.Models", "QuizApp.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.BlazorWASM", "QuizApp.WASM\QuizApp.BlazorWASM.csproj", "{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizApp.MMLConverter", "QuizApp.MMLConverter\QuizApp.MMLConverter.csproj", "{BECF5C1E-679A-4A62-8C4F-602DEB741105}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizApp.Parser", "QuizApp.Parser\QuizApp.Parser.csproj", "{C483A0F4-F594-4636-A484-9F3073E126B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D074046-7E5F-4D5C-B1BA-B33A25372CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECF5C1E-679A-4A62-8C4F-602DEB741105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECF5C1E-679A-4A62-8C4F-602DEB741105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECF5C1E-679A-4A62-8C4F-602DEB741105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECF5C1E-679A-4A62-8C4F-602DEB741105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C483A0F4-F594-4636-A484-9F3073E126B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C483A0F4-F594-4636-A484-9F3073E126B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C483A0F4-F594-4636-A484-9F3073E126B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C483A0F4-F594-4636-A484-9F3073E126B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

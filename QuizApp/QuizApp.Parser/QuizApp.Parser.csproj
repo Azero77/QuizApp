@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<PackageId>WordDocumentParser</PackageId>
+	  <Authors>Azero Zaggar</Authors>
+	  <Description>Parser For Taking Word Documents and convert it to json</Description>
+	  <PackageTags>Word Document Json Question Quiz</PackageTags>
+	  <PackageProjectUrl>https://github.com/Azero77/Word-Document-Table-Parser.git</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/Azero77/Word-Document-Table-Parser.git</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <IncludeSymbols>true</IncludeSymbols>
+	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.ML.CpuMath" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuizApp.MMLConverter\QuizApp.MMLConverter.csproj" />
+	  <ProjectReference Include="..\QuizApp.Models\QuizApp.Models.csproj" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

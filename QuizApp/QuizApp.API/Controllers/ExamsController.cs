@@ -28,7 +28,6 @@ namespace QuizAppAPI.Controllers
         public async Task<IActionResult> GetExams(CancellationToken token)
         {
             var result = _repo.GetExamsAsync(token); // Use the async method
-            var test = result.ToBlockingEnumerable<Exam>().ToList();
             if (result is null)
                 return NotFound();
 
@@ -45,7 +44,7 @@ namespace QuizAppAPI.Controllers
             if (result is null)
                 return NotFound();
 
-            return Ok(result);
+            return Ok(result.Result);
         }
 
         [HttpGet("{id}/Questions")]

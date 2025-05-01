@@ -1,0 +1,11 @@
+{
+  "BaseUrl": "https://api.together.xyz/v1/chat/completions",
+  "ApiKey": "6cc556d29e8a556ec42a1236bf71d149058ffe777f2f316f5e6892a529916c18",
+  "requestConfig": {
+    "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+    "max_completion_token": 1024,
+    "top_p": 1,
+    "stream": false,
+    "stop": null
+  }
+}
