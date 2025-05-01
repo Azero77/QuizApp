@@ -9,5 +9,6 @@ namespace QuizApp.Parser.WordFileParser
     public interface IMessager
     {
         void Message(string message);
+        event Action<string> Error;
     }
 }

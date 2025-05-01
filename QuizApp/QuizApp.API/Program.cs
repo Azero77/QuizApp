@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.RateLimiting;
+using QuizApp.API.Handlers;
 using QuizApp.API.Middlewares;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 using QuizApp.Parser;
+using QuizApp.Parser.WordFileParser;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
 
@@ -16,10 +18,11 @@ namespace QuizAppAPI
 
             // Add services to the container.
             ConfigureLaunchSchema(builder);
-
+            
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<IMessager, ErrorMessager>();
             builder.Services.AddWordParser();
             builder.Services.AddRateLimiter(opts =>
             {
