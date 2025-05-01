@@ -74,5 +74,21 @@ namespace QuizApp.BlazorWASM.Services
             }
             yield break;
         }
+
+        public async Task<Exam> AddExam(Exam exam)
+        {
+            HttpResponseMessage? result = await _client.PostAsJsonAsync<Exam>("Exams/add", exam);
+            if (result.IsSuccessStatusCode)
+                return exam;
+            return null!;
+        }
+        public async Task<Exam> UpdateExam(Exam exam)
+        {
+            HttpResponseMessage? result = await _client.PutAsJsonAsync<Exam>("Exams/update", exam);
+            if (result.IsSuccessStatusCode)
+                return exam;
+            return null!;
+        }
+
     }
 }

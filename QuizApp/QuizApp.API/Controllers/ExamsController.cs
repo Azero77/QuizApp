@@ -69,7 +69,7 @@ namespace QuizAppAPI.Controllers
             {
                 return Ok(repositoryResult.Result);
             }
-            return NotFound();
+            return BadRequest();
         }
 
         [HttpPut("update")]

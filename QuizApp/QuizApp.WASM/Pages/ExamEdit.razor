@@ -1,0 +1,74 @@
+﻿@inherits HttpClientErrorHandler
+@page "/admin/exams/{id?}"
+
+@if (_exam is not null)
+{
+    <EditForm method="post"
+              Model="_exam"
+              OnValidSubmit="OnSubmit">
+        <DataAnnotationsValidator />
+        @if (!string.IsNullOrEmpty(_exam?.id))
+        {
+            <div>
+                <InputText @bind-Value="_exam.id" disabled class="form-control" />
+            </div>
+        }
+        <div>
+            <InputText @bind-Value="_exam!.Name" class="form-control" />
+            <ValidationMessage For="() => _exam.Name" />
+        </div>
+        <ExamView Id="@_exam.id" />
+    </EditForm>
+}
+else
+{
+    <MudProgressCircular />
+}
+
+@code {
+    private Mode _mode;
+
+    [Parameter]
+    public string Id { get; set; } = null!;
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string ReturnUrl { get; set; } = "/";
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+    public Exam? _exam { get; set; } = null!;
+
+    [Inject]
+    public ExamsClient _client { get; set; } = null!;
+    protected override async Task OnInitializedAsync()
+    {
+        _mode = Id is null ? Mode.Create : Mode.Edit;
+        _exam = await AssignExam();
+    }
+    private async Task<Exam?> AssignExam()
+    {
+        _exam = await _client.GetExamAsync(Id);
+        if (_exam is null)
+            AddError("Page not found");
+        return _exam;
+    }
+    public async Task OnSubmit()
+    {
+        Exam result = null!;
+        if (_mode == Mode.Create)
+        {
+            result = await _client.AddExam(_exam!);
+        }
+        else if (_mode == Mode.Edit)
+        {
+            result = await _client.UpdateExam(_exam!);
+        }
+        NavigationManager.NavigateTo(ReturnUrl);
+    }
+    public enum Mode
+    {
+        Create = 0,
+        Edit = 1
+    }
+}

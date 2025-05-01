@@ -41,5 +41,13 @@
         StateHasChanged();
     }
 
+    protected void AddError(string errorMessage)
+    {
+        OnErrorsChanged(errorMessage);
+    }
+    protected void ClearErrors()
+    {
+        _errors = new();
+    }
 
 }
