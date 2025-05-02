@@ -2,27 +2,12 @@
 @if (!string.IsNullOrEmpty(submission?.SubmissionPersonName))
 {
     <div class=" data-latex exam-container d-flex flex-column justify-content-center align-items-center">
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         @if (Exam is not null)
         {
-            <CascadingValue Value="submission">
-                <CascadingValue Value="Corrected">
-                    @{
-                        int i = 0;
-                        foreach (Question question in Exam.Questions)
-                        {
-                            i++;
-                            <!-- Add w-100 and text-center to the child container -->
-                                <div class=" m-3 container">
-                                    <QuestionView QuestionSelected="SelectChoices"
-                                                    SelectedChoice="@Choices[i-1]"
-                                                  Question="question" QuestionNumber="i" />
-                                </div>
-                        }
-                    }
-                </CascadingValue>
-            </CascadingValue>
+            <ExamVieww
+                Exam = "Exam"
+                ExamMode="ExamMode.Read"
+                />
         }
         else
         {

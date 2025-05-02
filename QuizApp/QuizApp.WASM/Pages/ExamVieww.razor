@@ -1,0 +1,47 @@
+﻿<h3>ExamVieww</h3>
+
+<CascadingValue Value="ExamMode">
+    @{
+        int i = 0;
+        foreach (Question question in Exam.Questions)
+        {
+            i++;
+            <!-- Add w-100 and text-center to the child container -->
+            <div class=" m-3 container">
+                <QuestionView 
+                            QuestionSelected="ChoiceSelected"
+                              SelectedChoice="GetSelectedChoice(i)"
+                              Question="question" QuestionNumber="i" />
+            </div>
+        }
+    }
+</CascadingValue>
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public Exam Exam { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public ExamMode ExamMode { get; set; } = ExamMode.Read;
+
+    #region Corrected
+    [CascadingParameter]
+    public Submission Submission { get; set; } = null!;
+    private byte? GetSelectedChoice(int questionIndex)
+    {
+        if(ExamMode == ExamMode.Corrected && Submission is not null)
+        {
+            return Submission.Choices[questionIndex];
+        }
+        return null;
+    }
+    #endregion
+
+    #region Read
+    [Parameter]
+    public EventCallback<(int, byte?)> ChoiceSelected { get; set; }
+    #endregion
+
+}

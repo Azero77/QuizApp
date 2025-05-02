@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\CorrectedExamPage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.3.0" />
@@ -19,11 +23,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\CorrectedExamPage.razor" />
     <None Include="wwwroot\js\ExamView.js" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="npm\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\CorrectedExamPage.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\CorrectedExamPage.razor" />
   </ItemGroup>
 
 </Project>

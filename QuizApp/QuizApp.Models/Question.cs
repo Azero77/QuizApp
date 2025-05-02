@@ -8,6 +8,7 @@ namespace QuizApp.Models
         public IList<string> QuestionChoices { get; set; } = null!;
         public string QuestionText { get; set; } = string.Empty;
         public byte? QuestionAnswer { get; set; }
+        public byte? SelectedAnswer { get; set; } = null;
     }
 
     //every question segment contains sentences that have some properties

@@ -47,17 +47,19 @@
 
     //if the question is readonly (Corrected = true) then it will be a selectedChoice
     [Parameter]
-    public byte? SelectedChoice { get; set; } = 0;
+    public byte? SelectedChoice { get; set; } = null!;
 
     [CascadingParameter]
     public bool Corrected { get; set; }
+
+    
 
     [Parameter]
     public EventCallback<byte?> SelectedChoiceChanged { get; set; } // Add this
 
     [Parameter]
     [EditorRequired]
-    public Action<int, byte?> QuestionSelected { get; set; } = null!;
+    public EventCallback<(int,byte?)> QuestionSelected { get; set; }
 
 
     private string GetChoicePrefix(int index)
@@ -65,80 +67,6 @@
         // Convert the index to a corresponding letter (0 → A, 1 → B, 2 → C, etc.)
         return ((char)('A' + index)).ToString();
     }
-
-    private bool IsArabic(List<QuestionSentence> questionText)
-    {
-        if (questionText == null || !questionText.Any())
-            return false;
-
-        // Check if any segment contains Arabic text
-        return questionText.Any(segment =>
-            segment.Text.Any(c => c >= 0x0600 && c <= 0x06FF));
-    }
-
-    private string GetChoiceText(List<QuestionSentence> choice)
-    {
-        // Concatenate all segments in the choice to form a single string
-        return string.Join(" ", choice.Select(segment => segment.Text));
-    }
-
-    [Obsolete]
-    private RenderFragment RenderQuestionSegment(QuestionSentence segment) => builder =>
-    {
-        switch (segment.QuestionSentenceType)
-        {
-            case QuestionSentenceType.SimpleText:
-                builder.AddContent(0, segment.Text);
-                break;
-
-            case QuestionSentenceType.ParagraphEquation:
-                builder.OpenElement(1, "div");
-                builder.AddAttribute(2, "class", "text-center"); // Add text-center class
-                builder.AddContent(3, RenderEquation(segment.Text));
-                builder.CloseElement();
-                break;
-
-            case QuestionSentenceType.InlineEquation:
-                builder.OpenElement(4, "span");
-                builder.AddContent(5, RenderEquation(segment.Text));
-                builder.CloseElement();
-                break;
-
-            case QuestionSentenceType.ImageUrl:
-                builder.OpenElement(6, "img");
-                builder.AddAttribute(7, "src", segment.Text);
-                builder.AddAttribute(8, "alt", segment.AltText ?? "Image");
-                builder.CloseElement();
-                break;
-
-            case QuestionSentenceType.CodeBlock:
-                builder.OpenElement(9, "pre");
-                builder.AddContent(10, segment.Text);
-                builder.CloseElement();
-                break;
-
-            case QuestionSentenceType.Table:
-                builder.OpenElement(11, "table");
-                builder.AddMarkupContent(12, segment.Text); // Assuming Text contains HTML table markup
-                builder.CloseElement();
-                break;
-
-            default:
-                builder.AddContent(13, segment.Text);
-                break;
-        }
-    };
-
-    private RenderFragment RenderEquation(string equation) => builder =>
-    {
-        // Render equation using a library like MathJax or KaTeX
-        builder.OpenElement(13, "span");
-        builder.AddAttribute(14, "class", "math-equation");
-        builder.AddContent(15, equation);
-        builder.CloseElement();
-    };
-
-
 
     private string GetChoiceClass(byte choice)
     {
@@ -159,7 +87,7 @@
         if(choice is not null)
         {
             SelectedChoice = choice;
-            QuestionSelected(QuestionNumber,choice);
+            QuestionSelected.InvokeAsync((QuestionNumber, choice));
         }
     }
 }
