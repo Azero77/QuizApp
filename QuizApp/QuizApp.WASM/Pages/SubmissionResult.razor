@@ -1,4 +1,4 @@
-﻿@page "/submissionResult"
+﻿@page "/submissionResult/{ExamId}/{SubmissionId}"
 @inherits HttpClientErrorHandler
 @inject ExamsClient Client
 @inject NavigationManager NavigationManager
@@ -21,11 +21,9 @@
 
 @code {
     [Parameter]
-    [SupplyParameterFromQuery(Name = "examId")]
     public string ExamId { get; set; } = string.Empty;
 
     [Parameter]
-    [SupplyParameterFromQuery(Name = "submissionId")]
     public string SubmissionId { get; set; } = string.Empty;
 
     [Inject]
@@ -35,6 +33,8 @@
     private Submission? _submission = null!;
     protected override async Task OnInitializedAsync()
     {
+        if (ExamId is null || SubmissionId is null)
+            return;
         _exam = await Client.GetExamAsync(ExamId);
         _submission = await Client.GetSubmission(SubmissionId);
         if(_exam is null || _submission is null)
@@ -44,5 +44,4 @@
         }
         ExamState.Initialize(_exam, ExamMode.Corrected,_submission);
     }
-
 }

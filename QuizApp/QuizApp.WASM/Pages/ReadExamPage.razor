@@ -20,6 +20,8 @@
     //Page for Solving the exam while reading it;
     private const ExamMode _examMode = ExamMode.Read;
 
+    [SupplyParameterFromQuery]
+    public string submissionName { get; set; } = string.Empty;
     [Parameter]
     public string Id { get; set; } = string.Empty;
     [Inject] public ExamService ExamState { get; set; } = null!;
@@ -37,7 +39,7 @@
     }
     private async Task SubmitExam()
     {
-        var result  = await ExamState.SubmitExam();
+        var result  = await ExamState.SubmitExam(submissionName);
         if (result.IsSuccessStatusCode)
         {
             string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;

@@ -40,3 +40,10 @@ function renderMathInElement() {
 // Expose functions globally
 window.loadMathJax = loadMathJax;
 window.renderMathInElement = renderMathInElement;
+
+// Re-render MathJax when navigating back using bfcache
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted || (window.performance && performance.navigation.type === 2)) {
+        renderMathInElement();
+    }
+});

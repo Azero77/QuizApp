@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="npm\**" />
+    <Content Remove="npm\**" />
+    <EmbeddedResource Remove="npm\**" />
+    <None Remove="npm\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\CorrectedExamPage.razor" />
   </ItemGroup>
 
@@ -23,12 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\CorrectedExamPage.razor" />
     <None Include="wwwroot\js\ExamView.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="npm\" />
   </ItemGroup>
 
   <ItemGroup>
