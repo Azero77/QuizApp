@@ -9,10 +9,10 @@ namespace QuizApp.BlazorWASM.Services
         {
             IDictionary<string, string> queryParams = new Dictionary<string, string>
                 {
-                    {"SubmissionId",submissionId},
-                    {"ExamId",examId}
+                    {"submissionId",submissionId},
+                    {"examId",examId}
                 };
-            string url = QueryHelpers.AddQueryString("/CorrectedExam", queryParams);
+            string url = QueryHelpers.AddQueryString("/submissionResult", queryParams);
             return url;
         }
     }

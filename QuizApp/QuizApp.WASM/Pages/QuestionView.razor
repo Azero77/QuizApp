@@ -1,20 +1,19 @@
-﻿
-<MudPaper Class="pa-3 container" dir="rtl">
+﻿<MudPaper Class="pa-3 container" dir="rtl">
     <!-- Flex layout for question number + text -->
     <MudStack Row="true" Justify="Justify.FlexStart" Class="mb-4">
         <MudText Typo="Typo.inherit" Color="Color.Primary" Class="me-2">
-            @QuestionNumber.
+            @(QuestionNumber + 1).
         </MudText>
         <MudText Typo="Typo.h4">
             @Question.QuestionText
         </MudText>
     </MudStack>
     <!-- Choices as selectable list items -->
-    <MudList
-            SelectedValueChanged="SelectChoice"
+    <MudList SelectedValueChanged="SelectChoice"
              SelectionMode="SelectionMode.SingleSelection"
              T="byte?"
-             Disabled="Corrected"
+             SelectedValue="SelectedChoice"
+             Disabled="ExamState.Mode == ExamMode.Corrected"
              Color="@Color.Info"
              Dense="true" Hover="true">
         @for (byte i = 0; i < Question.QuestionChoices.Count(); i++)
@@ -29,7 +28,7 @@
                     <MudStack Row="true" Gap="Gap.Small">
                         <MudText Typo="Typo.body1">@prefix.</MudText>
                             <MudStack Row="true">
-                             @choice
+                                @choice
                         </MudStack>
                     </MudStack>
                 </div>
@@ -37,30 +36,20 @@
         }
     </MudList>
 </MudPaper>
-
 @code {
     [Parameter]
+    [EditorRequired]
     public Question Question { get; set; } = null!;
 
-    [Parameter]
-    public int QuestionNumber { get; set; }
-
-    //if the question is readonly (Corrected = true) then it will be a selectedChoice
-    [Parameter]
-    public byte? SelectedChoice { get; set; } = null!;
-
     [CascadingParameter]
-    public bool Corrected { get; set; }
-
-    
-
-    [Parameter]
-    public EventCallback<byte?> SelectedChoiceChanged { get; set; } // Add this
+    public ExamService ExamState { get; set; } = null!;
 
     [Parameter]
     [EditorRequired]
-    public EventCallback<(int,byte?)> QuestionSelected { get; set; }
+    public int QuestionNumber { get; set; }
 
+    [Parameter]
+    public byte? SelectedChoice { get; set; } = 0;
 
     private string GetChoicePrefix(int index)
     {
@@ -70,7 +59,7 @@
 
     private string GetChoiceClass(byte choice)
     {
-        if(Corrected)
+        if (ExamState.Mode == ExamMode.Corrected)
         {
             if (choice == Question.QuestionAnswer && choice == SelectedChoice)
                 return "background : #66FF00; Color : white !important";
@@ -84,10 +73,12 @@
 
     private void SelectChoice(byte? choice)
     {
-        if(choice is not null)
+        if (choice is not null)
         {
             SelectedChoice = choice;
-            QuestionSelected.InvokeAsync((QuestionNumber, choice));
+           ExamState.Exam.Questions[QuestionNumber].SelectedAnswer = choice;
         }
     }
+
+
 }

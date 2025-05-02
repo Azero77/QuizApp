@@ -23,7 +23,7 @@
     public NavigationManager NavigationManager { get; set; } = null!;
     private void OnClick()
     {
-        NavigationManager.NavigateTo($"/Exams/{Id}?submissionName={Name}");
+        NavigationManager.NavigateTo($"/ReadExam/{Id}?submissionName={Name}");
     }
     [Parameter]
     public EventCallback<string> NameChanged { get; set; }

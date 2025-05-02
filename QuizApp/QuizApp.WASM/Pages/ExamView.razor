@@ -1,129 +1,34 @@
-﻿@page "/Exams/{Id}"
-@if (!string.IsNullOrEmpty(submission?.SubmissionPersonName))
-{
-    <div class=" data-latex exam-container d-flex flex-column justify-content-center align-items-center">
-        @if (Exam is not null)
-        {
-            <ExamVieww
-                Exam = "Exam"
-                ExamMode="ExamMode.Read"
-                />
-        }
-        else
-        {
-            <MudProgressCircular Color
-            ="Color.Info"
-            Indeterminate="true"
-            Size="Size.Large"
-            Style="height:30vh;width:30vh;align-self:center;margin-top:15%"/>
-        }
-
-    <div>
-        <MudButton OnClick="SubmitExam">Correct Exam</MudButton>
-    </div>
-    @if(result is not null)
-        {
-            <div class="bg-info p-3 m-3 text-center">
-                Your result is @result
-            </div>
-        }
-    </div>
+﻿@{
+    for (int i = 0; i < Exam.Questions.Count; i++)
+    {
+        var question = Exam.Questions[i];
+        var index = i; // Capture loop variable safely
+        <div class="m-3 container">
+            <QuestionView
+                @key = "index"
+                SelectedChoice="GetSelectedChoice(index)"
+                Question="question"
+                QuestionNumber="index" />
+        </div>
+    }
 }
-
-
 @code {
-    [Parameter]
-    public string Id { get; set; } = string.Empty;
 
-    [Inject]
-    public ExamsClient _client { get; set; } = null!;
+    [CascadingParameter]
+    public ExamService ExamState { get; set; } = null!;
 
-    [Inject]
-    public NavigationManager? Navigation{ get; set; }
-    private int? result = null;
-
-    [SupplyParameterFromQuery]
-    [Parameter]
-    public string submissionName { get; set; } = string.Empty;
-
-    [Parameter]
-    public byte?[] Choices { get; set; } = null!;
-
-    public Submission submission { get; set; } = null!;
-
-    [Inject]
-    public IJSRuntime JSRuntime { get; set; } = null!;
-
-    public Exam? Exam { get; set; } = null;
-
-    [Parameter]
-    public bool Corrected { get; set; } = false;
-    protected override async Task OnInitializedAsync()
+    private Exam Exam => ExamState.Exam;
+    #region Corrected
+    public Submission Submission => ExamState.Submission;
+    private byte? GetSelectedChoice(int questionIndex)
     {
-        if (string.IsNullOrEmpty(Id))
-            Navigation?.NavigateTo("/NotFound");
-        Exam = await InitializeExam(Id);
-        if(!Corrected)
-            Choices = new byte?[Exam!.Questions.Count()];
-        submission = new() { ExamId = Exam!.id!, SubmissionPersonName = submissionName };
-        await base.OnInitializedAsync();
-    }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
+        if(ExamState.Mode == ExamMode.Corrected && Submission is not null)
         {
-            // Initialize MathJax with CommonHTML output for copyable equations
-            await JSRuntime.InvokeVoidAsync("eval", @"
-            MathJax = {
-                tex: {
-                    inlineMath: [['\\(', '\\)']],
-                    displayMath: [['$$', '$$']]
-                },
-                options: {
-                    enableCopy: true, // Enable copying of equations
-                    renderActions: {
-                        addMenu: [0, '', ''] // Disable the right-click menu
-                    }
-                },
-                chtml: {
-                    scale: 1.2, // Adjust scale if needed
-                    mtextInheritFont: true // Inherit font for better integration
-                }
-            };
-        ");
-
-            // Load MathJax script with CommonHTML output
-            await JSRuntime.InvokeVoidAsync("loadMathJax", "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js");
+            return ExamState.Submission.Choices[questionIndex];
         }
-
-        // Render equations after content is rendered
-        await JSRuntime.InvokeVoidAsync("renderMathInElement");
+        return null;
     }
+    #endregion
 
-    private Task<Exam?> InitializeExam(string id) => _client?.GetExamAsync(id) ?? throw new InvalidDataException();
 
-    private async Task SubmitExam()
-    {
-        if (Choices is not null)
-        {
-            submission.Choices = new List<byte?>(Choices);
-            submission.DateSubmitted = DateTime.Now;
-            int result = Exam!.CorrectExam(submission);
-            submission.Result = result;
-            Console.WriteLine("result is : "  + result);
-            HttpResponseMessage HttpResponseresult = await _client!.SubmitExam(submission);
-            if (HttpResponseresult.IsSuccessStatusCode)
-            {
-                string? id = (await HttpResponseresult.Content.ReadFromJsonAsync<Submission?>())?.id;
-                submission.id = id ?? throw new HttpRequestException();
-                string url = UrlHelpers.GetSubmissionLink(Exam.id!, submission.id);
-                Navigation!.NavigateTo(url);
-            }
-        }
-    }
-
-    private void SelectChoices(int questionIndex, byte? answer)
-    {
-        Choices[questionIndex - 1] = answer;
-    }
 }

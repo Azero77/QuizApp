@@ -1,22 +1,20 @@
-﻿@page "/ReadExam/{Id}"
-@inherits HttpClientErrorHandler
-@inject ExamsClient Client
-@inject NavigationManager NavigationManager
-<div class="data-latex exam-container d-flex flex-column justify-content-center align-items-center">
-    @if(Exam is not null)
-    {
-        <CascadingValue Value="Submission">
-            <ExamVieww Exam="Exam"
-                        ChoiceSelected="ChoiceSelected"
-                       ExamMode="_examMode" />
-            <button @onclick="SubmitExam" class="btn btn-primary">Submit Exam</button>
-        </CascadingValue>
+﻿    @page "/ReadExam/{Id}"
+    @inherits HttpClientErrorHandler
+    @inject NavigationManager NavigationManager
+    @inject ExamsClient Client
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        @if(Exam is not null)
+        {
+            <CascadingValue Value="ExamState">
+                    <ExamView />
+            </CascadingValue>
+        <button @onclick="SubmitExam" class="btn btn-primary">Submit Exam</button>
     }
-    else
-    {
-        <MudProgressCircular/>
-    }
-</div>
+        else
+        {
+            <MudProgressCircular/>
+        }
+    </div>
 
 @code {
     //Page for Solving the exam while reading it;
@@ -24,39 +22,27 @@
 
     [Parameter]
     public string Id { get; set; } = string.Empty;
-    public Exam Exam { get; set; } = null!;
-    public Submission Submission { get; set; } = null!;
+    [Inject] public ExamService ExamState { get; set; } = null!;
+    public Exam Exam => ExamState.Exam;
 
     protected override async Task OnInitializedAsync()
     {
-        Exam = (await Client.GetExamAsync(Id))!;
-        if(Exam is null)
+        Exam? exam = await Client.GetExamAsync(Id);
+        if(exam is null)
         {
             AddError("Page not found");
+            return;
         }
+        ExamState.Initialize(exam, ExamMode.Read);
     }
     private async Task SubmitExam()
     {
-        Submission = new Submission()
+        var result  = await ExamState.SubmitExam();
+        if (result.IsSuccessStatusCode)
         {
-            Choices = Exam.Questions.Select(q => q.SelectedAnswer).ToList(),
-            ExamId = Exam.id ?? throw new Exception("Id can't be null here"),
-            DateSubmitted = DateTime.Now,
-            Result = Exam!.CorrectExam(Submission)
-        };
-        HttpResponseMessage HttpResponseresult = await Client.SubmitExam(Submission);
-        if (HttpResponseresult.IsSuccessStatusCode)
-        {
-            string? id = (await HttpResponseresult.Content.ReadFromJsonAsync<Submission?>())?.id;
-            Submission.id = id ?? throw new HttpRequestException();
-            string url = UrlHelpers.GetSubmissionLink(Exam.id!, Submission.id);
+            string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;
+            string url = UrlHelpers.GetSubmissionLink(Exam.id!, id ?? string.Empty);
             NavigationManager!.NavigateTo(url);
         }
     }
-    public void ChoiceSelected((int,byte?) selection)
-    {
-        var (questionIndex, answer) = selection;
-        Exam.Questions[questionIndex].SelectedAnswer = answer;
     }
-
-}

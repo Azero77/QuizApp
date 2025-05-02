@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using QuizApp.BlazorWASM.Services;
+using QuizApp.BlazorWASM.Services.ExamServices;
 
 namespace QuizApp.BlazorWASM
 {
@@ -14,6 +15,7 @@ namespace QuizApp.BlazorWASM
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             AddClientServices(builder);
+            builder.Services.AddScoped<ExamService>();
             var app = builder.Build();
             
             await app.RunAsync();
