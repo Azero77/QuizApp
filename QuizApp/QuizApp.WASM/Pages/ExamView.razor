@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject IJSRuntime JSRuntime
+@{
     for (int i = 0; i < Exam.Questions.Count; i++)
     {
         var question = Exam.Questions[i];
@@ -30,5 +31,41 @@
     }
     #endregion
 
+    #region RenderMathJAX
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Inject config BEFORE loading script
+            await JSRuntime.InvokeVoidAsync("eval", @"
+            window.MathJax = {
+                tex: {
+                    inlineMath: [['\\(', '\\)']],
+                    displayMath: [['$$', '$$']]
+                },
+                options: {
+                    enableCopy: true,
+                    renderActions: {
+                        addMenu: [0, '', '']
+                    }
+                },
+                chtml: {
+                    scale: 1.2,
+                    mtextInheritFont: true
+                }
+            };
+        ");
+
+            // Load MathJax and then render math
+            await JSRuntime.InvokeVoidAsync("loadMathJax", "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js");
+
+            // Wait a bit to ensure MathJax is ready
+            await Task.Delay(500); // optional safety net
+        }
+
+        // Always try to render after each render
+        await JSRuntime.InvokeVoidAsync("renderMathInElement");
+    }
+    #endregion
 
 }

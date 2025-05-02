@@ -1,3 +1,4 @@
+
 // wwwroot/js/ExamView.js
 function loadMathJax(src) {
     return new Promise((resolve, reject) => {
