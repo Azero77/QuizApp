@@ -1,24 +1,35 @@
 ﻿@inherits HttpClientErrorHandler
 @page "/admin/exams/{id?}"
 
-@if (_exam is not null)
+@if (ExamState.Exam is not null)
 {
-    <EditForm method="post"
-              Model="_exam"
-              OnValidSubmit="OnSubmit">
-        <DataAnnotationsValidator />
-        @if (!string.IsNullOrEmpty(_exam?.id))
-        {
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <EditForm method="post"
+                  Model="ExamState.Exam"
+                  OnValidSubmit="OnSubmit">
+            <DataAnnotationsValidator />
+            @if (!string.IsNullOrEmpty(ExamState.Exam?.id))
+            {
+                <div>
+                    <label for="id">Exam Id:</label>
+                    <InputText @bind-Value="ExamState.Exam.id" disabled class="form-control" />
+                </div>
+            }
             <div>
-                <InputText @bind-Value="_exam.id" disabled class="form-control" />
+                <label for="Name">Name:</label>
+                <InputText @bind-Value="ExamState.Exam!.Name" class="form-control" />
+                <ValidationMessage For="() => ExamState.Exam.Name" />
             </div>
-        }
-        <div>
-            <InputText @bind-Value="_exam!.Name" class="form-control" />
-            <ValidationMessage For="() => _exam.Name" />
-        </div>
-        <ExamView Id="@_exam.id" />
-    </EditForm>
+            @if(_mode == Mode.Create)
+            {
+                <label>Input File</label>
+                <InputFile OnChange="FileAdded"></InputFile>
+            }
+            <CascadingValue Value="ExamState">
+                <ExamView />
+            </CascadingValue>
+        </EditForm>
+    </div>
 }
 else
 {
@@ -28,43 +39,55 @@ else
 @code {
 
     private Mode _mode;
-    [Parameter]
-    public string Id { get; set; } = null!;
-
+    [Parameter]public string Id { get; set; } = null!;
     [Parameter]
     [SupplyParameterFromQuery]
     public string ReturnUrl { get; set; } = "/";
 
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
-    public Exam? _exam { get; set; } = null!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
-    [Inject]
-    public ExamsClient _client { get; set; } = null!;
+    [Inject] public ExamService ExamState { get; set; } = null!;
+
+    [Inject] public ExamsClient _client { get; set; } = null!;
     protected override async Task OnInitializedAsync()
     {
         _mode = Id is null ? Mode.Create : Mode.Edit;
-        _exam = await AssignExam();
+        ExamState.Initialize(await AssignExam() ?? null!,ExamMode.Alter);
+        if(ExamState.Exam is null)
+        {
+            AddError("Exam Not Found");
+            return;
+        }
+        StateHasChanged();
     }
     private async Task<Exam?> AssignExam()
     {
-        _exam = await _client.GetExamAsync(Id);
-        if (_exam is null)
-            AddError("Page not found");
-        return _exam;
+        if(_mode == Mode.Create)
+        {
+            return new Exam();
+        }
+        else if(_mode == Mode.Edit)
+        {
+            return await _client.GetExamAsync(Id);
+        }
+        return null;
     }
     public async Task OnSubmit()
     {
         Exam result = null!;
         if (_mode == Mode.Create)
         {
-            result = await _client.AddExam(_exam!);
+            result = await ExamState.AddExam();
         }
         else if (_mode == Mode.Edit)
         {
-            result = await _client.UpdateExam(_exam!);
+            result = await ExamState.UpdateExam();
         }
         NavigationManager.NavigateTo(ReturnUrl);
+    }
+
+    private void FileAdded(InputFileChangeEventArgs e)
+    {
     }
     public enum Mode
     {

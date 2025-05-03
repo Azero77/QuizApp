@@ -29,6 +29,11 @@
         {
             return ExamState.Submission.Choices[questionIndex];
         }
+        else if(ExamState.Mode == ExamMode.Alter)
+        {
+            //Will display the choices as the valid choices
+            return (ExamState.Exam.Questions.Select(q => q.QuestionAnswer).ToArray())[questionIndex];
+        }
         return null;
     }
     #endregion

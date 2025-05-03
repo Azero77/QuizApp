@@ -3,6 +3,7 @@ using QuizApp.BlazorWASM.Models;
 using QuizApp.BlazorWASM.Pages;
 using QuizApp.Models;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 
 namespace QuizApp.BlazorWASM.Services.ExamServices
 {
@@ -51,6 +52,21 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
             };
             Submission.Result = Exam.CorrectExam(Submission);
             return _client.SubmitExam(Submission);
+        }
+
+        public Task<Exam> AddExam()
+        {
+            return _client.AddExam(Exam);
+        }
+
+        public Task<Exam> UpdateExam()
+        {
+            return _client.UpdateExam(Exam);
+        }
+
+        public Task<Exam> DeleteExam(Exam exam)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -90,5 +90,10 @@ namespace QuizApp.BlazorWASM.Services
             return null!;
         }
 
+        public async Task<Exam> GenerateExam(Stream file)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -75,8 +75,12 @@
     {
         if (choice is not null)
         {
+
             SelectedChoice = choice;
-           ExamState.Exam.Questions[QuestionNumber].SelectedAnswer = choice;
+            if (ExamState.Mode == ExamMode.Read)
+                ExamState.Exam.Questions[QuestionNumber].SelectedAnswer = choice;
+            else if (ExamState.Mode == ExamMode.Alter)
+                ExamState.Exam.Questions[QuestionNumber].QuestionAnswer = choice;
         }
     }
 
