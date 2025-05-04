@@ -17,8 +17,9 @@ namespace QuizApp.BlazorWASM
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             AddClientServices(builder);
-            builder.Services.AddSingleton<AuthenticationStateProvider,BffAuthenticationStateProvider>();
             builder.Services.AddScoped<ExamService>();
+            builder.Services.AddAuthorizationCore();
+            builder.Services.AddSingleton<AuthenticationStateProvider,BffAuthenticationStateProvider>();
             var app = builder.Build();
             
             await app.RunAsync();
@@ -28,7 +29,7 @@ namespace QuizApp.BlazorWASM
         {
             builder.Services.AddHttpClient<ExamsClient>(client =>
                 {
-                    client.BaseAddress = new Uri("https://localhost:5004/api/");
+                    client.BaseAddress = new Uri("https://localhost:5002/api/");
                 })
                 .AddHttpMessageHandler<CookieHandler>()
                 .AddHttpMessageHandler<AntiforgeryHandler>()
