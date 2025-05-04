@@ -83,11 +83,6 @@ namespace QuizApp.BFF
             app.UseBff();
             app.UseAuthorization();
 
-            // local API endpoints
-            app.MapControllers()
-                .RequireAuthorization()
-                .AsBffApiEndpoint();
-
             app.MapBffManagementEndpoints();
 
 

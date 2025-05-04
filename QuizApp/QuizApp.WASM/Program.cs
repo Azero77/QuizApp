@@ -27,9 +27,9 @@ namespace QuizApp.BlazorWASM
 
         private static void AddClientServices(WebAssemblyHostBuilder builder)
         {
-            builder.Services.AddHttpClient<ExamsClient>(client =>
+            builder.Services.AddHttpClient<ExamsClient>("apiClient",client =>
                 {
-                    client.BaseAddress = new Uri("https://localhost:5002/api/");
+                    client.BaseAddress = new Uri("https://localhost:5002/");
                 })
                 .AddHttpMessageHandler<CookieHandler>()
                 .AddHttpMessageHandler<AntiforgeryHandler>()
