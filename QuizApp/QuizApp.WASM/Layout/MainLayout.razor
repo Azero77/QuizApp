@@ -20,7 +20,19 @@
                            Edge="Edge.End" />
         </MudAppBar>
         <MudMainContent>
-            @Body
+            <AuthorizeView>
+                <Authorized>
+                    Hello @context.User.Identity?.Name
+                    <a href="@($"https://localhost:5002/{context.User.FindFirst("bff:logout_url")?.Value}")">Log out</a>
+                </Authorized>
+                <Authorizing>Determining Auth State</Authorizing>
+                <NotAuthorized>
+                    <a href="https://localhost:5002/bff/login">login</a>
+                </NotAuthorized>
+            </AuthorizeView>
+            <div>
+                @Body
+            </div>
         </MudMainContent>
     </MudLayout>
 </MudRTLProvider>

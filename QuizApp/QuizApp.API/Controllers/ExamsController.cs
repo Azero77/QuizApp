@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using MongoDB.Driver;
 using QuizApp.API.Services;
@@ -13,6 +14,7 @@ namespace QuizAppAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize] //WIll Be changed
     public class ExamsController : Controller
     {
         private readonly IExamQuestionsRepository _repo;

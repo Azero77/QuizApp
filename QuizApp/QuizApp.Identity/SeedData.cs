@@ -1,0 +1,55 @@
+using Duende.IdentityModel;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Identity.Data;
+using QuizApp.Identity.Models;
+using Serilog;
+using System.Security.Claims;
+
+namespace QuizApp.Identity
+{
+    public class SeedData
+    {
+        public static void EnsureSeedData(WebApplication app)
+        {
+            using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+
+                var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var anas = userMgr.FindByNameAsync("alice").Result;
+                if (anas == null)
+                {
+                    anas = new ApplicationUser
+                    {
+                        UserName = "Anas",
+                        Email = "Anas@example.com",
+                        EmailConfirmed = true,
+                    };
+                    var result = userMgr.CreateAsync(anas, "Pass123$").Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+
+                    result = userMgr.AddClaimsAsync(anas, new Claim[]{
+                                new Claim(JwtClaimTypes.Name, "Alice Smith"),
+                                new Claim(JwtClaimTypes.GivenName, "Alice"),
+                                new Claim(JwtClaimTypes.FamilyName, "Smith"),
+                                new Claim(JwtClaimTypes.WebSite, "http://alice.example.com"),
+                            }).Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+                    Log.Debug("alice created");
+                }
+                else
+                {
+                    Log.Debug("alice already exists");
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace QuizApp.BlazorWASM.Services
+namespace QuizApp.BlazorWASM.Services.HttpClientHandlers
 {
     public class HttpClientErrorDelegationHandler : DelegatingHandler
     {

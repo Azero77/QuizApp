@@ -1,3 +1,5 @@
+using DocumentFormat.OpenXml.Presentation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using QuizApp.API.Handlers;
 using QuizApp.API.Middlewares;
@@ -34,6 +36,21 @@ namespace QuizAppAPI
                         opts.Window = TimeSpan.FromSeconds(2);
                     });
             });
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+                opts => 
+                {
+                    opts.Authority = "https://localhost:5001";
+                    opts.TokenValidationParameters = new()
+                    {
+                        ValidateAudience = true,
+                        ValidateIssuer = true,
+                        ValidAudiences = new string[] { "exams","submissions","examgenerator"}
+                    };
+                });
+
+            builder.Services.AddAuthorization();
             builder.Services.AddHttpsRedirection(opts =>
             {
                 opts.HttpsPort = builder.Environment.IsDevelopment() ? 5001 : 443;
