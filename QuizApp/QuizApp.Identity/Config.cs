@@ -58,7 +58,7 @@ namespace QuizApp.Identity
                 },
                 new Client
                 {
-                    ClientId = "client.interactive",
+                    ClientId = "interactive.confidential",
                     ClientSecrets = {new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
                     RedirectUris = { "https://localhost:44300/signin-oidc" },

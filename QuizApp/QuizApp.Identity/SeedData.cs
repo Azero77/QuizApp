@@ -26,7 +26,6 @@ namespace QuizApp.Identity
                         UserName = "Anas",
                         Email = "Anas@example.com",
                         EmailConfirmed = true,
-                        Role = ApplicationConstants.Roles.Admin
                     };
                     var result = userMgr.CreateAsync(anas, "Pass123$").Result;
                     if (!result.Succeeded)
@@ -39,7 +38,6 @@ namespace QuizApp.Identity
                                 new Claim(JwtClaimTypes.GivenName, "Alice"),
                                 new Claim(JwtClaimTypes.FamilyName, "Smith"),
                                 new Claim(JwtClaimTypes.WebSite, "http://alice.example.com"),
-                                new Claim(JwtClaimTypes.Roles, anas.Role)
                             }).Result;
                     if (!result.Succeeded)
                     {
