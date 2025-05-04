@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using QuizApp.BlazorWASM.Services;
 using QuizApp.BlazorWASM.Services.ExamServices;
+using QuizApp.BlazorWASM.Services.HttpClientHandlers;
 
 namespace QuizApp.BlazorWASM
 {
@@ -15,6 +17,7 @@ namespace QuizApp.BlazorWASM
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
             AddClientServices(builder);
+            builder.Services.AddSingleton<AuthenticationStateProvider,BffAuthenticationStateProvider>();
             builder.Services.AddScoped<ExamService>();
             var app = builder.Build();
             
@@ -23,11 +26,16 @@ namespace QuizApp.BlazorWASM
 
         private static void AddClientServices(WebAssemblyHostBuilder builder)
         {
-            builder.Services.AddHttpClient<ExamsClient>(client => 
+            builder.Services.AddHttpClient<ExamsClient>(client =>
                 {
                     client.BaseAddress = new Uri("https://localhost:5004/api/");
-                }).AddHttpMessageHandler<HttpClientErrorDelegationHandler>();
+                })
+                .AddHttpMessageHandler<CookieHandler>()
+                .AddHttpMessageHandler<AntiforgeryHandler>()
+                .AddHttpMessageHandler<HttpClientErrorDelegationHandler>();
             builder.Services.AddSingleton<HttpClientErrorDelegationHandler>();
+            builder.Services.AddSingleton<AntiforgeryHandler>();
+            builder.Services.AddSingleton<CookieHandler>();
         }
     }
 }

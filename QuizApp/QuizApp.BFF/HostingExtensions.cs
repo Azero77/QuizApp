@@ -1,4 +1,5 @@
 using Duende.Bff.Yarp;
+using Microsoft.AspNetCore.Authentication;
 using Serilog;
 
 namespace QuizApp.BFF
@@ -95,6 +96,11 @@ namespace QuizApp.BFF
             app.MapGet("/", (context) => {
                 context.Response.Redirect("https://localhost:5003");
                 return Task.CompletedTask;
+            });
+
+            app.MapGet("/accesstoken", async (HttpContext context) =>
+            {
+                return await context.GetUserAccessTokenAsync();
             });
             return app;
         }
