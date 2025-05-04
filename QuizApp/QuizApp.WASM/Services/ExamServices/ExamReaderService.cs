@@ -64,6 +64,7 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
             return _client.UpdateExam(Exam);
         }
 
+
         public Task<Exam> DeleteExam(Exam exam)
         {
             throw new NotImplementedException();

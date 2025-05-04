@@ -5,9 +5,12 @@
 {
     <div class="d-flex flex-column justify-content-center align-items-center">
         <EditForm method="post"
+                class="d-flex flex-column justify-content-center align-items-center"
+                    FormName="MainForm"
                   Model="ExamState.Exam"
                   OnValidSubmit="OnSubmit">
             <DataAnnotationsValidator />
+            <ValidationSummary/>    
             @if (!string.IsNullOrEmpty(ExamState.Exam?.id))
             {
                 <div>
@@ -16,24 +19,46 @@
                 </div>
             }
             <div>
-                <label for="Name">Name:</label>
-                <InputText @bind-Value="ExamState.Exam!.Name" class="form-control" />
+                
+                <MudTextField T="string" Label="Name" @bind-Value="ExamState.Exam!.Name"
+                Class="d-block p-4"
+                Required="true" RequiredError="User name is required!" />
+
                 <ValidationMessage For="() => ExamState.Exam.Name" />
             </div>
             @if(_mode == Mode.Create)
             {
-                <label>Input File</label>
-                <InputFile OnChange="FileAdded"></InputFile>
+                <MudFileUpload T="IBrowserFile" FilesChanged="FileAdded">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.CloudUpload">
+                            Read Exam
+                        </MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
             }
-            <CascadingValue Value="ExamState">
-                <ExamView />
-            </CascadingValue>
+            <div>
+                <CascadingValue Value="ExamState">
+                    <ExamView />
+                </CascadingValue>
+                @if(_fileStatus == Status.Loading)
+                {
+                    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                    <p>Loading...</p>
+                }
+            </div>
+           @if(ExamState.Exam.Questions.Count > 0)
+            {
+                <button type="submit" class="btn btn-primary text-center p-4">Submit</button>
+            }
         </EditForm>
+        
     </div>
 }
 else
 {
-    <MudProgressCircular />
+    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
 }
 
 @code {
@@ -43,6 +68,7 @@ else
     [Parameter]
     [SupplyParameterFromQuery]
     public string ReturnUrl { get; set; } = "/";
+    private Status _fileStatus = Status.None;
 
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
@@ -74,24 +100,45 @@ else
     }
     public async Task OnSubmit()
     {
-        Exam result = null!;
+        if(ExamState.Exam.Questions.Count <= 0)
+        {
+            return;
+        }
+
         if (_mode == Mode.Create)
         {
-            result = await ExamState.AddExam();
+            await ExamState.AddExam();
         }
         else if (_mode == Mode.Edit)
         {
-            result = await ExamState.UpdateExam();
+            await ExamState.UpdateExam();
         }
-        NavigationManager.NavigateTo(ReturnUrl);
+        NavigationManager.NavigateTo(ReturnUrl ?? "/");
     }
 
-    private void FileAdded(InputFileChangeEventArgs e)
+    private async Task FileAdded(IBrowserFile file)
     {
+        _fileStatus = Status.Loading;
+        ExamState.Exam.Questions = new List<Question>();
+        await Task.Delay(5000);
+
+        await foreach (Question? q in await _client.GenerateExam(file))
+        {
+            if (q is not null)
+                ExamState.Exam.Questions.Add(q);
+        }
+        _fileStatus = Status.Finsihed;
     }
     public enum Mode
     {
         Create = 0,
         Edit = 1
+    }
+
+    private enum Status
+    {
+        None,
+        Loading,
+        Finsihed
     }
 }

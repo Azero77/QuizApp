@@ -1,4 +1,5 @@
-﻿using QuizApp.BlazorWASM.Pages;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using QuizApp.BlazorWASM.Pages;
 using QuizApp.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -90,9 +91,15 @@ namespace QuizApp.BlazorWASM.Services
             return null!;
         }
 
-        public async Task<Exam> GenerateExam(Stream file)
+        public async Task<IAsyncEnumerable<Question?>> GenerateExam(IBrowserFile file)
         {
-            throw new NotImplementedException();
+            MultipartFormDataContent content = new();
+            StreamContent fileContent = new(file.OpenReadStream(maxAllowedSize : 10 * 1024 * 1024));
+            content.Add(fileContent, "file", file.Name);
+
+            HttpResponseMessage response = await _client.PostAsync("ExamGenerator", content);
+            return response.Content.ReadFromJsonAsAsyncEnumerable<Question?>();
+
         }
 
     }
