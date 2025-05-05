@@ -11,13 +11,17 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
 	  <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
-    <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
+	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+	  <PackageReference Include="MongoDB.Driver.Core" Version="2.30.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	  <PackageReference Include="Duende.IdentityServer.AspNetIdentity" version="7.2.0" />
+
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\QuizApp.Models\QuizApp.Models.csproj" />
     <ProjectReference Include="..\QuizApp.Parser\QuizApp.Parser.csproj" />
+    <ProjectReference Include="..\QuizApp.Shared\QuizApp.Shared.csproj" />
   </ItemGroup>
 
 </Project>

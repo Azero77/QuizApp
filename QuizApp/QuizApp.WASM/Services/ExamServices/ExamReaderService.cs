@@ -46,7 +46,7 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
             Submission = new Submission()
             {
                 SubmissionPersonName = submissionName,
-                Choices = Exam.Questions.Select(q => q.SelectedAnswer).ToList(),
+                Choices = Exam.Questions.Select(q => q.SelectedAnswer).ToArray(),
                 ExamId = Exam.id ?? throw new Exception("Id can't be null here"),
                 DateSubmitted = DateTime.Now
             };

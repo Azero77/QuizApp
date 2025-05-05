@@ -42,7 +42,7 @@
         var result  = await ExamState.SubmitExam(submissionName);
         if (result.IsSuccessStatusCode)
         {
-            string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.id;
+            string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.Id;
             string url = UrlHelpers.GetSubmissionLink(Exam.id!, id ?? string.Empty);
             NavigationManager!.NavigateTo(url);
         }

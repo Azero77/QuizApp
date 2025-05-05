@@ -2,7 +2,8 @@ using Duende.IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Identity.Data;
-using QuizApp.Identity.Models;
+using QuizApp.Shared;
+using QuizApp.Shared.Models;
 using Serilog;
 using System.Security.Claims;
 

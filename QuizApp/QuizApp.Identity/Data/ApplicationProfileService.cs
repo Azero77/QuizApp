@@ -4,8 +4,7 @@ using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
-using QuizApp.Identity.Models;
-
+using QuizApp.Shared.Models;
 namespace QuizApp.Identity.Data
 {
     public class ApplicationProfileService : ProfileService<ApplicationUser>

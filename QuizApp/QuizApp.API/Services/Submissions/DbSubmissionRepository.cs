@@ -27,9 +27,10 @@ namespace QuizApp.API.Services.Submissions
             }
         }
 
-        public async Task<Submission> GetSubmission(string id, CancellationToken token = default)
+        public async Task<RepositoryResult<Submission>> GetSubmission(string id, CancellationToken token = default)
         {
-            return await (await Submissions.FindAsync<Submission>(s => s.id == id)).SingleAsync();
+            var sub = await (await Submissions.FindAsync<Submission>(s => s.Id == id)).SingleAsync();
+            return RepositoryResult<Submission>.Success(sub);
         }
         public async IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, [EnumeratorCancellation] CancellationToken token = default)
         {
@@ -53,9 +54,10 @@ namespace QuizApp.API.Services.Submissions
                 }
             }
         }
-        public Task AddSubmission(Submission submission, CancellationToken token = default)
+        public async Task<RepositoryResult<Submission>> AddSubmission(Submission submission, CancellationToken token = default)
         {
-            return Submissions.InsertOneAsync(submission);
+            await Submissions.InsertOneAsync(submission);
+            return RepositoryResult<Submission>.Success(submission);
         }
     }
 }

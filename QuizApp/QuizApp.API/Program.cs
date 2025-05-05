@@ -1,12 +1,16 @@
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.EntityFrameworkCore;
 using QuizApp.API.Handlers;
 using QuizApp.API.Middlewares;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 using QuizApp.Parser;
 using QuizApp.Parser.WordFileParser;
+using QuizApp.Shared;
+using QuizApp.Shared.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
 
@@ -20,52 +24,17 @@ namespace QuizAppAPI
 
             // Add services to the container.
             ConfigureLaunchSchema(builder);
-            
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IMessager, ErrorMessager>();
             builder.Services.AddWordParser();
-            builder.Services.AddRateLimiter(opts =>
-            {
-                opts.AddFixedWindowLimiter("fixedWindowSlider",
-                    opts =>
-                    {
-                        opts.PermitLimit = 10;
-                        opts.QueueLimit = 5;
-                        opts.Window = TimeSpan.FromSeconds(2);
-                    });
-            });
-
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-                opts => 
-                {
-                    opts.Authority = "https://localhost:5001";
-                    opts.TokenValidationParameters = new()
-                    {
-                        ValidateAudience = true,
-                        ValidateIssuer = true,
-                        ValidAudiences = new string[] { "exams","submissions","examgenerator"}
-                    };
-                });
-
-            builder.Services.AddAuthorization();
-            builder.Services.AddHttpsRedirection(opts =>
-            {
-                opts.HttpsPort = builder.Environment.IsDevelopment() ? 5001 : 443;
-            });
-            builder.Services.AddCors(opts =>
-            {
-                opts.AddPolicy(name: "ClientRequests",
-                    p =>
-                    {
-                        string uri = builder.Configuration?["ClientUrl"] ?? string.Empty;
-                        p.WithOrigins(uri)
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                    });
-            });
+            ConfigureRateLimiter(builder);
+            ConfigureApplicationDbContext(builder);
+            ConfigureAuth(builder);
+            ConfigureHttpsRedirection(builder);
+            ConfigureCORS(builder);
             ConfigureServices(builder);
 
             var app = builder.Build();
@@ -81,6 +50,69 @@ namespace QuizAppAPI
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static void ConfigureRateLimiter(WebApplicationBuilder builder)
+        {
+            builder.Services.AddRateLimiter(opts =>
+            {
+                opts.AddFixedWindowLimiter("fixedWindowSlider",
+                    opts =>
+                    {
+                        opts.PermitLimit = 10;
+                        opts.QueueLimit = 5;
+                        opts.Window = TimeSpan.FromSeconds(2);
+                    });
+            });
+        }
+
+        private static void ConfigureCORS(WebApplicationBuilder builder)
+        {
+            builder.Services.AddCors(opts =>
+            {
+                opts.AddPolicy(name: "ClientRequests",
+                    p =>
+                    {
+                        string uri = builder.Configuration?["ClientUrl"] ?? string.Empty;
+                        p.WithOrigins(uri)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    });
+            });
+        }
+
+        private static void ConfigureHttpsRedirection(WebApplicationBuilder builder)
+        {
+            builder.Services.AddHttpsRedirection(opts =>
+            {
+                opts.HttpsPort = builder.Environment.IsDevelopment() ? 5001 : 443;
+            });
+        }
+
+        private static void ConfigureAuth(WebApplicationBuilder builder)
+        {
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+                            opts =>
+                            {
+                                opts.Authority = "https://localhost:5001";
+                                opts.TokenValidationParameters = new()
+                                {
+                                    ValidateAudience = true,
+                                    ValidateIssuer = true,
+                                    ValidAudiences = new string[] { "exams", "submissions", "examgenerator" }
+                                };
+                            });
+
+            builder.Services.AddAuthorization();
+        }
+
+        private static void ConfigureApplicationDbContext(WebApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<ApplicationDbContext>(opts =>
+            opts.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings:ApplicationDbConnectionString").Value));
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         private static void UseSwagger(WebApplication app)

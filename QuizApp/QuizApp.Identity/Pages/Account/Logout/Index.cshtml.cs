@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using QuizApp.Identity.Models;
+using QuizApp.Shared.Models;
 
 namespace QuizApp.Identity.Pages.Logout
 {

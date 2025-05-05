@@ -2,7 +2,8 @@ using Duende.IdentityServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Identity.Data;
-using QuizApp.Identity.Models;
+using QuizApp.Shared;
+using QuizApp.Shared.Models;
 using Serilog;
 
 namespace QuizApp.Identity
@@ -14,7 +15,7 @@ namespace QuizApp.Identity
             builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
