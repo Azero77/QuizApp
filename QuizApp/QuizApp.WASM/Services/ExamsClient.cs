@@ -20,7 +20,7 @@ namespace QuizApp.BlazorWASM.Services
 
         public async IAsyncEnumerable<Exam?> GetExamsAsync()
         {
-            HttpResponseMessage response = await _client.GetAsync("Exams");
+            HttpResponseMessage response = await _client.GetAsync("api/Exams");
             if (response.IsSuccessStatusCode)
             {
                 //read the response
@@ -35,7 +35,7 @@ namespace QuizApp.BlazorWASM.Services
 
         public async Task<Exam?> GetExamAsync(string id)
         {
-            var response = await _client.GetAsync($"Exams/{id}");
+            var response = await _client.GetAsync($"api/Exams/{id}");
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<Exam?>();
@@ -45,14 +45,14 @@ namespace QuizApp.BlazorWASM.Services
 
         public Task<HttpResponseMessage> SubmitExam(Submission submission)
         {
-            return _client.PostAsJsonAsync<Submission>($"Submissions/add",submission);
+            return _client.PostAsJsonAsync<Submission>($"api/Submissions/add",submission);
         }
 
         public async Task<Submission?> GetSubmission(string subId)
         {
             if (subId is null)
                 throw new InvalidDataException("Submission Id must be given");
-            var response = await _client.GetAsync($"Submissions/id/{subId}");
+            var response = await _client.GetAsync($"api/Submissions/id/{subId}");
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<Submission?>();
@@ -64,7 +64,7 @@ namespace QuizApp.BlazorWASM.Services
         {
             if(examId is null)
                 throw new InvalidDataException("Exam Id must be given");
-            HttpResponseMessage response = await _client.GetAsync($"Submissions/exams/{examId}");
+            HttpResponseMessage response = await _client.GetAsync($"api/Submissions/exams/{examId}");
             if (response.IsSuccessStatusCode)
             {
                 //read the response
@@ -79,14 +79,14 @@ namespace QuizApp.BlazorWASM.Services
 
         public async Task<Exam> AddExam(Exam exam)
         {
-            HttpResponseMessage? result = await _client.PostAsJsonAsync<Exam>("Exams/add", exam);
+            HttpResponseMessage? result = await _client.PostAsJsonAsync<Exam>("api/Exams/add", exam);
             if (result.IsSuccessStatusCode)
                 return exam;
             return null!;
         }
         public async Task<Exam> UpdateExam(Exam exam)
         {
-            HttpResponseMessage? result = await _client.PutAsJsonAsync<Exam>("Exams/update", exam);
+            HttpResponseMessage? result = await _client.PutAsJsonAsync<Exam>("api/Exams/update", exam);
             if (result.IsSuccessStatusCode)
                 return exam;
             return null!;
@@ -98,7 +98,7 @@ namespace QuizApp.BlazorWASM.Services
             StreamContent fileContent = new(file.OpenReadStream(maxAllowedSize : 10 * 1024 * 1024));
             content.Add(fileContent, "file", file.Name);
 
-            HttpResponseMessage response = await _client.PostAsync("ExamGenerator", content);
+            HttpResponseMessage response = await _client.PostAsync("api/ExamGenerator", content);
             return response.Content.ReadFromJsonAsAsyncEnumerable<Question?>();
 
         }

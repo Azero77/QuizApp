@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 
@@ -6,6 +7,7 @@ namespace QuizApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles ="Admin")]
     public class SubmissionsController : Controller
     {
         private readonly ISubmissionRepository _repo;
@@ -34,6 +36,7 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet("id/{id}")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetSubmissionsById(string id, CancellationToken token)
         {
             Submission submissions = await _repo.GetSubmission(id,token);

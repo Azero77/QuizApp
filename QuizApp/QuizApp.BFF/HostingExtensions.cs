@@ -54,7 +54,11 @@ namespace QuizApp.BFF
                     options.Scope.Add("openid");
                     options.Scope.Add("profile");
                     options.Scope.Add("exam.read");
+                    options.Scope.Add("exam.write");
                     options.Scope.Add("submission.readown");
+                    options.Scope.Add("submission.write");
+                    options.Scope.Add("submission.readall");
+                    options.Scope.Add("examgenerator.read");
                     options.Scope.Add("offline_access");
 
                     options.TokenValidationParameters.NameClaimType = "name";

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using QuizApp.Models;
 using QuizApp.Parser.WordFileParser;
@@ -8,6 +9,7 @@ namespace QuizApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class ExamGeneratorController : Controller
     {
         private readonly IFileParser _parser;
