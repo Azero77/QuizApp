@@ -29,16 +29,16 @@ namespace QuizApp.Identity
                 new ApiResource("exams","Display And Correct Exams")
                 {
                    Scopes = { "exam.read","exam.write"},
-                   UserClaims = { JwtClaimTypes.Roles }
+                   UserClaims = { JwtClaimTypes.Role }
                 },
                 new ApiResource("submissions","Read And Add Submissions")
                 {
                     Scopes = { "submission.write","submission.readown","submission.readall"}, //readall -> read all submissions - readown -> read only user's submission
-                    UserClaims = {JwtClaimTypes.Roles }
+                    UserClaims = {JwtClaimTypes.Role }
                 },
                 new ApiResource("examgenerator","Generating your own submission"){
                     Scopes = { "examgenerator.read"},
-                    UserClaims = {JwtClaimTypes.Roles } //in the future everyone can generate exam so no need for role
+                    UserClaims = {JwtClaimTypes.Role } //in the future everyone can generate exam so no need for role
                 },
             };
 
@@ -72,7 +72,6 @@ namespace QuizApp.Identity
                         "submission.readall",//admin
                         "submission.write", //admin
                         "examgenerator.read", //admin
-                        JwtClaimTypes.Roles
                     }
 
                 }

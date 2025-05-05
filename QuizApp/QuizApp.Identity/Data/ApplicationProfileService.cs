@@ -1,4 +1,6 @@
-﻿using Duende.IdentityServer.AspNetIdentity;
+﻿using Duende.IdentityModel;
+using Duende.IdentityServer.AspNetIdentity;
+using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
@@ -8,13 +10,15 @@ namespace QuizApp.Identity.Data
 {
     public class ApplicationProfileService : ProfileService<ApplicationUser>
     {
-        public ApplicationProfileService(UserManager<ApplicationUser> userManager, IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory) : base(userManager, claimsFactory)
+        private readonly ILogger<ApplicationProfileService> _logger;
+        public ApplicationProfileService(UserManager<ApplicationUser> userManager, IUserClaimsPrincipalFactory<ApplicationUser> claimsFactory, ILogger<ApplicationProfileService> logger) : base(userManager, claimsFactory)
         {
+            _logger = logger;
         }
 
-        protected override Task GetProfileDataAsync(ProfileDataRequestContext context, ApplicationUser user)
+        protected override async Task GetProfileDataAsync(ProfileDataRequestContext context, ApplicationUser user)
         {
-            return base.GetProfileDataAsync(context, user);
+            await base.GetProfileDataAsync(context, user);
         }
     }
 }

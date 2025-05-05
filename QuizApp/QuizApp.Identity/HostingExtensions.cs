@@ -33,6 +33,7 @@ namespace QuizApp.Identity
                 .AddInMemoryApiResources(Config.ApiResources)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>()
+                .AddProfileService<ApplicationProfileService>()
                 .AddLicenseSummary();
 
             builder.Services.AddAuthentication()

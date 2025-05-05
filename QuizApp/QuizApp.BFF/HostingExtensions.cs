@@ -59,6 +59,7 @@ namespace QuizApp.BFF
 
                     options.TokenValidationParameters.NameClaimType = "name";
                     options.TokenValidationParameters.RoleClaimType = "role";
+
                 });
 
             return builder.Build();
