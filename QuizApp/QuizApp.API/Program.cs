@@ -14,6 +14,7 @@ using QuizApp.Shared;
 using QuizApp.Shared.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
+using System.Security.Claims;
 
 namespace QuizAppAPI
 {
@@ -46,6 +47,7 @@ namespace QuizAppAPI
 
             //app.UseHttpsRedirection();
             app.UseCors("ClientRequests");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseMiddleware<RequestTimeoutMiddleware>();
 
@@ -93,25 +95,29 @@ namespace QuizAppAPI
 
         private static void ConfigureAuth(WebApplicationBuilder builder)
         {
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
-                            opts =>
-                            {
-                                opts.Authority = "https://localhost:5001";
-                                opts.TokenValidationParameters = new()
-                                {
-                                    ValidateAudience = true,
-                                    ValidateIssuer = true,
-                                    ValidAudiences = new string[] { "exams", "submissions", "examgenerator" },
-                                    RoleClaimType = "role"
-                                };
-                            });
+            builder.Services.AddAuthentication(opts =>
+            {
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
+            opts =>
+            {
+                opts.Authority = "https://localhost:5001";
+                opts.TokenValidationParameters = new()
+                {
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidAudiences = new string[] { "exams", "submissions", "examgenerator" },
+                    RoleClaimType = ClaimTypes.Role
+                };
+            });
 
             builder.Services.AddAuthorization(opts =>
             {
                 opts.AddPolicy(APIConstants.AdminPolicy,b => b.RequireRole(ApplicationConstants.Roles.Admin));
-                opts.AddPolicy(APIConstants.UserPolicy,b => b.RequireRole(ApplicationConstants.Roles.User));
-                opts.DefaultPolicy = opts.GetPolicy(APIConstants.UserPolicy)!;
+                opts.AddPolicy(APIConstants.UserPolicy,b => b.RequireRole(ApplicationConstants.Roles.User,ApplicationConstants.Roles.Admin));
+                opts.DefaultPolicy = opts.GetPolicy(APIConstants.AdminPolicy)!;
             }); 
         }
 

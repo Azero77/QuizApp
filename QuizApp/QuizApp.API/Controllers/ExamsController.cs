@@ -15,7 +15,6 @@ namespace QuizAppAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [Authorize(APIConstants.AdminPolicy)]
     public class ExamsController : Controller
     {
         private readonly IExamQuestionsRepository _repo;
@@ -55,6 +54,7 @@ namespace QuizAppAPI.Controllers
         [HttpGet("{id}/Questions")]
         [ProducesResponseType(typeof(IAsyncEnumerable<Question>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(APIConstants.UserPolicy)]
         public async Task<IActionResult> GetExamQuestions(string id, CancellationToken token)
         {
             var result = _repo.GetQuestionsAsync(id,token); // Use the async method

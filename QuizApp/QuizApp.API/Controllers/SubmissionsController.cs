@@ -7,7 +7,6 @@ namespace QuizApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(APIConstants.AdminPolicy)]
     public class SubmissionsController : Controller
     {
         private readonly ISubmissionRepository _repo;

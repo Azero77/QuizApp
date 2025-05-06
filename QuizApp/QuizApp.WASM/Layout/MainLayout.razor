@@ -22,8 +22,8 @@
         <MudMainContent>
             <AuthorizeView>
                 <Authorized>
-                    Hello @context.User.Identity?.Name
-                    <a href="@($"https://localhost:5002/{context.User.FindFirst("bff:logout_url")?.Value}")">Log out</a>
+                    Hello @context.User.Identity?.Name @context.User.Claims.First(s => s.Type == "sub").Value
+                    <a href="@($"https://localhost:5002{context.User.FindFirst("bff:logout_url")?.Value}")">Log out</a>
                 </Authorized>
                 <Authorizing>Determining Auth State</Authorizing>
                 <NotAuthorized>
