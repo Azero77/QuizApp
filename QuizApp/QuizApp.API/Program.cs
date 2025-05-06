@@ -100,7 +100,8 @@ namespace QuizAppAPI
                                 {
                                     ValidateAudience = true,
                                     ValidateIssuer = true,
-                                    ValidAudiences = new string[] { "exams", "submissions", "examgenerator" }
+                                    ValidAudiences = new string[] { "exams", "submissions", "examgenerator" },
+                                    RoleClaimType = "role"
                                 };
                             });
 
@@ -109,7 +110,7 @@ namespace QuizAppAPI
 
         private static void ConfigureApplicationDbContext(WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<ApplicationDbContext>(opts =>
+            builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(opts =>
             opts.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings:ApplicationDbConnectionString").Value));
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -151,7 +152,7 @@ namespace QuizAppAPI
         {
             services.AddScoped<ExamQuestionsContext>();
             services.AddScoped<IExamQuestionsRepository, DbExamQuestionsRepository>();
-            services.AddScoped<ISubmissionRepository, DbSubmissionRepository>();
+            services.AddScoped<ISubmissionRepository, SqlSubmissionRepository>();
         }
 
         private static void ConfigureMongoModel(WebApplicationBuilder builder, IServiceCollection services)

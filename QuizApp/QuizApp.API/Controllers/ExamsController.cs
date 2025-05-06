@@ -40,7 +40,7 @@ namespace QuizAppAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Exam), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> GetExam(string id,CancellationToken token)
         {
             var result = await _repo.GetExamById(id,token);

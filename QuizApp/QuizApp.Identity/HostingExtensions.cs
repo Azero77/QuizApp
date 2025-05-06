@@ -14,7 +14,7 @@ namespace QuizApp.Identity
         {
             builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
