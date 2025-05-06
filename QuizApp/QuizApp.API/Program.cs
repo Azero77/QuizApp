@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using QuizApp.API;
 using QuizApp.API.Handlers;
 using QuizApp.API.Middlewares;
 using QuizApp.API.Services.Submissions;
@@ -30,6 +31,7 @@ namespace QuizAppAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IMessager, ErrorMessager>();
             builder.Services.AddWordParser();
+            
             ConfigureRateLimiter(builder);
             ConfigureApplicationDbContext(builder);
             ConfigureAuth(builder);
@@ -105,7 +107,12 @@ namespace QuizAppAPI
                                 };
                             });
 
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy(APIConstants.AdminPolicy,b => b.RequireRole(ApplicationConstants.Roles.Admin));
+                opts.AddPolicy(APIConstants.UserPolicy,b => b.RequireRole(ApplicationConstants.Roles.User));
+                opts.DefaultPolicy = opts.GetPolicy(APIConstants.UserPolicy)!;
+            }); 
         }
 
         private static void ConfigureApplicationDbContext(WebApplicationBuilder builder)

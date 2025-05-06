@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using MongoDB.Driver;
+using QuizApp.API;
 using QuizApp.API.Services;
 using QuizApp.Models;
 using QuizAppAPI.Services.ExamQuestions;
@@ -14,7 +15,7 @@ namespace QuizAppAPI.Controllers
     [ApiController]
     [Produces("application/json")]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(APIConstants.AdminPolicy)]
     public class ExamsController : Controller
     {
         private readonly IExamQuestionsRepository _repo;
@@ -40,7 +41,7 @@ namespace QuizAppAPI.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Exam), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(APIConstants.UserPolicy)]
         public async Task<IActionResult> GetExam(string id,CancellationToken token)
         {
             var result = await _repo.GetExamById(id,token);
