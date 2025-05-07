@@ -48,7 +48,7 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
                 SubmissionPersonName = submissionName,
                 Choices = Exam.Questions.Select(q => q.SelectedAnswer).ToArray(),
                 ExamId = Exam.id ?? throw new Exception("Id can't be null here"),
-                DateSubmitted = DateTime.Now
+                DateSubmitted = DateTimeOffset.UtcNow
             };
             Submission.Result = Exam.CorrectExam(Submission);
             return _client.SubmitExam(Submission);

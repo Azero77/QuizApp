@@ -27,7 +27,7 @@ namespace QuizApp.API.Services.Submissions
             }
         }
 
-        public async Task<RepositoryResult<Submission>> GetSubmission(string id, CancellationToken token = default)
+        public async Task<RepositoryResult<Submission>> GetSubmission(long id, CancellationToken token = default)
         {
             var sub = await (await Submissions.FindAsync<Submission>(s => s.Id == id)).SingleAsync();
             return RepositoryResult<Submission>.Success(sub);

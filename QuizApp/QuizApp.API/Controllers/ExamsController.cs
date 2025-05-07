@@ -25,9 +25,9 @@ namespace QuizAppAPI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(IAsyncEnumerable<Exam>), 200)] // Updated response type
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [AllowAnonymous]
         public async Task<IActionResult> GetExams(CancellationToken token)
         {
             var result = _repo.GetExamsAsync(token); // Use the async method

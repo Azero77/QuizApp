@@ -55,11 +55,12 @@ namespace QuizApp.Shared.Migrations
                 name: "Submissions",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SubmissionPersonName = table.Column<string>(type: "text", nullable: false),
                     ExamId = table.Column<string>(type: "text", nullable: false),
                     Choices = table.Column<short?[]>(type: "SMALLINT[]", nullable: false),
-                    DateSubmitted = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateSubmitted = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     Result = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

@@ -1,6 +1,7 @@
 ﻿    @page "/ReadExam/{Id}"
     @inherits HttpClientErrorHandler
     @inject NavigationManager NavigationManager
+    @inject AuthenticationStateProvider AuthNProvider
     @inject ExamsClient Client
     @attribute [Authorize]
     <div class="d-flex flex-column justify-content-center align-items-center">
@@ -20,9 +21,7 @@
 @code {
     //Page for Solving the exam while reading it;
     private const ExamMode _examMode = ExamMode.Read;
-
-    [SupplyParameterFromQuery]
-    public string submissionName { get; set; } = string.Empty;
+    private Task<AuthenticationState> auth_state = null!;
     [Parameter]
     public string Id { get; set; } = string.Empty;
     [Inject] public ExamService ExamState { get; set; } = null!;
@@ -31,6 +30,7 @@
     protected override async Task OnInitializedAsync()
     {
         Exam? exam = await Client.GetExamAsync(Id);
+        auth_state = AuthNProvider.GetAuthenticationStateAsync();
         if(exam is null)
         {
             AddError("Page not found");
@@ -40,11 +40,14 @@
     }
     private async Task SubmitExam()
     {
-        var result  = await ExamState.SubmitExam(submissionName);
+        string? user_id = (await auth_state)?.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+        if (user_id is null)
+            return;
+        var result  = await ExamState.SubmitExam(user_id);
         if (result.IsSuccessStatusCode)
         {
-            string? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.Id;
-            string url = UrlHelpers.GetSubmissionLink(Exam.id!, id ?? string.Empty);
+            long? id = (await result.Content.ReadFromJsonAsync<Submission?>())?.Id;
+            string url = UrlHelpers.GetSubmissionLink(Exam.id!, id.ToString() ?? string.Empty);
             NavigationManager!.NavigateTo(url);
         }
     }

@@ -156,14 +156,17 @@ namespace QuizApp.Shared.Migrations
 
             modelBuilder.Entity("QuizApp.Models.Submission", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<ushort?[]>("Choices")
                         .IsRequired()
                         .HasColumnType("SMALLINT[]");
 
-                    b.Property<DateTime>("DateSubmitted")
+                    b.Property<DateTimeOffset>("DateSubmitted")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ExamId")

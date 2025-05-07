@@ -36,7 +36,7 @@ namespace QuizApp.API.Controllers
 
         [HttpGet("id/{id}")]
         [Authorize(APIConstants.UserPolicy)]
-        public async Task<IActionResult> GetSubmissionsById(string id, CancellationToken token)
+        public async Task<IActionResult> GetSubmissionsById(long id, CancellationToken token)
         {
             Submission submissions = await _repo.GetSubmission(id,token);
             if (submissions is null)

@@ -14,6 +14,10 @@ namespace QuizApp.Shared
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts){}
 
+        static ApplicationDbContext()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
         public DbSet<Submission> Submissions { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -26,7 +30,6 @@ namespace QuizApp.Shared
                     v => v.Select(b => (ushort?) b).ToArray(),
                     v => v.Select(us => (byte?)us).ToArray()
                     );
-
                 entity.Property(e => e.SubmissionPersonName).IsRequired();
                 entity.Property(e => e.DateSubmitted).IsRequired();
             });

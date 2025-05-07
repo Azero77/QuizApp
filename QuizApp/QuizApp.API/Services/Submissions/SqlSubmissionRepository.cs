@@ -18,7 +18,6 @@ namespace QuizApp.API.Services.Submissions
         {
             try
             {
-
                 await _context.Submissions.AddAsync(submission, token);
                 await _context.SaveChangesAsync();
             }
@@ -29,7 +28,7 @@ namespace QuizApp.API.Services.Submissions
             return RepositoryResult<Submission>.Success(submission);
         }
 
-        public async Task<RepositoryResult<Submission>> GetSubmission(string id, CancellationToken token = default)
+        public async Task<RepositoryResult<Submission>> GetSubmission(long id, CancellationToken token = default)
         {
             Submission? sub = await _context.Submissions.FirstOrDefaultAsync(s => s.Id == id,token);
             if (sub is null)

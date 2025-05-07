@@ -92,7 +92,7 @@ namespace QuizApp.BFF
 
 
             app.MapRemoteBffApiEndpoint("/api", "https://localhost:5004/api")
-               .RequireAccessToken(Duende.Bff.TokenType.User);
+               .WithOptionalUserAccessToken();
             app.MapGet("/", (context) => {
                 context.Response.Redirect("https://localhost:5003");
                 return Task.CompletedTask;
