@@ -11,7 +11,6 @@ namespace QuizApp.Identity
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResource(JwtClaimTypes.Roles,new string[] { JwtClaimTypes.Roles })
             };
 
         public static IEnumerable<ApiScope> ApiScopes => new[]
