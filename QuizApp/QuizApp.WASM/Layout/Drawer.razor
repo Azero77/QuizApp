@@ -1,0 +1,34 @@
+﻿ <MudDrawer Class="drawer11" @bind-Open="@drawerOpen" Elevation="5" ClipMode="DrawerClipMode.Always">
+            <MudSpacer/>
+            <MudNavMenu>
+                <MudNavLink Href="/"  Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
+                    Home
+                </MudNavLink>
+                <AuthorizeView Roles="@ApplicationConstants.Roles.Admin">
+                    <Authorized>
+                        <MudNavLink Href="/submissions" Icon="@Icons.Material.Filled.Person" Match="NavLinkMatch.Prefix">
+                            Submissions
+                        </MudNavLink>
+                        <MudNavLink Href="/admin/exams" Icon="@Icons.Material.Filled.Assignment" Match="NavLinkMatch.Prefix">
+                            Upload
+                        </MudNavLink>
+                    </Authorized>
+                    <NotAuthorized>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
+                <MudNavLink Href="/about" Icon="@Icons.Material.Filled.Info">
+                    About
+                </MudNavLink>
+            </MudNavMenu>
+            <MudDivider />
+            <MudDrawerFooter>
+                <MudText Typo="Typo.caption" Class="text-center">Version 1.0.0</MudText>
+            </MudDrawerFooter>
+</MudDrawer>
+
+@code{
+    [EditorRequired]
+    [Parameter]
+    public bool drawerOpen {get;set;}
+}

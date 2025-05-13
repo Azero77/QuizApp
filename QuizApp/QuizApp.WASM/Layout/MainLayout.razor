@@ -16,62 +16,11 @@
                           OnClick="@ToggleDrawer" />
             <MudText Typo="Typo.h5">Alpha Zero</MudText>
             <MudSpacer/>
-            <AuthorizeView>
-                <Authorized>
-                    <div class="d-flex align-center">
-                        <span class="fw-bold mr-2">@context.User.Identity?.Name</span>
-                        <MudAvatar Color="Color.Success" Variant="Variant.Outlined" Size="Size.Small">
-                            @char.ToUpper(context.User.Identity?.Name?[0] ?? 'A')
-                        </MudAvatar>
-                        <MudIconButton Icon="@Icons.Material.Filled.Logout" 
-                                     Color="Color.Inherit" 
-                                     Href="@($"{GlobalConfig.BFFUrl}{context.User.FindFirst("bff:logout_url")?.Value}")"
-                                     Class="ml-2" />
-                    </div>
-                </Authorized>
-                <NotAuthorized>
-                    <MudButton Variant="Variant.Text" 
-                               Color="Color.Inherit" 
-                               Href="@($"{GlobalConfig.BFFUrl}/bff/login")"
-                               EndIcon="@Icons.Material.Filled.Login">
-                        Login
-                    </MudButton>
-                </NotAuthorized>
-                <Authorizing>
-                    <MudProgressCircular Size="Size.Medium" Color="Color.Inherit" />
-                </Authorizing>
-            </AuthorizeView>
+            <Nav/>
         </MudAppBar>
 
         <!-- Sidebar Drawer -->
-        <MudDrawer Class="drawer11" @bind-Open="@drawerOpen" Elevation="5" ClipMode="DrawerClipMode.Always">
-            <MudSpacer/>
-            <MudNavMenu>
-                <MudNavLink Href="/"  Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
-                    Home
-                </MudNavLink>
-                <AuthorizeView Roles="@ApplicationConstants.Roles.Admin">
-                    <Authorized>
-                        <MudNavLink Href="/submissions" Icon="@Icons.Material.Filled.Person" Match="NavLinkMatch.Prefix">
-                            Submissions
-                        </MudNavLink>
-                        <MudNavLink Href="/admin/exams" Icon="@Icons.Material.Filled.Assignment" Match="NavLinkMatch.Prefix">
-                            Upload
-                        </MudNavLink>
-                    </Authorized>
-                    <NotAuthorized>
-                    </NotAuthorized>
-                </AuthorizeView>
-                
-                <MudNavLink Href="/about" Icon="@Icons.Material.Filled.Info">
-                    About
-                </MudNavLink>
-            </MudNavMenu>
-            <MudDivider />
-            <MudDrawerFooter>
-                <MudText Typo="Typo.caption" Class="text-center">Version 1.0.0</MudText>
-            </MudDrawerFooter>
-        </MudDrawer>
+       <Drawer drawerOpen="@drawerOpen"/>
 
         <!-- Main Content -->
         <MudMainContent>
@@ -85,6 +34,7 @@
 @code {
     private int elevation = 4;
     private bool dense = true;
+
     private bool drawerOpen = true;
 
     private void ToggleDrawer()

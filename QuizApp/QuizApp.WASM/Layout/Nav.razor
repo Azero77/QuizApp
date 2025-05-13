@@ -1,5 +1,25 @@
-﻿<h3>Nav</h3>
-
-@code {
-
-}
+﻿<AuthorizeView>
+    <Authorized>
+        <div class="d-flex align-center">
+            <span class="fw-bold mr-2">@context.User.Identity?.Name</span>
+            <MudAvatar Color="Color.Success" Variant="Variant.Outlined" Size="Size.Small">
+                @char.ToUpper(context.User.Identity?.Name?[0] ?? 'A')
+            </MudAvatar>
+            <MudIconButton Icon="@Icons.Material.Filled.Logout"
+                           Color="Color.Inherit"
+                           Href="@($"{GlobalConfig.BFFUrl}{context.User.FindFirst("bff:logout_url")?.Value}")"
+                           Class="ml-2" />
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <MudButton Variant="Variant.Text"
+                   Color="Color.Inherit"
+                   Href="@($"{GlobalConfig.BFFUrl}/bff/login")"
+                   EndIcon="@Icons.Material.Filled.Login">
+            Login
+        </MudButton>
+    </NotAuthorized>
+    <Authorizing>
+        <MudProgressCircular Size="Size.Medium" Color="Color.Inherit" />
+    </Authorizing>
+</AuthorizeView>
