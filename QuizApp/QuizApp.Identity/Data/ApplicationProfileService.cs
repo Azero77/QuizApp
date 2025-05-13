@@ -18,11 +18,6 @@ namespace QuizApp.Identity.Data
 
         protected override async Task GetProfileDataAsync(ProfileDataRequestContext context, ApplicationUser user)
         {
-            _logger.LogDebug("Checking claims \n\n\n\n\n");
-            if (!context.IssuedClaims.Select(c => c.Type).Contains(JwtClaimTypes.Role))
-            {
-                context.IssuedClaims.Add(new System.Security.Claims.Claim(JwtClaimTypes.Role,ApplicationConstants.Roles.User));
-            }
             await base.GetProfileDataAsync(context, user);
         }
     }

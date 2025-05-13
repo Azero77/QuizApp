@@ -14,6 +14,7 @@ namespace QuizAppAPI.Controllers
     /// </summary>
     [ApiController]
     [Produces("application/json")]
+    [Authorize]
     [Route("api/[controller]")]
     public class ExamsController : Controller
     {
@@ -67,6 +68,7 @@ namespace QuizAppAPI.Controllers
 
 
         [HttpPost("add")]
+        [Authorize(APIConstants.AdminPolicy)]
         public async Task<IActionResult> AddExamQuestion([FromBody] Exam newExam,CancellationToken token)
         {
             var repositoryResult = await _repo.AddExam(newExam,token);
@@ -78,6 +80,7 @@ namespace QuizAppAPI.Controllers
         }
 
         [HttpPut("update")]
+        [Authorize(APIConstants.AdminPolicy)]
         public async Task<IActionResult> UpdateExamQuestion([FromBody] Exam exam,CancellationToken token)
         {
             var repositoryResult = await _repo.UpdateExam(exam, token);
@@ -89,6 +92,7 @@ namespace QuizAppAPI.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(APIConstants.AdminPolicy)]
         public async Task<IActionResult> DeleteExam(string id,CancellationToken token)
         {
             RepositoryResult<Exam> repoResult = await _repo.DeleteExam(id,token);

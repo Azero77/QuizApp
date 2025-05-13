@@ -24,8 +24,4 @@
     <ProjectReference Include="..\QuizApp.Shared\QuizApp.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Authorization\" />
-  </ItemGroup>
-
 </Project>

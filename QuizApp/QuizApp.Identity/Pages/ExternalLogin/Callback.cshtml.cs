@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using QuizApp.Shared;
 using QuizApp.Shared.Models;
 using System.Security.Claims;
 
@@ -113,11 +114,12 @@ namespace QuizApp.Identity.Pages.ExternalLogin
         private async Task<ApplicationUser> AutoProvisionUserAsync(string provider, string providerUserId, IEnumerable<Claim> claims)
         {
             var sub = Guid.NewGuid().ToString();
+            string? username = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value ?? "User";
 
             var user = new ApplicationUser
             {
                 Id = sub,
-                UserName = sub, // don't need a username, since the user will be using an external provider to login
+                UserName = username, // don't need a username, since the user will be using an external provider to login
             };
 
             // email
@@ -170,6 +172,8 @@ namespace QuizApp.Identity.Pages.ExternalLogin
             identityResult = await _userManager.AddLoginAsync(user, new UserLoginInfo(provider, providerUserId, provider));
             if (!identityResult.Succeeded) throw new InvalidOperationException(identityResult.Errors.First().Description);
 
+            //Adding User Role
+            await _userManager.AddToRoleAsync(user, ApplicationConstants.Roles.User);
             return user;
         }
 

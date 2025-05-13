@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using QuizApp.Shared;
 using QuizApp.Shared.Models;
 
 namespace QuizApp.Identity.Pages.Login
@@ -101,6 +102,7 @@ namespace QuizApp.Identity.Pages.Login
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(Input.Username!);
+
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user!.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
                     Telemetry.Metrics.UserLogin(context?.Client.ClientId, IdentityServerConstants.LocalIdentityProvider);
 

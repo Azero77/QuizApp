@@ -1,6 +1,8 @@
 using DocumentFormat.OpenXml.Presentation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.API;
@@ -109,16 +111,28 @@ namespace QuizAppAPI
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidAudiences = new string[] { "exams", "submissions", "examgenerator" },
-                    RoleClaimType = ClaimTypes.Role
+                    RoleClaimType = "role"
+                };
+                opts.MapInboundClaims = false;
+                opts.Events = new JwtBearerEvents()
+                {
+                    OnForbidden = context => 
+                    {
+                        foreach (var item in context.HttpContext.User.Claims)
+                        {
+                            Console.WriteLine($"{item.Type} : {item.Value}");
+                        }
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
             builder.Services.AddAuthorization(opts =>
             {
-                opts.AddPolicy(APIConstants.AdminPolicy,b => b.RequireRole(ApplicationConstants.Roles.Admin));
                 opts.AddPolicy(APIConstants.UserPolicy,b => b.RequireRole(ApplicationConstants.Roles.User,ApplicationConstants.Roles.Admin));
-                opts.DefaultPolicy = opts.GetPolicy(APIConstants.AdminPolicy)!;
+                opts.AddPolicy(APIConstants.AdminPolicy, b => b.RequireRole(ApplicationConstants.Roles.Admin));
             }); 
+            
         }
 
         private static void ConfigureApplicationDbContext(WebApplicationBuilder builder)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QuizApp.API.Authorization;
 using QuizApp.API.Services.Submissions;
 using QuizApp.Models;
 
@@ -7,6 +8,7 @@ namespace QuizApp.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class SubmissionsController : Controller
     {
         private readonly ISubmissionRepository _repo;
@@ -17,6 +19,7 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(APIConstants.AdminPolicy)]
         public ActionResult<IAsyncEnumerable<Submission>> GetSubmissions(CancellationToken token)
         {
             IAsyncEnumerable<Submission> submissions = _repo.GetSubmissions(token);
@@ -26,6 +29,7 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet("name/{name}")]
+        [Authorize(APIConstants.UserPolicy)]
         public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByName(string name,CancellationToken token)
         {
             IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByName(name,token);
@@ -36,6 +40,7 @@ namespace QuizApp.API.Controllers
 
         [HttpGet("id/{id}")]
         [Authorize(APIConstants.UserPolicy)]
+        [OnlyOwnedSubmissionFilter]
         public async Task<IActionResult> GetSubmissionsById(long id, CancellationToken token)
         {
             Submission submissions = await _repo.GetSubmission(id,token);
@@ -45,6 +50,7 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpGet("exams/{exam_id}")]
+        [Authorize(APIConstants.AdminPolicy)]
         public ActionResult<IAsyncEnumerable<Submission>> GetSubmissionsByExamName(string exam_id, CancellationToken token)
         {
             IAsyncEnumerable<Submission> submissions = _repo.GetSubmissionsByExamId(exam_id,token);
@@ -54,6 +60,7 @@ namespace QuizApp.API.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(APIConstants.UserPolicy)]
         public async Task<IActionResult> AddSubmissionAsync([FromBody] Submission submission, CancellationToken token)
         {
             await _repo.AddSubmission(submission,token);
