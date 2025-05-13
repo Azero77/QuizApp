@@ -79,7 +79,7 @@ namespace QuizAppAPI
                 opts.AddPolicy(name: "ClientRequests",
                     p =>
                     {
-                        string uri = builder.Configuration?["ClientUrl"] ?? string.Empty;
+                        string uri = GlobalConfig.BFFUrl;
                         p.WithOrigins(uri)
                         .AllowAnyHeader()
                         .AllowAnyMethod();
@@ -105,7 +105,7 @@ namespace QuizAppAPI
             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
             opts =>
             {
-                opts.Authority = "https://localhost:5001";
+                opts.Authority = GlobalConfig.IdentityUrl;
                 opts.TokenValidationParameters = new()
                 {
                     ValidateAudience = true,

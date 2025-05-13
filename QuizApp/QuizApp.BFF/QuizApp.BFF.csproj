@@ -16,4 +16,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuizApp.Shared\QuizApp.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

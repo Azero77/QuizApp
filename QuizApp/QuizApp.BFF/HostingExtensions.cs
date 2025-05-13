@@ -1,6 +1,8 @@
 using Duende.Bff.Yarp;
 using Microsoft.AspNetCore.Authentication;
+using QuizApp.Shared;
 using Serilog;
+using static System.Net.WebRequestMethods;
 
 namespace QuizApp.BFF
 {
@@ -20,7 +22,7 @@ namespace QuizApp.BFF
             {
                 o.AddPolicy("SPAClients",p =>
                 {
-                    p.WithOrigins("https://localhost:5003")
+                    p.WithOrigins(GlobalConfig.ClientUrl)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -40,7 +42,7 @@ namespace QuizApp.BFF
                 })
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    options.Authority = GlobalConfig.IdentityUrl;
                     options.ClientId = "interactive.confidential";
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
@@ -87,14 +89,13 @@ namespace QuizApp.BFF
             // add CSRF protection and status code handling for API endpoints
             app.UseBff();
             app.UseAuthorization();
-
             app.MapBffManagementEndpoints();
 
 
-            app.MapRemoteBffApiEndpoint("/api", "https://localhost:5004/api")
+            app.MapRemoteBffApiEndpoint("/api", $"{GlobalConfig.APIUrl}/api")
                .WithOptionalUserAccessToken();
             app.MapGet("/", (context) => {
-                context.Response.Redirect("https://localhost:5003");
+                context.Response.Redirect(GlobalConfig.ClientUrl);
                 return Task.CompletedTask;
             });
 

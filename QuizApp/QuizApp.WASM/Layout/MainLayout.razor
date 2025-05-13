@@ -23,11 +23,11 @@
             <AuthorizeView>
                 <Authorized>
                     Hello @context.User.Identity?.Name @context.User.Claims.First(s => s.Type == "sub").Value
-                    <a href="@($"https://localhost:5002{context.User.FindFirst("bff:logout_url")?.Value}")">Log out</a>
+                    <a href="@($"{GlobalConfig.BFFUrl}{context.User.FindFirst("bff:logout_url")?.Value}")">Log out</a>
                 </Authorized>
                 <Authorizing>Determining Auth State</Authorizing>
                 <NotAuthorized>
-                    <a href="https://localhost:5002/bff/login">login</a>
+                    <a href=@($"{GlobalConfig.BFFUrl}/bff/login")>login</a>
                 </NotAuthorized>
             </AuthorizeView>
             <div>

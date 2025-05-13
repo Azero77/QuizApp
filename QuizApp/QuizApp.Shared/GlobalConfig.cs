@@ -2,8 +2,8 @@
 
 public class GlobalConfig
 {
-    public static string IdentityUrl = "https://localhost:5001";
-    public static string BFFUrl = "https://localhost:5002";
-    public static string ClientUrl = "https://localhost:5003";
-    public static string APIUrl = "https://localhost:5004";
+    public const string IdentityUrl = "https://localhost:5001";
+    public const string BFFUrl = "https://localhost:5002";
+    public const string ClientUrl = "https://localhost:5003";
+    public const string APIUrl = "https://localhost:5004";
 }

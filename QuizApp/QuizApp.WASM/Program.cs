@@ -5,6 +5,7 @@ using MudBlazor.Services;
 using QuizApp.BlazorWASM.Services;
 using QuizApp.BlazorWASM.Services.ExamServices;
 using QuizApp.BlazorWASM.Services.HttpClientHandlers;
+using QuizApp.Shared;
 
 namespace QuizApp.BlazorWASM
 {
@@ -29,7 +30,7 @@ namespace QuizApp.BlazorWASM
         {
             builder.Services.AddHttpClient<ExamsClient>("apiClient",client =>
                 {
-                    client.BaseAddress = new Uri("https://localhost:5002/");
+                    client.BaseAddress = new Uri(GlobalConfig.BFFUrl);
                 })
                 .AddHttpMessageHandler<CookieHandler>()
                 .AddHttpMessageHandler<AntiforgeryHandler>()

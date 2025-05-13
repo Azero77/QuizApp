@@ -1,5 +1,6 @@
 using Duende.IdentityModel;
 using Duende.IdentityServer.Models;
+using QuizApp.Shared;
 
 namespace QuizApp.Identity
 {
@@ -60,9 +61,9 @@ namespace QuizApp.Identity
                     ClientId = "interactive.confidential",
                     ClientSecrets = {new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:5002/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5002/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+                    RedirectUris = { $"{GlobalConfig.BFFUrl}/signin-oidc" },
+                    FrontChannelLogoutUri = $"{GlobalConfig.BFFUrl}/signout-oidc",
+                    PostLogoutRedirectUris = { $"{GlobalConfig.BFFUrl}/signout-callback-oidc" },
                     AllowOfflineAccess = true,
                     AllowedScopes = { "openid", "profile", "email" ,
                         "exam.read",
