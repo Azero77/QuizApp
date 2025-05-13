@@ -1,41 +1,70 @@
 ﻿@page "/"
 @inherits HttpClientErrorHandler
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Exam Selection</PageTitle>
 
-<MudText Typo="Typo.h4">
-    Select Exam:
-</MudText>
-@if(Exams is null)
-{
-    <p>Loading</p>
-}
-else
-{
-    @foreach (var item in Exams)
-    {
-        <MudNavLink
-            Class="rounded ma-3"
-            Href="@($"ReadExam/{item.id}")"
-            >
-            @item.Name
-        </MudNavLink>
-    }
-}
+<MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
+    <MudPaper Class="pa-6 rounded-lg" Elevation="5">
+        <MudText Typo="Typo.h4" Class="mb-4 text-primary">
+            <MudIcon Icon="@Icons.Material.Filled.Assignment" Class="mr-2" />
+            Select an Exam
+        </MudText>
 
-@code{
+        @if (Exams is null)
+        {
+            <MudGrid Class="my-8">
+                <MudItem xs="12" Class="text-center">
+                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Medium" />
+                    <MudText Class="mt-3">Loading exams...</MudText>
+                </MudItem>
+            </MudGrid>
+        }
+        else if (!Exams.Any())
+        {
+            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="my-4">
+                <MudText>No exams available at the moment.</MudText>
+            </MudAlert>
+        }
+        else
+        {
+            <MudGrid Class="my-4">
+                @foreach (var item in Exams)
+                {
+                    <MudItem xs="12" sm="6" md="4" Class="pa-2">
+                        <MudCard Class="rounded-lg h-full" Elevation="1" Hover="true">
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Class="mb-2">@item.Name</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Outlined"
+                                           Color="Color.Primary"
+                                           EndIcon="@Icons.Material.Filled.ArrowForward"
+                                           Href="@($"ReadExam/{item.id}")"
+                                           FullWidth="true"
+                                           Class="mt-auto">
+                                    Start Exam
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                }
+            </MudGrid>
+        }
+    </MudPaper>
+</MudContainer>
 
+@code {
     [Inject]
     public ExamsClient? _client { get; set; }
 
     public List<Exam>? Exams { get; set; } = null;
 
-    protected override async Task OnInitializedAsync() 
+    protected override async Task OnInitializedAsync()
     {
         Exams = new();
         await foreach (Exam? Exam in _client?.GetExamsAsync()!)
         {
-            if(Exam is not null)
+            if (Exam is not null)
                 Exams.Add(Exam);
         }
     }

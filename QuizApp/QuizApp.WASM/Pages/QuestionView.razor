@@ -28,7 +28,9 @@
                     <MudStack Row="true" Gap="Gap.Small">
                         <MudText Typo="Typo.body1">@prefix.</MudText>
                             <MudStack Row="true">
-                                @choice
+                                <MudText Typo="Typo.h6" Class="Size">
+                                    @choice
+                                </MudText>
                         </MudStack>
                     </MudStack>
                 </div>
@@ -83,6 +85,5 @@
                 ExamState.Exam.Questions[QuestionNumber].QuestionAnswer = choice;
         }
     }
-
 
 }

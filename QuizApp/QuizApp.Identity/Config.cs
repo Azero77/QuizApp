@@ -12,6 +12,10 @@ namespace QuizApp.Identity
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
+                new IdentityResource(){ 
+                    Name = "role",
+                    UserClaims = { JwtClaimTypes.Role }
+                }
             };
 
         public static IEnumerable<ApiScope> ApiScopes => new[]
@@ -65,7 +69,7 @@ namespace QuizApp.Identity
                     FrontChannelLogoutUri = $"{GlobalConfig.BFFUrl}/signout-oidc",
                     PostLogoutRedirectUris = { $"{GlobalConfig.BFFUrl}/signout-callback-oidc" },
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "email" ,
+                    AllowedScopes = { "openid", "profile", "email" , "role",
                         "exam.read",
                         "exam.write", //admin
                         "submission.readown", 

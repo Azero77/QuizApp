@@ -62,7 +62,8 @@ namespace QuizApp.BFF
                     options.Scope.Add("submission.readall");
                     options.Scope.Add("examgenerator.read");
                     options.Scope.Add("offline_access");
-
+                    options.Scope.Add("role");
+                    options.ClaimActions.MapUniqueJsonKey("role","role");
                     options.TokenValidationParameters.NameClaimType = "name";
                     options.TokenValidationParameters.RoleClaimType = "role";
 
