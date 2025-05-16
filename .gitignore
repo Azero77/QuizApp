@@ -15,7 +15,8 @@ obj/
 #Ignore Docker
 **/Dockerfile*
 Dockerfile*
-
+docker*
+.yml
 #ignore certificate
 *.pfx
 

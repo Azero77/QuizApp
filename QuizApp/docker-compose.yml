@@ -19,4 +19,13 @@ services:
     build:
       context: .
       dockerfile: QuizApp.Identity/Dockerfile
-
+  quizapp.db.postgres:
+    image: postgres:16.1-alpine3.19
+    environment:
+        POSTGRES_USER: azero
+        POSTGRES_PASSWORD: 1234
+        POSTGRES_DB: QuizAppDatabase
+    ports:
+        5005:5005
+    volumes:
+        - ./.containers/db:/var/lib/postgresql/data
