@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  quizapp.api:
+    image: ${DOCKER_REGISTRY-}quizappapi
+    build:
+      context: .
+      dockerfile: QuizApp.API/Dockerfile
