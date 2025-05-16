@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "quizapp.api": "StartDebugging"
+        "quizapp.api": "StartDebugging",
+        "quizapp.bff": "StartDebugging"
       }
     }
   }
