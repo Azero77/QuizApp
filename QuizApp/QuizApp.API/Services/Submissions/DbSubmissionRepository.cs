@@ -34,7 +34,7 @@ namespace QuizApp.API.Services.Submissions
         }
         public async IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, [EnumeratorCancellation] CancellationToken token = default)
         {
-            var cursor = await Submissions.FindAsync<Submission>(s => s.SubmissionPersonName == submissionPersonName);
+            var cursor = await Submissions.FindAsync<Submission>(s => s.UserId == submissionPersonName);
             while (await cursor.MoveNextAsync())
             {
                 foreach (Submission item in cursor.Current)

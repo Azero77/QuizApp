@@ -13,7 +13,6 @@ using QuizApp.Models;
 using QuizApp.Parser;
 using QuizApp.Parser.WordFileParser;
 using QuizApp.Shared;
-using QuizApp.Shared.Models;
 using QuizAppAPI.Contexts;
 using QuizAppAPI.Services.ExamQuestions;
 using System.Security.Claims;

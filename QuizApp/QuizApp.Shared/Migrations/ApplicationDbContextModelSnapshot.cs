@@ -154,38 +154,7 @@ namespace QuizApp.Shared.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Submission", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<ushort?[]>("Choices")
-                        .IsRequired()
-                        .HasColumnType("SMALLINT[]");
-
-                    b.Property<DateTimeOffset>("DateSubmitted")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("ExamId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Result")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("SubmissionPersonName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Submissions");
-                });
-
-            modelBuilder.Entity("QuizApp.Shared.Models.ApplicationUser", b =>
+            modelBuilder.Entity("QuizApp.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -249,6 +218,39 @@ namespace QuizApp.Shared.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("QuizApp.Models.Submission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<ushort?[]>("Choices")
+                        .IsRequired()
+                        .HasColumnType("SMALLINT[]");
+
+                    b.Property<DateTimeOffset>("DateSubmitted")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ExamId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Result")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Submissions");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -260,7 +262,7 @@ namespace QuizApp.Shared.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("QuizApp.Shared.Models.ApplicationUser", null)
+                    b.HasOne("QuizApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,7 +271,7 @@ namespace QuizApp.Shared.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("QuizApp.Shared.Models.ApplicationUser", null)
+                    b.HasOne("QuizApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -284,7 +286,7 @@ namespace QuizApp.Shared.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuizApp.Shared.Models.ApplicationUser", null)
+                    b.HasOne("QuizApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -293,11 +295,22 @@ namespace QuizApp.Shared.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("QuizApp.Shared.Models.ApplicationUser", null)
+                    b.HasOne("QuizApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("QuizApp.Models.Submission", b =>
+                {
+                    b.HasOne("QuizApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

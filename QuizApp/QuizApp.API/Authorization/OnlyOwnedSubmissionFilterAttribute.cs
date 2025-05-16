@@ -37,7 +37,7 @@ namespace QuizApp.API.Authorization
                 Console.WriteLine(json);
                 Submission? sub = JsonConvert.DeserializeObject<Submission>(json);
                 if (sub is not null)
-                    return sub.SubmissionPersonName;
+                    return sub.UserId;
             }
             return null;
         }

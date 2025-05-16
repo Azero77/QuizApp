@@ -48,7 +48,7 @@ namespace QuizApp.API.Services.Submissions
 
         public IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, CancellationToken token = default)
         {
-            return _context.Submissions.Where(s => s.SubmissionPersonName == submissionPersonName).AsAsyncEnumerable();
+            return _context.Submissions.Where(s => s.UserId == submissionPersonName).AsAsyncEnumerable();
         }
     }
 }

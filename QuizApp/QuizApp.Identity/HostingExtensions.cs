@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Identity.Data;
 using QuizApp.Shared;
-using QuizApp.Shared.Models;
+using QuizApp.Models;
 using Serilog;
 
 namespace QuizApp.Identity

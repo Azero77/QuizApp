@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using QuizApp.Shared;
-using QuizApp.Shared.Models;
+using QuizApp.Models;
 
 namespace QuizApp.Identity.Pages.Login
 {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Models;
-using QuizApp.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +29,7 @@ namespace QuizApp.Shared
                     v => v.Select(b => (ushort?) b).ToArray(),
                     v => v.Select(us => (byte?)us).ToArray()
                     );
-                entity.Property(e => e.SubmissionPersonName).IsRequired();
+                entity.Property(e => e.UserId).IsRequired();
                 entity.Property(e => e.DateSubmitted).IsRequired();
             });
             base.OnModelCreating(builder);

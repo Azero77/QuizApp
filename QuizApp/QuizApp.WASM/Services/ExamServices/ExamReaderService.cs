@@ -39,13 +39,13 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="HttpRequestException"></exception>
-        public Task<HttpResponseMessage> SubmitExam(string submissionName)
+        public Task<HttpResponseMessage> SubmitExam(string user_id)
         {
             if (Exam is null)
                 throw new ArgumentException("Please Assign Exam Before Calling Any method");
             Submission = new Submission()
             {
-                SubmissionPersonName = submissionName,
+                UserId = user_id,
                 Choices = Exam.Questions.Select(q => q.SelectedAnswer).ToArray(),
                 ExamId = Exam.id ?? throw new Exception("Id can't be null here"),
                 DateSubmitted = DateTimeOffset.UtcNow

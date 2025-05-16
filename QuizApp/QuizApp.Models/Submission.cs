@@ -8,9 +8,10 @@ public class Submission
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
-    public string SubmissionPersonName { get; set; } = string.Empty;
-    public string ExamId { get; set; } = null!;
+    public required string UserId { get; set; }
+    public ApplicationUser User { get; set; } = null!;
+    public required string ExamId { get; set; }
     public byte?[] Choices { get; set; } = null!;
-    public DateTimeOffset DateSubmitted { get; set; }
+    public required DateTimeOffset DateSubmitted { get; set; }
     public int Result { get; set; }
 }
