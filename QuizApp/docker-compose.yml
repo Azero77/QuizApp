@@ -23,9 +23,12 @@ services:
     image: postgres:16.1-alpine3.19
     environment:
         POSTGRES_USER: azero
-        POSTGRES_PASSWORD: 1234
+        POSTGRES_PASSWORD: 9b5f1295-7ed2-422f-9b30-6b0b1d513c37
         POSTGRES_DB: QuizAppDatabase
     ports:
         5005:5005
     volumes:
         - ./.containers/db:/var/lib/postgresql/data
+
+  quizapp.db.mongo:
+    

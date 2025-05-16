@@ -38,7 +38,11 @@ namespace WordDocumentTableParserProject.Formatter
             {
                 StringBuilder result = new();
                 FormatElement(p, result);
-                questionSentences.Add(result.ToString());
+                string text = result.ToString();
+
+                // Remove leading lettered labels like "A- ", "B) ", "C. ", etc.
+                text = Regex.Replace(text, @"^[A-Z][\.\-\)\:]?\s*", string.Empty);
+                questionSentences.Add(text);
             }
             return questionSentences;
         }
