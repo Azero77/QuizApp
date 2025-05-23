@@ -30,7 +30,7 @@ namespace QuizApp.API.Services.Submissions
 
         public async Task<RepositoryResult<Submission>> GetSubmission(long id, CancellationToken token = default)
         {
-            Submission? sub = await _context.Submissions.FirstOrDefaultAsync(s => s.Id == id,token);
+            Submission? sub = await _context.Submissions.Include(s => s.User).FirstOrDefaultAsync(s => s.Id == id,token);
             if (sub is null)
                 return RepositoryResult<Submission>.Fail("NO Submission Found");
             return RepositoryResult<Submission>.Success(sub);
@@ -38,17 +38,17 @@ namespace QuizApp.API.Services.Submissions
 
         public IAsyncEnumerable<Submission> GetSubmissions(CancellationToken token = default)
         {
-            return _context.Submissions.AsAsyncEnumerable();
+            return _context.Submissions.Include(s => s.User).AsAsyncEnumerable();
         }
 
         public IAsyncEnumerable<Submission> GetSubmissionsByExamId(string examId, CancellationToken token = default)
         {
-            return _context.Submissions.Where(s => s.ExamId == examId).AsAsyncEnumerable();
+            return _context.Submissions.Where(s => s.ExamId == examId).Include(s => s.User).AsAsyncEnumerable();
         }
 
-        public IAsyncEnumerable<Submission> GetSubmissionsByName(string submissionPersonName, CancellationToken token = default)
+        public IAsyncEnumerable<Submission> GetSubmissionsByName(string userId, CancellationToken token = default)
         {
-            return _context.Submissions.Where(s => s.UserId == submissionPersonName).AsAsyncEnumerable();
+            return _context.Submissions.Where(s => s.UserId == userId).Include(s => s.User).AsAsyncEnumerable();
         }
     }
 }

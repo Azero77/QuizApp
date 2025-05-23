@@ -2,57 +2,58 @@
 @inherits HttpClientErrorHandler
 
 <PageTitle>Exam Selection</PageTitle>
+<div>
+    <MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
+        <MudPaper Class="pa-6 rounded-lg" Elevation="5">
+            <MudText Typo="Typo.h4" Class="mb-4 text-primary">
+                <MudIcon Icon="@Icons.Material.Filled.Assignment" Class="mr-2" />
+                Select an Exam
+            </MudText>
 
-<MudContainer MaxWidth="MaxWidth.Medium" Class="my-8">
-    <MudPaper Class="pa-6 rounded-lg" Elevation="5">
-        <MudText Typo="Typo.h4" Class="mb-4 text-primary">
-            <MudIcon Icon="@Icons.Material.Filled.Assignment" Class="mr-2" />
-            Select an Exam
-        </MudText>
-
-        @if (Exams is null)
-        {
-            <MudGrid Class="my-8">
-                <MudItem xs="12" Class="text-center">
-                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Medium" />
-                    <MudText Class="mt-3">Loading exams...</MudText>
-                </MudItem>
-            </MudGrid>
-        }
-        else if (!Exams.Any())
-        {
-            <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="my-4">
-                <MudText>No exams available at the moment.</MudText>
-            </MudAlert>
-        }
-        else
-        {
-            <MudGrid Class="my-4">
-                @foreach (var item in Exams)
-                {
-                    <MudItem xs="12" sm="6" md="4" Class="pa-2">
-                        <MudCard Class="rounded-lg h-full" Elevation="1" Hover="true">
-                            <MudCardContent>
-                                <MudText Typo="Typo.h6" Class="mb-2">@item.Name</MudText>
-                            </MudCardContent>
-                            <MudCardActions>
-                                <MudButton Variant="Variant.Outlined"
-                                           Color="Color.Primary"
-                                           EndIcon="@Icons.Material.Filled.ArrowForward"
-                                           Href="@($"ReadExam/{item.id}")"
-                                           FullWidth="true"
-                                           Class="mt-auto">
-                                    Start Exam
-                                </MudButton>
-                            </MudCardActions>
-                        </MudCard>
+            @if (Exams is null)
+            {
+                <MudGrid Class="my-8">
+                    <MudItem xs="12" Class="text-center">
+                        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Medium" />
+                        <MudText Class="mt-3">Loading exams...</MudText>
                     </MudItem>
-                }
-            </MudGrid>
-        }
-    </MudPaper>
-</MudContainer>
+                </MudGrid>
+            }
+            else if (!Exams.Any())
+            {
+                <MudAlert Severity="Severity.Info" Variant="Variant.Outlined" Class="my-4">
+                    <MudText>No exams available at the moment.</MudText>
+                </MudAlert>
+            }
+            else
+            {
+                <MudGrid Class="my-4">
+                    @foreach (var item in Exams)
+                    {
+                        <MudItem xs="12" sm="6" md="4" Class="pa-2">
+                            <MudCard Class="rounded-lg h-full myitem" Elevation="1" Hover="true">
+                                <MudCardContent>
+                                    <MudText Typo="Typo.h6" Class="mb-2">@item.Name</MudText>
+                                    </MudCardContent>
+                                    <MudCardActions>
+                                        <MudButton Variant="Variant.Outlined"
+                                                   Color="Color.Primary"
+                                                   EndIcon="@Icons.Material.Filled.ArrowForward"
+                                                   Href="@($"ReadExam/{item.id}")"
+                                                   FullWidth="true"
+                                                   Class="mt-auto">
+                                            Start Exam
+                                        </MudButton>
+                                    </MudCardActions>
+                                </MudCard>
+                            </MudItem>
+                    }
+                </MudGrid>
+            }
+        </MudPaper>
+    </MudContainer>
 
+</div>
 @code {
     [Inject]
     public ExamsClient? _client { get; set; }

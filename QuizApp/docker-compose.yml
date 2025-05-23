@@ -1,34 +1,60 @@
 version: '3.4'
 
 services:
+  
+  quizapp.db.postgres:
+    image: postgres:16.1-alpine3.19
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bios1973
+      POSTGRES_DB: QuizAppDatabase
+    ports:
+        - 5005:5005
+    volumes:
+        - quizapp.postgresdata:/var/lib/postgresql/data
+        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U postgres"]
+      interval : 5s
+      timeout : 5s
+      retries: 5
+  quizapp.db.mongo:
+    image: mongo
+    ports:
+        - 27017:27017
+    volumes:
+        - quizapp.mongodata:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   quizapp.api:
-    image: ${DOCKER_REGISTRY-}quizappapi
+    restart: always
+    image: ${DOCKER_REGISTRY-}quizappapi:2.0
     build:
       context: .
       dockerfile: QuizApp.API/Dockerfile
+    depends_on:
+        quizapp.db.mongo:
+            condition: service_healthy
+        quizapp.db.postgres:
+            condition: service_healthy
 
   quizapp.bff:
-    image: ${DOCKER_REGISTRY-}quizappbff
+    image: ${DOCKER_REGISTRY-}quizappbff:2.0
     build:
       context: .
       dockerfile: QuizApp.BFF/Dockerfile
 
 
   quizapp.identity:
-    image: ${DOCKER_REGISTRY-}quizappidentity
+    image: ${DOCKER_REGISTRY-}quizappidentity:1.0
     build:
       context: .
       dockerfile: QuizApp.Identity/Dockerfile
-  quizapp.db.postgres:
-    image: postgres:16.1-alpine3.19
-    environment:
-        POSTGRES_USER: azero
-        POSTGRES_PASSWORD: 9b5f1295-7ed2-422f-9b30-6b0b1d513c37
-        POSTGRES_DB: QuizAppDatabase
-    ports:
-        5005:5005
-    volumes:
-        - ./.containers/db:/var/lib/postgresql/data
-
-  quizapp.db.mongo:
-    
+  
+volumes:
+  quizapp.postgresdata:
+  quizapp.mongodata:

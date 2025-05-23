@@ -20,7 +20,10 @@ namespace QuizApp.Identity
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            builder.Services.Configure<IdentityOptions>(opts => 
+            {
+                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+            });
             builder.Services
                 .AddIdentityServer(options =>
                 {

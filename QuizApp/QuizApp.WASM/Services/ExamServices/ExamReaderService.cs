@@ -4,6 +4,7 @@ using QuizApp.BlazorWASM.Pages;
 using QuizApp.Models;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace QuizApp.BlazorWASM.Services.ExamServices
 {
@@ -51,6 +52,7 @@ namespace QuizApp.BlazorWASM.Services.ExamServices
                 DateSubmitted = DateTimeOffset.UtcNow
             };
             Submission.Result = Exam.CorrectExam(Submission);
+            Console.WriteLine(JsonSerializer.Serialize(Submission));
             return _client.SubmitExam(Submission);
         }
 

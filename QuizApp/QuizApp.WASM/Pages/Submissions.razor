@@ -17,7 +17,7 @@
                             <MudListItem>
                                 <MudNavLink
                                     Href="@UrlHelpers.GetSubmissionLink(exam.id,sub.Id!.ToString())"    
-                                >@sub.UserId</MudNavLink>
+                                >@sub.User.UserName - @sub.DateSubmitted</MudNavLink>
                             </MudListItem>
                         }
                     }

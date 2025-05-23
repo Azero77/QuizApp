@@ -12,10 +12,12 @@ namespace QuizApp.API.Controllers
     public class SubmissionsController : Controller
     {
         private readonly ISubmissionRepository _repo;
+        private readonly ILogger<SubmissionsController> _logger;
 
-        public SubmissionsController(ISubmissionRepository repo)
+        public SubmissionsController(ISubmissionRepository repo, ILogger<SubmissionsController> logger)
         {
             _repo = repo;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -63,6 +65,7 @@ namespace QuizApp.API.Controllers
         [Authorize(APIConstants.UserPolicy)]
         public async Task<IActionResult> AddSubmissionAsync([FromBody] Submission submission, CancellationToken token)
         {
+            _logger.LogDebug("API running in add submissions");
             await _repo.AddSubmission(submission,token);
             return Ok(submission);
         }

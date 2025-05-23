@@ -9,7 +9,7 @@ public class Submission
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
     public required string UserId { get; set; }
-    public ApplicationUser User { get; set; } = null!;
+    public ApplicationUser? User { get; set; }
     public required string ExamId { get; set; }
     public byte?[] Choices { get; set; } = null!;
     public required DateTimeOffset DateSubmitted { get; set; }

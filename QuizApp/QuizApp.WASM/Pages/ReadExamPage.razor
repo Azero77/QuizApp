@@ -41,6 +41,7 @@
     private async Task SubmitExam()
     {
         string? user_id = (await auth_state)?.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+        Console.WriteLine(user_id);
         if (user_id is null)
             return;
         var result  = await ExamState.SubmitExam(user_id);
@@ -50,5 +51,6 @@
             string url = UrlHelpers.GetSubmissionLink(Exam.id!, id.ToString() ?? string.Empty);
             NavigationManager!.NavigateTo(url);
         }
+
     }
     }
