@@ -26,6 +26,7 @@
     <ProjectReference Include="..\QuizApp.Models\QuizApp.Models.csproj" />
     <ProjectReference Include="..\QuizApp.Parser\QuizApp.Parser.csproj" />
     <ProjectReference Include="..\QuizApp.Shared\QuizApp.Shared.csproj" />
+    <ProjectReference Include="..\QuizApp.Servicedefaults\QuizApp.Servicedefaults.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,3 @@
-ALTER DATABASE "QuizAppDatabase" OWNER TO azero;
 
 DO $$
 BEGIN
@@ -8,6 +7,7 @@ BEGIN
 END
 $$;
 
+ALTER DATABASE "QuizAppDatabase" OWNER TO azero;
 -- Grant access to the schema
 GRANT CONNECT ON DATABASE "QuizAppDatabase" TO azero;
 GRANT USAGE ON SCHEMA public TO azero;

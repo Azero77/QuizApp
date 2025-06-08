@@ -1,9 +1,16 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Components;
+using System.Net;
 
 namespace QuizApp.BlazorWASM.Services.HttpClientHandlers
 {
     public class HttpClientErrorDelegationHandler : DelegatingHandler
     {
+        private readonly NavigationManager _navigationManager;
+
+        public HttpClientErrorDelegationHandler(NavigationManager navigationManager)
+        {
+            _navigationManager = navigationManager;
+        }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             HttpResponseMessage response;

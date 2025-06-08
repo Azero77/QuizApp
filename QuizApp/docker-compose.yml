@@ -47,6 +47,8 @@ services:
     build:
       context: .
       dockerfile: QuizApp.BFF/Dockerfile
+    volumes:
+        - ./BFF/Duende_License.key:/app/Duende_License.key:ro 
 
 
   quizapp.identity:
@@ -54,7 +56,9 @@ services:
     build:
       context: .
       dockerfile: QuizApp.Identity/Dockerfile
-  
+    volumes:
+        - ./Identity/Duende_License.key:/app/Duende_License.key:ro
+    
 volumes:
   quizapp.postgresdata:
   quizapp.mongodata:

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>e60bb5a5-4d7a-4a1b-84ec-3f9c1661bbd8</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuizApp.API\QuizApp.API.csproj" />
+    <ProjectReference Include="..\QuizApp.WASM\QuizApp.BlazorWASM.csproj" />
+    <ProjectReference Include="..\QuizApp.Identity\QuizApp.Identity.csproj" />
+    <ProjectReference Include="..\QuizApp.BFF\QuizApp.BFF.csproj" />
+  </ItemGroup>
+
+</Project>

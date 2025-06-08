@@ -33,7 +33,7 @@ namespace QuizAppAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<IMessager, ErrorMessager>();
             builder.Services.AddWordParser();
-            
+            builder.AddServiceDefaults();
             ConfigureRateLimiter(builder);
             ConfigureApplicationDbContext(builder);
             ConfigureAuth(builder);
@@ -53,7 +53,7 @@ namespace QuizAppAPI
             app.UseMiddleware<RequestTimeoutMiddleware>();
 
             app.MapControllers();
-
+            app.MapDefaultEndpoints();
             app.Run();
         }
 
